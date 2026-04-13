@@ -1,0 +1,219 @@
+---
+// src/components/ui/Servicios.astro
+
+const serviciosDesign = [
+  {
+    titulo: "Diseño Web",
+    descripcion:
+      "Impulsa tu presencia online con sitios web atractivos, altamente funcionales y adaptables a cualquier dispositivo. Optimizados para el mejor rendimiento.",
+    icono: "icon-display",
+  },
+  {
+    titulo: "Diseño Publicitario",
+    descripcion:
+      "Capta la atención de tu audiencia con piezas gráficas impactantes, desde banners y flyers hasta contenido visual para redes sociales.",
+    icono: "icon-palette",
+  },
+  {
+    titulo: "Identidad de Marca",
+    descripcion:
+      "Construye una marca memorable con una identidad visual profesional que refleje tus valores: logotipo, paleta de colores y manuales de uso.",
+    icono: "icon-fingerprint",
+  },
+  {
+    titulo: "Diseño UI / UX",
+    descripcion:
+      "Mejora la experiencia de tus usuarios con interfaces intuitivas y atractivas. Soluciones pensadas para conectar de forma natural con quienes navegan.",
+    icono: "icon-mobile-screen-button",
+  },
+  {
+    titulo: "Identidad de Creador",
+    descripcion:
+      "Destaca como creador de contenido con una imagen visual única. Perfecto para streamers, influencers y proyectos digitales que buscan diferenciarse.",
+    icono: "icon-sparkles",
+  },
+];
+
+const serviciosSolutions = [
+  {
+    titulo: "Automatización Industrial",
+    descripcion:
+      "Diseño e implementación de sistemas de control automatizado para optimizar líneas de producción, reduciendo tiempos muertos y aumentando la eficiencia.",
+    icono: "icon-robot",
+  },
+  {
+    titulo: "Sistemas SCADA",
+    descripcion:
+      "Desarrollo de interfaces de supervisión y adquisición de datos en tiempo real (HMI/SCADA) para el monitoreo integral de procesos industriales.",
+    icono: "icon-network-wired",
+  },
+  {
+    titulo: "Lógica SCL & PLC",
+    descripcion:
+      "Programación estructurada y avanzada de Controladores Lógicos Programables (Siemens S7, etc.) utilizando arquitecturas modulares seguras.",
+    icono: "icon-microchip",
+  },
+  {
+    titulo: "Domótica & Energía",
+    descripcion:
+      "Soluciones de gestión autónoma para la optimización del consumo energético en instalaciones mediante redes de microcontroladores.",
+    icono: "icon-bolt",
+  },
+  {
+    titulo: "Diseño y Modelado CAD",
+    descripcion:
+      "Modelado 3D paramétrico, ensamblaje y análisis de esfuerzo para piezas mecánicas o chasis robóticos listos para manufactura o impresión 3D.",
+    icono: "icon-compass-drafting",
+  },
+];
+---
+
+<section
+  id="Servicios"
+  class="w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-contraste/50"
+>
+  <div class="text-center mb-16 md:mb-24">
+    <h2
+      class="text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
+    >
+      Mis <span
+        class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+        >Servicios</span
+      >
+    </h2>
+    <p class="text-texto-secundario max-w-2xl mx-auto">
+      Soluciones especializadas desarrolladas con precisión técnica y rigor
+      estético para escalar tu proyecto.
+    </p>
+  </div>
+
+  <div class="relative">
+    <div
+      id="grid-servicios-design"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 opacity-100 transform translate-y-0 relative z-10"
+    >
+      {
+        serviciosDesign.map((servicio) => (
+          <article class="group relative bg-tarjetas border border-contraste hover:border-texto-resaltado/30 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-neutral-lg overflow-hidden flex flex-col h-full">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-texto-resaltado/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-contraste flex items-center justify-center mb-5 md:mb-6 group-hover:bg-texto-resaltado/10 transition-colors duration-300">
+              <i
+                class={`${servicio.icono} text-2xl md:text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300`}
+              />
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-texto-principal mb-3 tracking-wide">
+              {servicio.titulo}
+            </h3>
+            <p class="text-sm md:text-base text-texto-secundario leading-relaxed flex-grow">
+              {servicio.descripcion}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div
+      id="grid-servicios-solutions"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 opacity-0 transform translate-y-8 absolute top-0 left-0 w-full pointer-events-none"
+    >
+      {
+        serviciosSolutions.map((servicio) => (
+          <article class="group relative bg-tarjetas border border-contraste hover:border-texto-resaltado/30 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-neutral-lg overflow-hidden flex flex-col h-full">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-texto-resaltado/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-contraste flex items-center justify-center mb-5 md:mb-6 group-hover:bg-texto-resaltado/10 transition-colors duration-300">
+              <i
+                class={`${servicio.icono} text-2xl md:text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300`}
+              />
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-texto-principal mb-3 tracking-wide">
+              {servicio.titulo}
+            </h3>
+            <p class="text-sm md:text-base text-texto-secundario leading-relaxed flex-grow">
+              {servicio.descripcion}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Lógica reactiva para transicionar entre los servicios de Design y Solutions
+  const gridDesign = document.getElementById("grid-servicios-design");
+  const gridSolutions = document.getElementById("grid-servicios-solutions");
+
+  const observerServicios = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        const contextoActual =
+          document.documentElement.getAttribute("data-context");
+
+        if (contextoActual === "solutions") {
+          // Ocultar Design
+          gridDesign?.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+          gridDesign?.classList.add(
+            "opacity-0",
+            "-translate-y-8",
+            "absolute",
+            "pointer-events-none",
+          );
+
+          // Mostrar Solutions
+          gridSolutions?.classList.remove(
+            "opacity-0",
+            "translate-y-8",
+            "absolute",
+            "pointer-events-none",
+          );
+          gridSolutions?.classList.add(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+        } else {
+          // Ocultar Solutions
+          gridSolutions?.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+          gridSolutions?.classList.add(
+            "opacity-0",
+            "translate-y-8",
+            "absolute",
+            "pointer-events-none",
+          );
+
+          // Mostrar Design
+          gridDesign?.classList.remove(
+            "opacity-0",
+            "-translate-y-8",
+            "absolute",
+            "pointer-events-none",
+          );
+          gridDesign?.classList.add(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+        }
+      }
+    });
+  });
+
+  // Iniciamos la observación en el HTML raíz
+  observerServicios.observe(document.documentElement, { attributes: true });
+</script>

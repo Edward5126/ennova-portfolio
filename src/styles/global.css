@@ -1,0 +1,107 @@
+/* 1. Los imports externos SIEMPRE van primero */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+/* 2. Definición del tema de Tailwind v4 */
+@theme {
+  --font-sans: "Montserrat", sans-serif;
+
+  /* Colores estáticos */
+  --color-fondo: var(--theme-fondo);
+  --color-tarjetas: var(--theme-tarjetas);
+  --color-contraste: var(--theme-contraste);
+  --color-filtro: var(--theme-filtro);
+
+  /* Textos */
+  --color-texto-principal: var(--theme-texto-principal);
+  --color-texto-secundario: var(--theme-texto-secundario);
+  --color-texto-resaltado: var(--theme-texto-resaltado);
+
+  /* Colores de marca */
+  --color-brand-a: var(--theme-brand-a);
+  --color-brand-b: var(--theme-brand-b);
+
+  /* Degradados */
+  --background-image-degradado-principal: var(--theme-degradado-principal);
+  --background-image-degradado-hover: var(--theme-degradado-hover);
+  --background-image-degradado-active: var(--theme-degradado-active);
+}
+
+/* 3. Mapeo reactivo de variables globales */
+@layer base {
+  /* Estado E-nnova Design (Se aplica a la etiqueta HTML) */
+  :root,
+  :root[data-context="design"] {
+    --theme-brand-a: #dae15c;
+    --theme-brand-b: #47b449;
+    --theme-degradado-principal: linear-gradient(to top, #47b449, #dae15c);
+    --theme-degradado-hover: linear-gradient(to top, #53d255, #f1f967);
+    --theme-degradado-active: linear-gradient(to top, #3a953c, #afb54b);
+
+    --theme-fondo: #010200;
+    --theme-texto-principal: whitesmoke;
+    --theme-texto-secundario: rgba(255, 255, 255, 0.6);
+    --theme-texto-resaltado: #8fd33d;
+
+    --theme-tarjetas: rgba(217, 217, 217, 0.03);
+    --theme-contraste: rgba(217, 217, 217, 0.1);
+    --theme-filtro: #383838;
+  }
+
+  /* Estado E-nnova Solutions (Prueba Morada) */
+  :root[data-context="solutions"] {
+    --theme-brand-a: #b28dff;
+    --theme-brand-b: #6a0dad;
+    --theme-degradado-principal: linear-gradient(to top, #6a0dad, #b28dff);
+    --theme-degradado-hover: linear-gradient(to top, #7d1bc4, #c9aeff);
+    --theme-degradado-active: linear-gradient(to top, #520887, #9b6cff);
+
+    --theme-fondo: #010002;
+    --theme-texto-principal: #f0f0f5;
+    --theme-texto-secundario: rgba(240, 240, 245, 0.6);
+    --theme-texto-resaltado: #d4b3ff;
+
+    --theme-tarjetas: rgba(138, 43, 226, 0.05);
+    --theme-contraste: rgba(138, 43, 226, 0.15);
+    --theme-filtro: #2d1b4e;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--theme-fondo);
+    color: var(--theme-texto-principal);
+    font-family: var(--font-sans);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+}
+
+/* Clases de utilidad para Scroll Reveal */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.5, 0, 0, 1),
+    transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Retraso escalonado para elementos hermanos (ej. tarjetas de una cuadrícula) */
+.delay-100 {
+  transition-delay: 100ms;
+}
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-300 {
+  transition-delay: 300ms;
+}

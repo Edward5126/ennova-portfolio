@@ -1,0 +1,185 @@
+---
+// src/components/common/Footer.astro
+
+// Lógica de enrutamiento para que los anclajes funcionen desde la página 404
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === "/" || currentPath === "/index.html";
+const formatearEnlace = (hash: string) => (isHome ? hash : `/${hash}`);
+
+const enlacesFooter = [
+  { url: "#Inicio", texto: "Inicio" },
+  { url: "#Portafolio", texto: "Portafolio" },
+  { url: "#Servicios", texto: "Servicios" },
+  { url: "#AcercaDe", texto: "Acerca de" },
+  { url: "#Testimonios", texto: "Testimonios" },
+];
+
+const redesSociales = [
+  {
+    url: "https://wa.me/529994247747",
+    iconoClase: "icon-whatsapp-brands-solid-full",
+    ariaLabel: "WhatsApp",
+  },
+  {
+    url: "https://www.instagram.com/ennova_design/",
+    iconoClase: "icon-instagram",
+    ariaLabel: "Instagram",
+  },
+  {
+    url: "https://github.com/Edward5126",
+    iconoClase: "icon-github",
+    ariaLabel: "GitHub",
+  },
+  {
+    url: "mailto:eduardochan_cach@hotmail.com",
+    iconoClase: "icon-envelope",
+    ariaLabel: "Correo Electrónico",
+  },
+  {
+    url: "https://forms.gle/A5B7pvSFWFqWSEgV9",
+    iconoClase: "icon-file",
+    ariaLabel: "Formulario",
+  },
+  {
+    url: "https://buymeacoffee.com/ennovadesign",
+    iconoClase: "icon-paypal",
+    ariaLabel: "Buy Me a Coffee",
+  },
+];
+---
+
+<footer
+  class="w-full bg-tarjetas border-t border-contraste/80 pt-16 pb-8 px-6 mt-12"
+>
+  <div
+    class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-12 items-center md:items-start text-center md:text-left"
+  >
+    <div
+      class="w-full md:w-1/3 flex flex-col items-center md:items-start gap-6"
+    >
+      <a
+        href={formatearEnlace("#Inicio")}
+        class="flex items-center cursor-pointer w-fit"
+      >
+        <img
+          id="logo-footer"
+          src="/IMG/LogoHorizontalDesign.svg"
+          alt="E-nnova Logo"
+          class="h-7 w-auto drop-shadow-sm hover:scale-105 transition-transform duration-300"
+        />
+      </a>
+      <p class="text-texto-secundario text-sm leading-relaxed max-w-sm">
+        Transformando ideas en soluciones digitales y tecnológicas con rigor
+        estético y precisión técnica.
+      </p>
+    </div>
+
+    <div class="w-full md:w-1/3 flex flex-col items-center">
+      <div class="flex flex-col gap-4">
+        <h4
+          class="text-texto-principal font-bold tracking-wide uppercase text-sm mb-2"
+        >
+          Explorar
+        </h4>
+        <ul class="flex flex-col gap-3">
+          {
+            enlacesFooter.map((enlace) => (
+              <li>
+                <a
+                  href={formatearEnlace(enlace.url)}
+                  class="text-texto-secundario hover:text-texto-resaltado transition-colors text-sm font-medium tracking-wide"
+                >
+                  {enlace.texto}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/3 flex flex-col items-center md:items-end">
+      <div
+        class="flex flex-col items-center md:items-start gap-4 w-full md:w-fit"
+      >
+        <h4
+          class="text-texto-principal font-bold tracking-wide uppercase text-sm mb-2"
+        >
+          Conectar
+        </h4>
+        <div
+          class="flex flex-wrap justify-center md:justify-start gap-5 max-w-[220px]"
+        >
+          {
+            redesSociales.map((red) => (
+              <a
+                href={red.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={red.ariaLabel}
+                class="group transition-all duration-300 hover:-translate-y-1"
+              >
+                <i
+                  class={`${red.iconoClase} text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all`}
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="max-w-7xl mx-auto pt-8 border-t border-contraste/50 flex flex-col md:flex-row items-center justify-between gap-4 text-center"
+  >
+    <span
+      class="text-texto-secundario text-[11px] sm:text-xs font-medium tracking-wide"
+    >
+      © <span id="year-copy"></span>
+      <span id="marca-copy">E-nnova Design</span>. Todos los derechos
+      reservados.
+    </span>
+    <span
+      class="text-texto-secundario text-[11px] sm:text-xs flex items-center justify-center gap-1.5"
+    >
+      Desarrollado con <i class="icon-heart text-texto-resaltado text-[10px]"
+      ></i> por Eduardo Chan.
+    </span>
+  </div>
+</footer>
+
+<script>
+  const yearSpan = document.getElementById("year-copy");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear().toString();
+  }
+
+  const marcaCopy = document.getElementById("marca-copy");
+  const logoFooter = document.getElementById("logo-footer") as HTMLImageElement;
+
+  const observerFooter = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        const contextoActual =
+          document.documentElement.getAttribute("data-context");
+
+        if (marcaCopy) {
+          marcaCopy.textContent =
+            contextoActual === "solutions"
+              ? "E-nnova Solutions"
+              : "E-nnova Design";
+        }
+
+        if (logoFooter) {
+          logoFooter.src =
+            contextoActual === "solutions"
+              ? "/IMG/LogoHorizontalSolutions.svg"
+              : "/IMG/LogoHorizontalDesign.svg";
+        }
+      }
+    });
+  });
+
+  observerFooter.observe(document.documentElement, { attributes: true });
+</script>

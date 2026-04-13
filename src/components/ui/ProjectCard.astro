@@ -1,0 +1,50 @@
+---
+// src/components/ui/ProjectCard.astro
+import type { Proyecto } from "../../types";
+
+interface Props {
+  proyecto: Proyecto;
+}
+
+const { proyecto } = Astro.props;
+
+const categoriasTexto = proyecto.categorias.join(", ");
+const categoriasData = proyecto.categorias.join("|");
+
+const proyectoCodificado = btoa(encodeURIComponent(JSON.stringify(proyecto)));
+---
+
+<article
+  class="proyecto-card group cursor-pointer flex flex-col gap-5 transition-all duration-300 transform hover:-translate-y-2"
+  data-contexto={proyecto.contexto}
+  data-categorias={categoriasData}
+  data-proyecto={proyectoCodificado}
+  aria-label={`Ver detalles de ${proyecto.nombre}`}
+>
+  <div
+    class="relative w-full aspect-video rounded-3xl overflow-hidden bg-contraste shadow-neutral-sm group-hover:shadow-neutral-lg transition-all duration-500"
+  >
+    <img
+      src={proyecto.imagenUrl}
+      alt={proyecto.nombre}
+      class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+      loading="lazy"
+      onerror={`this.onerror=null; this.src='${proyecto.imagenFallbackUrl}'; this.classList.add('opacity-50');`}
+    />
+    <div
+      class="absolute inset-0 bg-fondo/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none"
+    >
+    </div>
+  </div>
+
+  <div class="flex flex-col px-2">
+    <h3
+      class="text-xl font-bold text-texto-principal mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300 w-fit"
+    >
+      {proyecto.nombre}
+    </h3>
+    <span class="text-sm text-texto-secundario tracking-wide">
+      {categoriasTexto}
+    </span>
+  </div>
+</article>

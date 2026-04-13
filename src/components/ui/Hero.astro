@@ -1,0 +1,163 @@
+---
+// src/components/ui/Hero.astro
+---
+
+<section
+  id="Inicio"
+  class="relative w-full min-h-[100dvh] flex flex-col justify-center overflow-hidden pt-24 pb-12 md:py-0"
+>
+  <div class="absolute inset-0 z-0 bg-fondo">
+    <img
+      id="hero-img-design"
+      src="/IMG/FondoHeroDesign.jpg"
+      alt="Entorno de diseño creativo"
+      class="w-full h-full object-cover opacity-30 transition-opacity duration-700"
+      loading="eager"
+    />
+    <img
+      id="hero-img-solutions"
+      src="/IMG/FondoHeroSolutions.jpg"
+      alt="Entorno de ingeniería y código"
+      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700"
+      loading="lazy"
+    />
+
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-fondo via-fondo/90 to-transparent"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-fondo to-transparent"
+    >
+    </div>
+
+    <div
+      class="absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-a rounded-full opacity-5 blur-[80px] md:blur-[120px] mix-blend-screen transition-colors duration-700 pointer-events-none"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+    <div class="max-w-2xl w-full">
+      <h1
+        class="text-4xl sm:text-5xl md:text-7xl font-bold text-texto-principal tracking-tight mb-6 md:mb-8 leading-tight"
+      >
+        Inicia con <span
+          id="hero-title-accent"
+          class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+          >calidad</span
+        >
+      </h1>
+
+      <div class="relative min-h-[120px] sm:min-h-[100px] mb-8 md:mb-12">
+        <p
+          id="hero-desc-design"
+          class="text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl transition-opacity duration-500"
+        >
+          Hago que tu idea cuente con una presencia digital valiosa desde su
+          nacimiento. Diseño identidades y sitios web para proyectos que buscan
+          trascender.
+        </p>
+        <p
+          id="hero-desc-solutions"
+          class="absolute top-0 left-0 text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl opacity-0 pointer-events-none transition-opacity duration-500"
+        >
+          Optimizo procesos industriales mediante ingeniería de precisión.
+          Desarrollo sistemas de automatización, lógica de control y monitoreo
+          en tiempo real.
+        </p>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+      >
+        <button
+          class="flex items-center justify-center gap-3 px-8 py-4 bg-degradado-principal text-fondo font-bold rounded-xl shadow-neutral-md hover:shadow-neutral-lg transition-all duration-300 cursor-pointer btn-interactivo btn-hero w-full sm:w-auto"
+        >
+          <span id="hero-cta-text">Me interesa</span>
+          <i class="icon-paper-plane text-lg"></i>
+        </button>
+
+        <a
+          href="#Portafolio"
+          class="flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-contraste hover:border-texto-resaltado text-texto-principal rounded-xl transition-all duration-300 cursor-pointer group w-full sm:w-auto"
+        >
+          <span>Explorar portafolio</span>
+          <i
+            class="icon-arrow-right text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="mt-12 md:mt-0 md:absolute md:inset-0 z-20 pointer-events-none flex items-end justify-center md:justify-end max-w-7xl mx-auto px-6 w-full md:pb-12"
+  >
+    <div
+      class="group pointer-events-auto relative flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-tarjetas/60 border border-contraste/50 hover:border-texto-resaltado/40 shadow-neutral-md hover:shadow-neutral-lg backdrop-blur-md w-full md:max-w-[380px] transition-all duration-500 overflow-hidden cursor-default"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-transparent via-texto-resaltado/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-in-out pointer-events-none"
+      >
+      </div>
+
+      <div class="mt-0.5 relative z-10 flex-shrink-0">
+        <i
+          class="icon-shuffle text-xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500"
+        ></i>
+      </div>
+
+      <p class="text-sm text-texto-secundario leading-relaxed relative z-10">
+        <strong>Portafolio dual:</strong> Usa el menú superior para descubrir mi faceta
+        en <strong
+          id="hero-hint-perfil"
+          class="text-texto-principal tracking-wide transition-colors duration-500"
+          >Ingeniería Mecatrónica</strong
+        >.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const titleAccent = document.getElementById("hero-title-accent");
+  const descDesign = document.getElementById("hero-desc-design");
+  const descSolutions = document.getElementById("hero-desc-solutions");
+  const ctaText = document.getElementById("hero-cta-text");
+  const imgDesign = document.getElementById("hero-img-design");
+  const imgSolutions = document.getElementById("hero-img-solutions");
+  const hintPerfil = document.getElementById("hero-hint-perfil");
+
+  const observerHero = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        const ctx = document.documentElement.getAttribute("data-context");
+
+        if (ctx === "solutions") {
+          if (titleAccent) titleAccent.textContent = "ingeniería";
+          if (ctaText) ctaText.textContent = "Cotizar proyecto";
+          if (hintPerfil) hintPerfil.textContent = "Diseño y Desarrollo Web";
+
+          descDesign?.classList.add("opacity-0", "pointer-events-none");
+          descSolutions?.classList.remove("opacity-0", "pointer-events-none");
+
+          imgDesign?.classList.replace("opacity-30", "opacity-0");
+          imgSolutions?.classList.replace("opacity-0", "opacity-30");
+        } else {
+          if (titleAccent) titleAccent.textContent = "calidad";
+          if (ctaText) ctaText.textContent = "Me interesa";
+          if (hintPerfil) hintPerfil.textContent = "Ingeniería Mecatrónica";
+
+          descSolutions?.classList.add("opacity-0", "pointer-events-none");
+          descDesign?.classList.remove("opacity-0", "pointer-events-none");
+
+          imgSolutions?.classList.replace("opacity-30", "opacity-0");
+          imgDesign?.classList.replace("opacity-0", "opacity-30");
+        }
+      }
+    });
+  });
+
+  observerHero.observe(document.documentElement, { attributes: true });
+</script>

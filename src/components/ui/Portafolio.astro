@@ -1,0 +1,466 @@
+---
+// src/components/ui/Portafolio.astro
+import ProjectCard from "./ProjectCard.astro";
+import ProjectModal from "./ProjectModal.astro";
+import type { Proyecto } from "../../types";
+import proyectosData from "../../data/proyectos.json";
+
+const proyectos: Proyecto[] = proyectosData as Proyecto[];
+
+const filtrosDesign = [
+  "Todo",
+  "Diseño Web",
+  "Diseño Publicitario",
+  "Identidad de Marca",
+  "UI / UX",
+];
+const filtrosSolutions = [
+  "Todo",
+  "Automatización",
+  "Domótica",
+  "Sistemas SCADA",
+  "Lógica SCL",
+  "Diseño 3D",
+];
+---
+
+<section
+  id="Portafolio"
+  class="w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32"
+>
+  <div class="text-center mb-12 md:mb-16">
+    <h2
+      class="text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
+    >
+      Mi <span
+        class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+        >Portafolio</span
+      >
+    </h2>
+    <p class="text-texto-secundario max-w-2xl mx-auto">
+      Explora una selección de proyectos donde he transformado ideas en
+      soluciones digitales y tecnológicas efectivas.
+    </p>
+  </div>
+
+  <div id="contenedor-filtros" class="relative mb-16 z-30">
+    <div
+      class="md:hidden flex justify-center w-full relative"
+      id="dropdown-container"
+    >
+      <button
+        id="btn-dropdown-filtro"
+        class="w-full max-w-xs flex items-center justify-between gap-3 px-6 py-4 bg-tarjetas border border-contraste hover:border-texto-resaltado/50 rounded-2xl shadow-neutral-sm transition-all duration-300 cursor-pointer group"
+        aria-expanded="false"
+      >
+        <div class="flex items-center gap-3">
+          <i
+            class="icon-filter text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <span
+            id="texto-filtro-actual"
+            class="font-semibold text-texto-principal tracking-wide text-sm"
+            >Categoría: Todo</span
+          >
+        </div>
+        <i
+          id="icono-flecha-dropdown"
+          class="icon-chevron-down text-texto-secundario transition-transform duration-300"
+        ></i>
+      </button>
+
+      <div
+        id="menu-dropdown-filtro"
+        class="absolute top-full left-1/2 -translate-x-1/2 w-full max-w-xs mt-3 bg-fondo/95 backdrop-blur-2xl border border-contraste/80 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.3)] overflow-hidden transition-all duration-300 origin-top transform scale-95 opacity-0 invisible"
+      >
+        <ul
+          id="lista-filtros-design-movil"
+          class="flex flex-col py-2 transition-opacity duration-300"
+        >
+          {
+            filtrosDesign.map((filtro, index) => (
+              <li>
+                <button
+                  class={`btn-filtro btn-filtro-movil w-full text-left px-6 py-3 text-sm transition-colors duration-200 hover:bg-texto-resaltado/10 hover:text-texto-principal ${index === 0 ? "text-texto-resaltado bg-texto-resaltado/5 font-semibold" : "text-texto-secundario"}`}
+                  data-filter={filtro}
+                >
+                  {filtro}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+        <ul
+          id="lista-filtros-solutions-movil"
+          class="hidden flex-col py-2 transition-opacity duration-300"
+        >
+          {
+            filtrosSolutions.map((filtro, index) => (
+              <li>
+                <button
+                  class={`btn-filtro btn-filtro-movil w-full text-left px-6 py-3 text-sm transition-colors duration-200 hover:bg-texto-resaltado/10 hover:text-texto-principal ${index === 0 ? "text-texto-resaltado bg-texto-resaltado/5 font-semibold" : "text-texto-secundario"}`}
+                  data-filter={filtro}
+                >
+                  {filtro}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="hidden md:block relative min-h-[44px]">
+      <div
+        id="filtros-design-desktop"
+        class="flex flex-wrap justify-center gap-3 transition-all duration-500 absolute top-0 w-full"
+      >
+        {
+          filtrosDesign.map((filtro, index) => (
+            <button
+              class={`btn-filtro btn-filtro-desktop px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer shadow-neutral-sm hover:shadow-neutral-md ${index === 0 ? "border-texto-resaltado text-texto-resaltado bg-texto-resaltado/10" : "border-contraste text-texto-secundario hover:border-texto-resaltado/50 hover:text-texto-principal bg-tarjetas"}`}
+              data-filter={filtro}
+            >
+              {filtro}
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        id="filtros-solutions-desktop"
+        class="hidden flex-wrap justify-center gap-3 transition-all duration-500 absolute top-0 w-full opacity-0 translate-y-2"
+      >
+        {
+          filtrosSolutions.map((filtro, index) => (
+            <button
+              class={`btn-filtro btn-filtro-desktop px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer shadow-neutral-sm hover:shadow-neutral-md ${index === 0 ? "border-texto-resaltado text-texto-resaltado bg-texto-resaltado/10" : "border-contraste text-texto-secundario hover:border-texto-resaltado/50 hover:text-texto-principal bg-tarjetas"}`}
+              data-filter={filtro}
+            >
+              {filtro}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="galeria-proyectos"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 transition-all duration-500 transform"
+  >
+    {
+      proyectos.map((proyecto) => (
+        <div class="proyecto-wrapper hidden">
+          <ProjectCard proyecto={proyecto} />
+        </div>
+      ))
+    }
+  </div>
+
+  <div id="contenedor-cargar-mas" class="mt-16 flex justify-center hidden">
+    <button
+      id="btn-cargar-mas"
+      class="group flex items-center gap-3 px-8 py-3 bg-transparent border border-contraste hover:border-texto-resaltado text-texto-secundario hover:text-texto-principal rounded-full cursor-pointer transition-all duration-300 shadow-neutral-sm font-medium tracking-wide"
+    >
+      <span>Ver más proyectos</span>
+      <i
+        class="icon-arrow-trend-down text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+      ></i>
+    </button>
+  </div>
+</section>
+
+<ProjectModal />
+
+<script>
+  // Controles del Dropdown Móvil
+  const btnDropdown = document.getElementById("btn-dropdown-filtro");
+  const menuDropdown = document.getElementById("menu-dropdown-filtro");
+  const iconoFlecha = document.getElementById("icono-flecha-dropdown");
+  const textoFiltro = document.getElementById("texto-filtro-actual");
+  const contenedorDropdown = document.getElementById("dropdown-container");
+  let dropdownAbierto = false;
+
+  // Controles de Galería y Filtros
+  const botonesFiltro = document.querySelectorAll(".btn-filtro");
+  const contenedoresProyecto = document.querySelectorAll(".proyecto-wrapper");
+  const btnCargarMas = document.getElementById("btn-cargar-mas");
+  const contenedorCargarMas = document.getElementById("contenedor-cargar-mas");
+  const contenedorGaleria = document.getElementById("galeria-proyectos");
+
+  // Contenedores de Listas (Móvil)
+  const listaFiltrosDesignMovil = document.getElementById(
+    "lista-filtros-design-movil",
+  );
+  const listaFiltrosSolutionsMovil = document.getElementById(
+    "lista-filtros-solutions-movil",
+  );
+
+  // Contenedores de Badges (Escritorio)
+  const grupoFiltrosDesignDesktop = document.getElementById(
+    "filtros-design-desktop",
+  );
+  const grupoFiltrosSolutionsDesktop = document.getElementById(
+    "filtros-solutions-desktop",
+  );
+
+  const ITEMS_POR_PAGINA = 6;
+  let filtroActual = "Todo";
+  let contextoActual =
+    document.documentElement.getAttribute("data-context") || "design";
+  let proyectosVisiblesCount = 0;
+  let proyectosFiltrados: Element[] = [];
+
+  // 1. Lógica del Dropdown
+  const toggleDropdown = () => {
+    dropdownAbierto = !dropdownAbierto;
+    if (dropdownAbierto) {
+      menuDropdown?.classList.remove("opacity-0", "invisible", "scale-95");
+      menuDropdown?.classList.add("opacity-100", "scale-100");
+      iconoFlecha?.classList.add("rotate-180");
+    } else {
+      menuDropdown?.classList.remove("opacity-100", "scale-100");
+      menuDropdown?.classList.add("opacity-0", "invisible", "scale-95");
+      iconoFlecha?.classList.remove("rotate-180");
+    }
+  };
+
+  if (btnDropdown) {
+    btnDropdown.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    if (
+      dropdownAbierto &&
+      contenedorDropdown &&
+      !contenedorDropdown.contains(e.target as Node)
+    ) {
+      toggleDropdown();
+    }
+  });
+
+  // 2. Lógica de Galería
+  const actualizarGaleria = (conAnimacion = false) => {
+    const ejecutarActualizacion = () => {
+      proyectosFiltrados = Array.from(contenedoresProyecto).filter(
+        (wrapper) => {
+          const tarjeta = wrapper.querySelector(".proyecto-card");
+          const ctx = tarjeta?.getAttribute("data-contexto");
+          const catData = tarjeta?.getAttribute("data-categorias") || "";
+          const catArray = catData.split("|");
+
+          const coincideContexto = ctx === contextoActual;
+          const coincideFiltro =
+            filtroActual === "Todo" || catArray.includes(filtroActual);
+
+          return coincideContexto && coincideFiltro;
+        },
+      );
+
+      contenedoresProyecto.forEach((w) => w.classList.add("hidden"));
+
+      for (
+        let i = 0;
+        i < proyectosVisiblesCount && i < proyectosFiltrados.length;
+        i++
+      ) {
+        proyectosFiltrados[i].classList.remove("hidden");
+      }
+
+      if (proyectosVisiblesCount < proyectosFiltrados.length) {
+        contenedorCargarMas?.classList.remove("hidden");
+      } else {
+        contenedorCargarMas?.classList.add("hidden");
+      }
+    };
+
+    if (conAnimacion && contenedorGaleria) {
+      contenedorGaleria.style.opacity = "0";
+      contenedorGaleria.style.transform = "translateY(15px)";
+      setTimeout(() => {
+        ejecutarActualizacion();
+        contenedorGaleria.style.opacity = "1";
+        contenedorGaleria.style.transform = "translateY(0)";
+      }, 300);
+    } else {
+      ejecutarActualizacion();
+    }
+  };
+
+  // 3. Sincronización Visual de Botones (Móvil y Escritorio)
+  const resetearBotonesFiltro = () => {
+    botonesFiltro.forEach((btn) => {
+      const isDesktop = btn.classList.contains("btn-filtro-desktop");
+      const isActive = btn.getAttribute("data-filter") === filtroActual;
+
+      if (isActive) {
+        if (isDesktop) {
+          btn.classList.add(
+            "border-texto-resaltado",
+            "text-texto-resaltado",
+            "bg-texto-resaltado/10",
+          );
+          btn.classList.remove(
+            "border-contraste",
+            "text-texto-secundario",
+            "bg-tarjetas",
+          );
+        } else {
+          btn.classList.add(
+            "text-texto-resaltado",
+            "bg-texto-resaltado/5",
+            "font-semibold",
+          );
+          btn.classList.remove("text-texto-secundario");
+        }
+      } else {
+        if (isDesktop) {
+          btn.classList.remove(
+            "border-texto-resaltado",
+            "text-texto-resaltado",
+            "bg-texto-resaltado/10",
+          );
+          btn.classList.add(
+            "border-contraste",
+            "text-texto-secundario",
+            "bg-tarjetas",
+          );
+        } else {
+          btn.classList.remove(
+            "text-texto-resaltado",
+            "bg-texto-resaltado/5",
+            "font-semibold",
+          );
+          btn.classList.add("text-texto-secundario");
+        }
+      }
+    });
+
+    if (textoFiltro) textoFiltro.textContent = `Categoría: ${filtroActual}`;
+  };
+
+  // 4. Observador de Cambio de Perfil (Design/Solutions)
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        contextoActual =
+          document.documentElement.getAttribute("data-context") || "design";
+        filtroActual = "Todo";
+        proyectosVisiblesCount = ITEMS_POR_PAGINA;
+
+        resetearBotonesFiltro();
+
+        if (contextoActual === "solutions") {
+          // Cambio en Móvil
+          listaFiltrosDesignMovil?.classList.replace("flex", "hidden");
+          listaFiltrosSolutionsMovil?.classList.replace("hidden", "flex");
+
+          // Cambio en Escritorio
+          grupoFiltrosDesignDesktop?.classList.replace("flex", "hidden");
+          grupoFiltrosDesignDesktop?.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+          );
+          grupoFiltrosDesignDesktop?.classList.add(
+            "opacity-0",
+            "translate-y-2",
+          );
+
+          grupoFiltrosSolutionsDesktop?.classList.replace("hidden", "flex");
+          // Pequeño timeout para permitir que el display flex se aplique antes de la opacidad
+          setTimeout(() => {
+            grupoFiltrosSolutionsDesktop?.classList.remove(
+              "opacity-0",
+              "translate-y-2",
+            );
+            grupoFiltrosSolutionsDesktop?.classList.add(
+              "opacity-100",
+              "translate-y-0",
+            );
+          }, 10);
+        } else {
+          // Cambio en Móvil
+          listaFiltrosSolutionsMovil?.classList.replace("flex", "hidden");
+          listaFiltrosDesignMovil?.classList.replace("hidden", "flex");
+
+          // Cambio en Escritorio
+          grupoFiltrosSolutionsDesktop?.classList.replace("flex", "hidden");
+          grupoFiltrosSolutionsDesktop?.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+          );
+          grupoFiltrosSolutionsDesktop?.classList.add(
+            "opacity-0",
+            "translate-y-2",
+          );
+
+          grupoFiltrosDesignDesktop?.classList.replace("hidden", "flex");
+          setTimeout(() => {
+            grupoFiltrosDesignDesktop?.classList.remove(
+              "opacity-0",
+              "translate-y-2",
+            );
+            grupoFiltrosDesignDesktop?.classList.add(
+              "opacity-100",
+              "translate-y-0",
+            );
+          }, 10);
+        }
+
+        actualizarGaleria(true);
+      }
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  // 5. Inicialización
+  proyectosVisiblesCount = ITEMS_POR_PAGINA;
+  actualizarGaleria(false);
+
+  // 6. Eventos de Clics
+  if (btnCargarMas) {
+    btnCargarMas.addEventListener("click", () => {
+      proyectosVisiblesCount += ITEMS_POR_PAGINA;
+      actualizarGaleria(false);
+    });
+  }
+
+  botonesFiltro.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLButtonElement;
+      const nuevoFiltro = target.getAttribute("data-filter") || "Todo";
+
+      if (filtroActual === nuevoFiltro) {
+        if (!target.classList.contains("btn-filtro-desktop")) toggleDropdown();
+        return;
+      }
+
+      filtroActual = nuevoFiltro;
+      resetearBotonesFiltro();
+
+      if (!target.classList.contains("btn-filtro-desktop")) {
+        toggleDropdown();
+      }
+
+      proyectosVisiblesCount = ITEMS_POR_PAGINA;
+      actualizarGaleria(true);
+    });
+  });
+
+  const tarjetasInteractivas = document.querySelectorAll(".proyecto-card");
+  tarjetasInteractivas.forEach((tarjeta) => {
+    tarjeta.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const datosCodificados = target.getAttribute("data-proyecto");
+
+      const win = window as any;
+      if (typeof win.abrirModalProyecto === "function" && datosCodificados) {
+        win.abrirModalProyecto(datosCodificados);
+      }
+    });
+  });
+</script>

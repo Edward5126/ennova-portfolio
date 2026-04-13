@@ -1,0 +1,315 @@
+---
+// src/components/common/Header.astro
+import type { EnlaceExterno } from "../../types";
+
+// Lógica para determinar la ruta actual y formatear los enlaces adecuadamente
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === "/" || currentPath === "/index.html";
+const formatearEnlace = (hash: string) => (isHome ? hash : `/${hash}`);
+
+const enlacesNavegacion = [
+  { url: "#Inicio", texto: "Inicio" },
+  { url: "#Portafolio", texto: "Portafolio" },
+  { url: "#Servicios", texto: "Servicios" },
+  { url: "#AcercaDe", texto: "Acerca de" },
+  { url: "#Testimonios", texto: "Testimonios" },
+];
+
+const enlacesSociales: EnlaceExterno[] = [
+  {
+    url: "https://www.instagram.com/ennova_design/",
+    texto: "Instagram",
+    iconoClase: "icon-instagram",
+  },
+  {
+    url: "https://wa.me/529994247747",
+    texto: "WhatsApp",
+    iconoClase: "icon-whatsapp-brands-solid-full",
+  },
+];
+---
+
+<div
+  class="fixed top-0 left-0 w-full z-50 px-4 md:px-6 pt-4 md:pt-6 pointer-events-none flex justify-center"
+>
+  <header
+    class="w-full max-w-7xl bg-fondo/80 backdrop-blur-xl border border-contraste rounded-2xl shadow-neutral-lg transition-all duration-500 pointer-events-auto"
+  >
+    <div class="px-5 md:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8 lg:gap-10">
+        <a
+          href={formatearEnlace("#Inicio")}
+          class="flex items-center group cursor-pointer py-2"
+        >
+          <img
+            id="logo-nav"
+            src="/IMG/LogoHorizontalDesign.svg"
+            alt="E-nnova"
+            class="h-6 md:h-7 w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+          />
+        </a>
+
+        <nav class="hidden lg:flex items-center">
+          <ul class="flex items-center gap-6">
+            {
+              enlacesNavegacion.map((enlace) => (
+                <li>
+                  <a
+                    href={formatearEnlace(enlace.url)}
+                    class="text-texto-secundario hover:text-texto-resaltado transition-colors text-sm font-medium cursor-pointer tracking-wide"
+                  >
+                    {enlace.texto}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <div class="hidden md:flex items-center gap-5 lg:gap-6">
+        <button
+          id="btn-contexto-nav"
+          class="group flex items-center justify-center gap-2 px-4 py-1.5 w-[145px] bg-tarjetas border border-contraste hover:border-texto-resaltado/50 rounded-lg cursor-pointer transition-all duration-300 shadow-neutral-sm"
+        >
+          <i
+            id="icono-contexto-nav"
+            class="icon-microchip text-sm text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <span
+            id="texto-contexto-nav"
+            class="text-xs font-semibold text-texto-secundario group-hover:text-texto-principal transition-colors tracking-wide w-[96px] text-center inline-block"
+          >
+            Ver Solutions
+          </span>
+        </button>
+
+        <div class="w-px h-6 bg-contraste"></div>
+
+        <div class="flex items-center gap-4">
+          {
+            enlacesSociales.map((social) => (
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group transform hover:-translate-y-0.5 transition-all duration-300"
+                aria-label={social.texto}
+              >
+                <i
+                  class={
+                    social.iconoClase +
+                    " text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+                  }
+                />
+              </a>
+            ))
+          }
+        </div>
+
+        <button
+          id="btn-abrir-contacto"
+          class="group flex items-center gap-2 px-5 py-2 bg-transparent border border-texto-resaltado text-texto-resaltado hover:bg-texto-resaltado/10 transition-all duration-300 rounded-lg cursor-pointer shadow-neutral-sm font-semibold text-sm tracking-wide btn-interactivo"
+        >
+          <i
+            class="icon-paper-plane group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <span>Contacto</span>
+        </button>
+      </div>
+
+      <button
+        id="btn-menu-movil"
+        class="md:hidden group p-2 cursor-pointer"
+        aria-label="Alternar menú"
+      >
+        <i
+          id="icono-menu"
+          class="icon-bars text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300"
+        ></i>
+      </button>
+    </div>
+  </header>
+
+  <div
+    id="contenedor-menu-movil"
+    class="absolute top-[88px] left-0 w-full px-4 md:px-6 pointer-events-none flex justify-center"
+  >
+    <div
+      id="interior-menu-movil"
+      class="w-full max-w-7xl pointer-events-auto overflow-hidden max-h-0 transition-all duration-500 ease-in-out opacity-0"
+    >
+      <div
+        class="bg-fondo/95 backdrop-blur-xl border border-contraste rounded-2xl shadow-neutral-lg mt-2"
+      >
+        <ul class="flex flex-col px-6 py-6 gap-5">
+          <li class="pb-4 border-b border-contraste/50">
+            <button
+              id="btn-contexto-movil"
+              class="group w-full flex items-center justify-between p-3 bg-tarjetas border border-contraste hover:border-texto-resaltado/50 rounded-xl cursor-pointer transition-all duration-300"
+            >
+              <span
+                id="texto-contexto-movil"
+                class="text-sm font-bold text-texto-principal"
+                >Explorar Perfil Ingeniería</span
+              >
+              <i
+                id="icono-contexto-movil"
+                class="icon-arrow-right text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+              ></i>
+            </button>
+          </li>
+
+          {
+            enlacesNavegacion.map((enlace) => (
+              <li>
+                <a
+                  href={formatearEnlace(enlace.url)}
+                  class="block text-texto-secundario hover:text-texto-principal transition-colors text-base font-medium enlace-movil cursor-pointer"
+                >
+                  {enlace.texto}
+                </a>
+              </li>
+            ))
+          }
+
+          <li
+            class="pt-5 border-t border-contraste/50 flex justify-between items-center mt-2"
+          >
+            <div class="flex gap-5">
+              {
+                enlacesSociales.map((social) => (
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group transform hover:-translate-y-0.5 transition-all duration-300"
+                    aria-label={social.texto}
+                  >
+                    <i
+                      class={
+                        social.iconoClase +
+                        " text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+                      }
+                    />
+                  </a>
+                ))
+              }
+            </div>
+            <button
+              class="group flex items-center gap-2 px-6 py-2 border border-texto-resaltado text-texto-resaltado bg-texto-resaltado/10 hover:bg-texto-resaltado/20 rounded-lg cursor-pointer font-bold transition-all btn-interactivo shadow-neutral-sm text-sm"
+            >
+              <i
+                class="icon-paper-plane group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+              ></i>
+              <span>Contacto</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const btnMenu = document.getElementById("btn-menu-movil");
+  const interiorMenu = document.getElementById("interior-menu-movil");
+  const iconoMenu = document.getElementById("icono-menu");
+  const enlacesMovil = document.querySelectorAll(".enlace-movil");
+  let menuAbierto = false;
+
+  const alternarMenu = () => {
+    menuAbierto = !menuAbierto;
+    if (interiorMenu && iconoMenu) {
+      if (menuAbierto) {
+        interiorMenu.classList.remove("max-h-0", "opacity-0");
+        interiorMenu.classList.add("max-h-[600px]", "opacity-100");
+        iconoMenu.classList.replace("icon-bars", "icon-close");
+      } else {
+        interiorMenu.classList.remove("max-h-[600px]", "opacity-100");
+        interiorMenu.classList.add("max-h-0", "opacity-0");
+        iconoMenu.classList.replace("icon-close", "icon-bars");
+      }
+    }
+  };
+
+  if (btnMenu) btnMenu.addEventListener("click", alternarMenu);
+  enlacesMovil.forEach((enlace) => {
+    enlace.addEventListener("click", () => {
+      if (menuAbierto) alternarMenu();
+    });
+  });
+
+  const btnContextoNav = document.getElementById("btn-contexto-nav");
+  const btnContextoMovil = document.getElementById("btn-contexto-movil");
+
+  const alternarContextoGlobal = () => {
+    const htmlElement = document.documentElement;
+    const currentContext = htmlElement.getAttribute("data-context");
+
+    if (currentContext === "design") {
+      htmlElement.setAttribute("data-context", "solutions");
+    } else {
+      htmlElement.setAttribute("data-context", "design");
+    }
+  };
+
+  if (btnContextoNav)
+    btnContextoNav.addEventListener("click", alternarContextoGlobal);
+  if (btnContextoMovil)
+    btnContextoMovil.addEventListener("click", () => {
+      alternarContextoGlobal();
+      if (menuAbierto) alternarMenu();
+    });
+
+  const textoNav = document.getElementById("texto-contexto-nav");
+  const iconoNav = document.getElementById("icono-contexto-nav");
+  const textoMovil = document.getElementById("texto-contexto-movil");
+  const logoNav = document.getElementById("logo-nav") as HTMLImageElement;
+
+  const observerNav = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        const contexto = document.documentElement.getAttribute("data-context");
+        if (contexto === "solutions") {
+          if (textoNav) textoNav.textContent = "Ver Design";
+          if (iconoNav)
+            iconoNav.className =
+              "icon-palette text-sm text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all";
+          if (textoMovil) textoMovil.textContent = "Explorar Perfil Creativo";
+          if (logoNav) logoNav.src = "/IMG/LogoHorizontalSolutions.svg";
+        } else {
+          if (textoNav) textoNav.textContent = "Ver Solutions";
+          if (iconoNav)
+            iconoNav.className =
+              "icon-microchip text-sm text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all";
+          if (textoMovil) textoMovil.textContent = "Explorar Perfil Ingeniería";
+          if (logoNav) logoNav.src = "/IMG/LogoHorizontalDesign.svg";
+        }
+      }
+    });
+  });
+  observerNav.observe(document.documentElement, { attributes: true });
+
+  const botonesInteractivos = document.querySelectorAll(".btn-interactivo");
+  botonesInteractivos.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const target = e.currentTarget as HTMLButtonElement;
+      if (target.hasAttribute("disabled")) {
+        e.preventDefault();
+        return;
+      }
+      target.setAttribute("disabled", "true");
+      target.classList.add("cursor-wait", "opacity-70");
+      const win = window as any;
+      if (typeof win.abrirModalContacto === "function") {
+        win.abrirModalContacto();
+        if (menuAbierto) alternarMenu();
+      }
+      setTimeout(() => {
+        target.removeAttribute("disabled");
+        target.classList.remove("cursor-wait", "opacity-70");
+      }, 1000);
+    });
+  });
+</script>

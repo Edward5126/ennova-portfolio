@@ -1,0 +1,226 @@
+---
+// src/components/common/Modal.astro
+---
+
+<div
+  id="modal-contacto"
+  class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-400 p-3 sm:p-6"
+  aria-modal="true"
+  role="dialog"
+>
+  <div
+    id="modal-overlay"
+    class="absolute inset-0 bg-fondo/80 backdrop-blur-md cursor-pointer transition-opacity"
+  >
+  </div>
+
+  <div
+    class="relative w-full max-w-5xl bg-fondo/95 backdrop-blur-xl border border-contraste rounded-3xl shadow-neutral-lg flex flex-col md:flex-row p-2 sm:p-3 gap-2 transform scale-95 transition-all duration-400 ease-out overflow-hidden"
+    id="modal-content"
+  >
+    <button
+      id="btn-cerrar-modal"
+      class="absolute top-4 right-4 md:top-6 md:right-6 z-30 w-11 h-11 flex items-center justify-center bg-tarjetas border border-contraste rounded-full hover:bg-contraste active:scale-90 transition-all cursor-pointer shadow-neutral-sm group"
+      aria-label="Cerrar modal"
+    >
+      <i
+        class="icon-close text-xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+      ></i>
+    </button>
+
+    <div
+      class="hidden md:block w-full md:w-5/12 rounded-2xl overflow-hidden bg-contraste relative"
+    >
+      <img
+        src="/IMG/IlustrativaContacto.jpg"
+        alt="Contacto E-nnova"
+        class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal opacity-80 hover:opacity-100 transition-all duration-500"
+        loading="lazy"
+        onerror="this.style.display='none';"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-fondo/60 to-transparent pointer-events-none"
+      >
+      </div>
+    </div>
+
+    <div
+      class="w-full md:w-7/12 flex flex-col justify-center px-4 py-8 sm:py-10 md:px-10 lg:px-12 overflow-y-auto max-h-[85dvh] md:max-h-full"
+    >
+      <div class="mb-6 md:mb-8 text-center md:text-left">
+        <h2
+          class="text-2xl sm:text-3xl font-bold text-texto-principal tracking-tight"
+        >
+          Estamos <span
+            class="text-transparent bg-clip-text bg-degradado-principal"
+            >conectados</span
+          >
+        </h2>
+        <p
+          class="text-texto-secundario text-xs sm:text-sm mt-2 leading-relaxed"
+        >
+          Selecciona el canal más cómodo para ti. Responderé a la brevedad para
+          materializar tu idea.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3 md:gap-4">
+        <a
+          href="https://wa.me/529994247747"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl border border-contraste hover:border-texto-resaltado/50 bg-tarjetas hover:bg-texto-resaltado/5 active:scale-[0.98] transition-all duration-300 cursor-pointer group enlace-contacto shadow-neutral-sm"
+        >
+          <i
+            class="icon-whatsapp-brands-solid-full text-2xl sm:text-3xl w-10 text-center text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <div class="flex-1">
+            <span
+              class="block text-texto-principal font-semibold text-xs sm:text-sm tracking-wide"
+              >WhatsApp</span
+            >
+            <span
+              class="block text-texto-secundario text-[10px] sm:text-xs mt-0.5 leading-snug"
+              >Ideal para consultas rápidas</span
+            >
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+          ></i>
+        </a>
+
+        <a
+          href="mailto:eduardochan_cach@hotmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl border border-contraste hover:border-texto-resaltado/50 bg-tarjetas hover:bg-texto-resaltado/5 active:scale-[0.98] transition-all duration-300 cursor-pointer group enlace-contacto shadow-neutral-sm"
+        >
+          <i
+            class="icon-envelope text-2xl sm:text-3xl w-10 text-center text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <div class="flex-1">
+            <span
+              class="block text-texto-principal font-semibold text-xs sm:text-sm tracking-wide"
+              >Correo Electrónico</span
+            >
+            <span
+              class="block text-texto-secundario text-[10px] sm:text-xs mt-0.5 leading-snug"
+              >Documentos y propuestas</span
+            >
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+          ></i>
+        </a>
+
+        <a
+          href="https://forms.gle/A5B7pvSFWFqWSEgV9"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl border border-contraste hover:border-texto-resaltado/50 bg-tarjetas hover:bg-texto-resaltado/5 active:scale-[0.98] transition-all duration-300 cursor-pointer group enlace-contacto shadow-neutral-sm"
+        >
+          <i
+            class="icon-file text-2xl sm:text-3xl w-10 text-center text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+          <div class="flex-1">
+            <span
+              class="block text-texto-principal font-semibold text-xs sm:text-sm tracking-wide"
+              >Formulario Guiado</span
+            >
+            <span
+              class="block text-texto-secundario text-[10px] sm:text-xs mt-0.5 leading-snug"
+              >Estructura tus requerimientos</span
+            >
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+          ></i>
+        </a>
+      </div>
+
+      <div
+        class="flex items-center justify-center gap-6 sm:gap-8 pt-6 md:pt-8 mt-6 border-t border-contraste/50"
+      >
+        <a
+          href="https://www.instagram.com/ennova_design/"
+          target="_blank"
+          class="group transform hover:scale-110 active:scale-90 transition-all"
+        >
+          <i
+            class="icon-instagram text-xl sm:text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+        </a>
+        <a
+          href="https://github.com/Edward5126"
+          target="_blank"
+          class="group transform hover:scale-110 active:scale-90 transition-all"
+        >
+          <i
+            class="icon-github text-xl sm:text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+        </a>
+        <a
+          href="https://buymeacoffee.com/ennovadesign"
+          target="_blank"
+          class="group transform hover:scale-110 active:scale-90 transition-all"
+        >
+          <i
+            class="icon-paypal text-xl sm:text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modalContacto = document.getElementById("modal-contacto");
+  const modalOverlay = document.getElementById("modal-overlay");
+  const btnCerrar = document.getElementById("btn-cerrar-modal");
+  const modalContent = document.getElementById("modal-content");
+
+  (window as any).abrirModalContacto = () => {
+    if (!modalContacto || !modalContent) return;
+    document.body.style.overflow = "hidden";
+    modalContacto.classList.remove("hidden");
+    modalContacto.classList.add("flex");
+    void modalContacto.offsetWidth;
+    modalContacto.classList.remove("opacity-0");
+    modalContent.classList.remove("scale-95");
+    modalContent.classList.add("scale-100");
+  };
+
+  const cerrarModal = () => {
+    if (!modalContacto || !modalContent) return;
+    document.body.style.overflow = "";
+    modalContacto.classList.add("opacity-0");
+    modalContent.classList.remove("scale-100");
+    modalContent.classList.add("scale-95");
+    setTimeout(() => {
+      modalContacto.classList.add("hidden");
+      modalContacto.classList.remove("flex");
+    }, 400);
+  };
+
+  if (btnCerrar && modalOverlay) {
+    btnCerrar.addEventListener("click", cerrarModal);
+    modalOverlay.addEventListener("click", cerrarModal);
+  }
+
+  const enlacesContacto = document.querySelectorAll(".enlace-contacto");
+  enlacesContacto.forEach((enlace) => {
+    enlace.addEventListener("click", function (e) {
+      const target = e.currentTarget as HTMLAnchorElement;
+      if (target.style.pointerEvents === "none") {
+        e.preventDefault();
+        return;
+      }
+      target.style.pointerEvents = "none";
+      target.classList.add("opacity-50", "cursor-wait");
+      setTimeout(() => {
+        target.style.pointerEvents = "auto";
+        target.classList.remove("opacity-50", "cursor-wait");
+      }, 1000);
+    });
+  });
+</script>

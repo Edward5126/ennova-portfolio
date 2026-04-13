@@ -1,0 +1,141 @@
+---
+// src/components/ui/AcercaDe.astro
+---
+
+<section
+  id="AcercaDe"
+  class="w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-contraste/50"
+>
+  <div class="flex flex-col md:flex-row items-center gap-10 md:gap-20">
+    <div class="w-full md:w-5/12 flex justify-center">
+      <div
+        class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 flex items-center justify-center group"
+      >
+        <div
+          class="absolute inset-0 bg-texto-resaltado opacity-10 blur-[40px] md:blur-[60px] rounded-3xl group-hover:opacity-20 transition-opacity duration-500"
+        >
+        </div>
+
+        <div
+          class="relative z-10 w-full h-full rounded-3xl border border-contraste bg-tarjetas/40 p-2 md:p-3 backdrop-blur-md shadow-neutral-md group-hover:shadow-neutral-lg transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500"
+        >
+          <img
+            src="/IMG/IlustrativaContacto.jpg"
+            alt="Eduardo Chan"
+            class="w-full h-full object-cover rounded-[1.25rem] md:rounded-[1.35rem] grayscale group-hover:grayscale-0 transition-all duration-500"
+            loading="lazy"
+            onerror="this.style.display='none';"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="w-full md:w-7/12 flex flex-col items-center md:items-start text-center md:text-left"
+    >
+      <span
+        class="text-xs font-semibold text-texto-secundario tracking-widest uppercase mb-3 block"
+        >Conoce mi trayectoria</span
+      >
+
+      <h2
+        class="text-3xl sm:text-4xl md:text-5xl font-bold text-texto-principal mb-6 md:mb-8 tracking-tight"
+      >
+        Acerca de <span
+          class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+          id="acerca-titulo">E-nnova Design</span
+        >
+      </h2>
+
+      <div
+        id="contenedor-texto-acerca"
+        class="text-texto-secundario text-sm sm:text-base leading-relaxed space-y-4 mb-8 md:mb-10"
+      >
+        <div id="acerca-design" class="transition-opacity duration-500">
+          <p>
+            ¡Qué tal! Soy <strong class="text-texto-principal font-semibold"
+              >Eduardo Chan</strong
+            >, un apasionado del diseño gráfico y el desarrollo Front-End que
+            convirtió una afición en una metodología de trabajo profesional.
+          </p>
+          <p>
+            Creé E-nnova Design con el objetivo de ayudar a emprendedores a
+            lanzar sus proyectos con una identidad visual sólida y plataformas
+            web escalables desde su nacimiento.
+          </p>
+          <p>
+            Mi enfoque combina estética moderna con rendimiento técnico,
+            asegurando que cada marca no solo se vea bien, sino que funcione
+            impecablemente.
+          </p>
+          <p class="font-medium text-texto-principal italic mt-4">
+            ¡Hagamos que tu proyecto nazca con estilo!
+          </p>
+        </div>
+
+        <div
+          id="acerca-solutions"
+          class="hidden transition-opacity duration-500"
+        >
+          <p>
+            ¡Qué tal! Soy <strong class="text-texto-principal font-semibold"
+              >Eduardo Chan</strong
+            >, estudiante de Ingeniería Mecatrónica enfocado en la
+            automatización y el desarrollo de sistemas industriales
+            inteligentes.
+          </p>
+          <p>
+            A través de E-nnova Solutions, aplico rigor ingenieril para resolver
+            problemas complejos de control, gestión energética e interfaces
+            hombre-máquina (HMI/SCADA).
+          </p>
+          <p>
+            Busco transformar procesos tradicionales en sistemas autónomos y
+            eficientes mediante programación estructurada de PLC y
+            microcontroladores distribuidos.
+          </p>
+          <p class="font-medium text-texto-principal italic mt-4">
+            ¡Impulsemos la eficiencia de tu sistema!
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="/docs/CV_Eduardo_Chan.pdf"
+        download
+        class="group flex justify-center items-center gap-3 w-full sm:w-auto px-8 py-3.5 sm:py-3 bg-transparent border border-texto-resaltado text-texto-resaltado hover:bg-texto-resaltado/10 transition-all duration-300 rounded-full font-semibold tracking-wide"
+      >
+        <span>Descargar Currículum</span>
+        <i
+          class="icon-download text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+        ></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const acercaDesign = document.getElementById("acerca-design");
+  const acercaSolutions = document.getElementById("acerca-solutions");
+  const acercaTitulo = document.getElementById("acerca-titulo");
+
+  const observerAcerca = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        const contexto = document.documentElement.getAttribute("data-context");
+
+        if (contexto === "solutions") {
+          if (acercaTitulo) acercaTitulo.textContent = "E-nnova Solutions";
+          acercaDesign?.classList.add("hidden");
+          acercaSolutions?.classList.remove("hidden");
+        } else {
+          if (acercaTitulo) acercaTitulo.textContent = "E-nnova Design";
+          acercaSolutions?.classList.add("hidden");
+          acercaDesign?.classList.remove("hidden");
+        }
+      }
+    });
+  });
+
+  observerAcerca.observe(document.documentElement, { attributes: true });
+</script>

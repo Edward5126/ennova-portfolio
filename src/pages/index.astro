@@ -1,17 +1,81 @@
 ---
+// src/pages/index.astro
+import "../styles/global.css";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+import Modal from "../components/common/Modal.astro";
+import Hero from "../components/ui/Hero.astro";
+import Portafolio from "../components/ui/Portafolio.astro";
+import Servicios from "../components/ui/Servicios.astro";
+import AcercaDe from "../components/ui/AcercaDe.astro";
+import Testimonios from "../components/ui/Testimonios.astro";
+import FaviconManager from "../components/common/FaviconManager.astro";
+import SEO from "../components/common/SEO.astro";
 
+// --- METADATOS SEO ---
+const seoTitle = "E-nnova | Portafolio Profesional de Diseño e Ingeniería";
+const seoDescription =
+  "Portafolio de Eduardo Chan. Diseño de identidad visual, desarrollo web, automatización industrial, lógica PLC y soluciones SCADA. Rigor técnico y estético.";
+// Nota: Deberás subir una imagen (1200x630px) llamada "og-portafolio.jpg" a tu carpeta /public/IMG/ para que la previsualización al compartir el link sea perfecta.
+const seoImage = "https://tu-dominio.com/IMG/og-portafolio.jpg";
+const seoUrl = "https://tu-dominio.com/"; // Sustituir por tu dominio real de GitHub Pages o personalizado
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="es" data-context="design" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <FaviconManager />
+    <SEO />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Edward5126/E-core-icons@main/style.css"
+    />
+  </head>
+
+  <body
+    class="bg-fondo text-texto-principal font-sans antialiased selection:bg-texto-resaltado/20 selection:text-texto-principal transition-colors duration-500 flex flex-col min-h-screen"
+  >
+    <Header />
+
+    <main class="flex-grow">
+      <Hero />
+
+      <div class="reveal-on-scroll"><Portafolio /></div>
+      <div class="reveal-on-scroll"><Servicios /></div>
+      <div class="reveal-on-scroll"><AcercaDe /></div>
+      <div class="reveal-on-scroll"><Testimonios /></div>
+    </main>
+
+    <div class="reveal-on-scroll"><Footer /></div>
+
+    <Modal />
+
+    <script>
+      // Lógica de Scroll Reveal
+      // Este script detecta cuando un elemento entra en el 15% inferior de la pantalla y lo revela
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            // Una vez revelado, dejamos de observarlo para que no se anime al subir
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Aplicar el observador a todos los elementos con la clase
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+        revealObserver.observe(el);
+      });
+    </script>
+  </body>
 </html>
