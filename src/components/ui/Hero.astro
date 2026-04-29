@@ -54,17 +54,15 @@
           id="hero-desc-design"
           class="text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl transition-opacity duration-500"
         >
-          Hago que tu idea cuente con una presencia digital valiosa desde su
-          nacimiento. Diseño identidades y sitios web para proyectos que buscan
-          trascender.
+          Comienza tu proyecto con una presencia digital valiosa desde su
+          nacimiento y obtén una identidad que realmente destaque.
         </p>
         <p
           id="hero-desc-solutions"
           class="absolute top-0 left-0 text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl opacity-0 pointer-events-none transition-opacity duration-500"
         >
-          Optimizo procesos industriales mediante ingeniería de precisión.
-          Desarrollo sistemas de automatización, lógica de control y monitoreo
-          en tiempo real.
+          Trae a la vida tus proyectos bajo un enfoque ingenieril o agiliza tus
+          procesos mediante la automatización.
         </p>
       </div>
 
@@ -109,12 +107,11 @@
       </div>
 
       <p class="text-sm text-texto-secundario leading-relaxed relative z-10">
-        <strong>Portafolio dual:</strong> Usa el menú superior para descubrir mi faceta
-        en <strong
+        ¿Buscas soluciones de <strong
           id="hero-hint-perfil"
           class="text-texto-principal tracking-wide transition-colors duration-500"
-          >Ingeniería Mecatrónica</strong
-        >.
+          >Ingeniería y Automatización</strong
+        >? Explora más con el botón de la barra superior.
       </p>
     </div>
   </div>
@@ -135,7 +132,7 @@
         const ctx = document.documentElement.getAttribute("data-context");
 
         if (ctx === "solutions") {
-          if (titleAccent) titleAccent.textContent = "ingeniería";
+          if (titleAccent) titleAccent.textContent = "calidad";
           if (ctaText) ctaText.textContent = "Cotizar proyecto";
           if (hintPerfil) hintPerfil.textContent = "Diseño y Desarrollo Web";
 
@@ -146,9 +143,9 @@
           imgSolutions?.classList.replace("opacity-0", "opacity-30");
         } else {
           if (titleAccent) titleAccent.textContent = "calidad";
-          if (ctaText) ctaText.textContent = "Me interesa";
-          if (hintPerfil) hintPerfil.textContent = "Ingeniería Mecatrónica";
-
+          if (ctaText) ctaText.textContent = "Cotizar proyecto";
+          if (hintPerfil)
+            hintPerfil.textContent = "Ingeniería y Automatización";
           descSolutions?.classList.add("opacity-0", "pointer-events-none");
           descDesign?.classList.remove("opacity-0", "pointer-events-none");
 
