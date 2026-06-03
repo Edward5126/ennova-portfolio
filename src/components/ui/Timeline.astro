@@ -1,0 +1,235 @@
+---
+// src/components/ui/Timeline.astro
+
+const trayectoriaDesign = [
+  {
+    año: "2025",
+    titulo: "Liderazgo en Interfaz Estudiantil",
+    descripcion:
+      "Gestión de identidad como Web Master en IEEE RAS UADY. Desarrollo de la plataforma FI Pocket enfocada en UX para ingeniería.",
+    icono: "icon-layout",
+  },
+  {
+    año: "2024",
+    titulo: "Identidad Visual Competitiva",
+    descripcion:
+      "Dirección de branding para Atlantis Force y CAFI. Creación de manuales de identidad con rigor estético y funcional.",
+    icono: "icon-pen-tool",
+  },
+  {
+    año: "2023",
+    titulo: "Ecosistemas Digitales WitSet",
+    descripcion:
+      "Conceptualización y despliegue de un hub modular de aplicaciones web utilizando arquitectura minimalista.",
+    icono: "icon-layers",
+  },
+];
+
+const trayectoriaSolutions = [
+  {
+    año: "2026",
+    titulo: "Eficiencia Energética Industrial",
+    descripcion:
+      "Investigación y tesis sobre gestión autónoma del consumo en plantas de producción mediante sistemas distribuidos.",
+    icono: "icon-cpu",
+  },
+  {
+    año: "2026",
+    titulo: "Arquitectura SCADA Avanzada",
+    descripcion:
+      "Integración de medidores industriales MDK32 con protocolos Modbus TCP y visualización de datos en tiempo real.",
+    icono: "icon-monitor",
+  },
+  {
+    año: "2025",
+    titulo: "Ingeniería de Diseño AGV",
+    descripcion:
+      "Desarrollo de chasis para vehículos guiados automáticamente, aplicando análisis de estrés FEA y diseño paramétrico.",
+    icono: "icon-box",
+  },
+];
+---
+
+<section
+  id="Trayectoria"
+  class="w-full max-w-7xl mx-auto px-6 py-24 md:py-32 overflow-hidden"
+>
+  <div class="text-center mb-16 md:mb-24">
+    <h2
+      class="text-3xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
+    >
+      Línea de <span
+        class="text-transparent bg-clip-text bg-degradado-principal"
+        >Evolución</span
+      >
+    </h2>
+    <p class="text-texto-secundario max-w-xl mx-auto text-sm md:text-base">
+      Cronología de hitos académicos y profesionales que definen mi trayectoria
+      técnica y creativa.
+    </p>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto">
+    <div
+      class="absolute left-[27px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-texto-resaltado/50 via-contraste to-transparent md:-translate-x-1/2"
+    >
+    </div>
+
+    <div
+      id="timeline-design-container"
+      class="flex flex-col gap-12 md:gap-16 transition-all duration-700"
+    >
+      {
+        trayectoriaDesign.map((hito, index) => (
+          <div
+            class={`relative flex flex-col md:flex-row items-start md:items-center w-full group ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+          >
+            <div class="absolute left-[27px] md:left-1/2 w-4 h-4 bg-fondo border-2 border-contraste group-hover:border-texto-resaltado rounded-full -translate-x-1/2 mt-8 md:mt-0 z-10 transition-colors duration-500 shadow-neutral-sm" />
+
+            <div
+              class={`w-full md:w-1/2 pl-16 pr-0 md:px-12 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}
+            >
+              <div class="p-8 bg-tarjetas border border-contraste rounded-[2rem] hover:border-texto-resaltado/40 transition-all duration-500 shadow-neutral-sm hover:shadow-neutral-lg group-hover:-translate-y-1 relative overflow-hidden backdrop-blur-md">
+                <div class="absolute inset-0 bg-gradient-to-br from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div class="relative z-10">
+                  <div
+                    class={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}
+                  >
+                    <i
+                      class={`${hito.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                    />
+                    <span class="text-3xl font-black text-texto-resaltado/20 group-hover:text-texto-resaltado/40 transition-colors duration-500 tracking-tighter">
+                      {hito.año}
+                    </span>
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-bold text-texto-principal mb-3 group-hover:text-texto-resaltado transition-colors duration-500">
+                    {hito.titulo}
+                  </h3>
+                  <p class="text-sm md:text-base text-texto-secundario leading-relaxed">
+                    {hito.descripcion}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      id="timeline-solutions-container"
+      class="hidden flex-col gap-12 md:gap-16 transition-all duration-700 opacity-0 translate-y-8 absolute top-0 left-0 w-full pointer-events-none"
+    >
+      {
+        trayectoriaSolutions.map((hito, index) => (
+          <div
+            class={`relative flex flex-col md:flex-row items-start md:items-center w-full group ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+          >
+            <div class="absolute left-[27px] md:left-1/2 w-4 h-4 bg-fondo border-2 border-contraste group-hover:border-texto-resaltado rounded-full -translate-x-1/2 mt-8 md:mt-0 z-10 transition-colors duration-500 shadow-neutral-sm" />
+
+            <div
+              class={`w-full md:w-1/2 pl-16 pr-0 md:px-12 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}
+            >
+              <div class="p-8 bg-tarjetas border border-contraste rounded-[2rem] hover:border-texto-resaltado/40 transition-all duration-500 shadow-neutral-sm hover:shadow-neutral-lg group-hover:-translate-y-1 relative overflow-hidden backdrop-blur-md">
+                <div class="absolute inset-0 bg-gradient-to-br from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div class="relative z-10">
+                  <div
+                    class={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}
+                  >
+                    <i
+                      class={`${hito.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                    />
+                    <span class="text-3xl font-black text-texto-resaltado/20 group-hover:text-texto-resaltado/40 transition-colors duration-500 tracking-tighter">
+                      {hito.año}
+                    </span>
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-bold text-texto-principal mb-3 group-hover:text-texto-resaltado transition-colors duration-500">
+                    {hito.titulo}
+                  </h3>
+                  <p class="text-sm md:text-base text-texto-secundario leading-relaxed">
+                    {hito.descripcion}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const designTimeline = document.getElementById("timeline-design-container");
+  const solutionsTimeline = document.getElementById(
+    "timeline-solutions-container",
+  );
+
+  const updateTimelineContext = () => {
+    const context = document.documentElement.getAttribute("data-context");
+
+    if (context === "solutions") {
+      designTimeline?.classList.add(
+        "opacity-0",
+        "translate-y-8",
+        "pointer-events-none",
+      );
+      setTimeout(() => {
+        designTimeline?.classList.add("hidden");
+        designTimeline?.classList.remove(
+          "absolute",
+          "top-0",
+          "left-0",
+          "w-full",
+        );
+
+        solutionsTimeline?.classList.remove("hidden");
+        solutionsTimeline?.classList.add("relative");
+        setTimeout(() => {
+          solutionsTimeline?.classList.remove(
+            "opacity-0",
+            "translate-y-8",
+            "absolute",
+            "top-0",
+            "left-0",
+            "w-full",
+            "pointer-events-none",
+          );
+          solutionsTimeline?.classList.add("flex");
+        }, 50);
+      }, 400);
+    } else {
+      solutionsTimeline?.classList.add(
+        "opacity-0",
+        "translate-y-8",
+        "pointer-events-none",
+      );
+      setTimeout(() => {
+        solutionsTimeline?.classList.add("hidden");
+        solutionsTimeline?.classList.remove("relative");
+
+        designTimeline?.classList.remove("hidden");
+        setTimeout(() => {
+          designTimeline?.classList.remove(
+            "opacity-0",
+            "translate-y-8",
+            "pointer-events-none",
+          );
+          designTimeline?.classList.add("flex");
+        }, 50);
+      }, 400);
+    }
+  };
+
+  const observerTimeline = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        updateTimelineContext();
+      }
+    });
+  });
+
+  observerTimeline.observe(document.documentElement, { attributes: true });
+
+  updateTimelineContext();
+</script>

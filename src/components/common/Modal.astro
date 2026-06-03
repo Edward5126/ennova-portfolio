@@ -168,6 +168,16 @@
             class="icon-paypal text-xl sm:text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
           ></i>
         </a>
+        <a
+          href="https://www.linkedin.com/in/eduardo-chan/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group transition-all duration-300 hover:-translate-y-1"
+        >
+          <i
+            class="icon-paypal inline-block text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+          ></i>
+        </a>
       </div>
     </div>
   </div>
@@ -188,6 +198,10 @@
     modalContacto.classList.remove("opacity-0");
     modalContent.classList.remove("scale-95");
     modalContent.classList.add("scale-100");
+
+    setTimeout(() => {
+      if (btnCerrar) btnCerrar.focus();
+    }, 100);
   };
 
   const cerrarModal = () => {
@@ -206,6 +220,13 @@
     btnCerrar.addEventListener("click", cerrarModal);
     modalOverlay.addEventListener("click", cerrarModal);
   }
+
+  document.addEventListener("keydown", (e) => {
+    const esVisible = !modalContacto?.classList.contains("hidden");
+    if (e.key === "Escape" && esVisible) {
+      cerrarModal();
+    }
+  });
 
   const enlacesContacto = document.querySelectorAll(".enlace-contacto");
   enlacesContacto.forEach((enlace) => {

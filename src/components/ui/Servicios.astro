@@ -1,6 +1,12 @@
 ---
 // src/components/ui/Servicios.astro
 
+interface Props {
+  variant: "design" | "solutions";
+}
+
+const { variant } = Astro.props;
+
 const serviciosDesign = [
   {
     titulo: "Diseño Web",
@@ -66,6 +72,9 @@ const serviciosSolutions = [
     icono: "icon-compass-drafting",
   },
 ];
+
+const serviciosActivos =
+  variant === "design" ? serviciosDesign : serviciosSolutions;
 ---
 
 <section
@@ -81,7 +90,7 @@ const serviciosSolutions = [
         >Servicios</span
       >
     </h2>
-    <p class="text-texto-secundario max-w-2xl mx-auto">
+    <p class="text-texto-secundario max-w-2xl mx-auto text-lg">
       Soluciones especializadas desarrolladas con precisión técnica y rigor
       estético para escalar tu proyecto.
     </p>
@@ -89,131 +98,30 @@ const serviciosSolutions = [
 
   <div class="relative">
     <div
-      id="grid-servicios-design"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 opacity-100 transform translate-y-0 relative z-10"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 auto-rows-min"
     >
       {
-        serviciosDesign.map((servicio) => (
-          <article class="group relative bg-tarjetas border border-contraste hover:border-texto-resaltado/30 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-neutral-lg overflow-hidden flex flex-col h-full">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-texto-resaltado/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        serviciosActivos.map((servicio) => (
+          <article class="group relative bg-tarjetas backdrop-blur-md border border-contraste hover:border-texto-resaltado/40 rounded-[24px] p-8 md:p-10 transition-all duration-500 hover:shadow-neutral-lg overflow-hidden flex flex-col h-full text-left">
+            <div class="absolute inset-0 bg-gradient-to-br from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-            <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-contraste flex items-center justify-center mb-5 md:mb-6 group-hover:bg-texto-resaltado/10 transition-colors duration-300">
+            <div class="mb-8 relative z-10">
               <i
-                class={`${servicio.icono} text-2xl md:text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300`}
+                class={`${servicio.icono} inline-block text-4xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
               />
             </div>
 
-            <h3 class="text-lg md:text-xl font-bold text-texto-principal mb-3 tracking-wide">
-              {servicio.titulo}
-            </h3>
-            <p class="text-sm md:text-base text-texto-secundario leading-relaxed flex-grow">
-              {servicio.descripcion}
-            </p>
-          </article>
-        ))
-      }
-    </div>
-
-    <div
-      id="grid-servicios-solutions"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 opacity-0 transform translate-y-8 absolute top-0 left-0 w-full pointer-events-none"
-    >
-      {
-        serviciosSolutions.map((servicio) => (
-          <article class="group relative bg-tarjetas border border-contraste hover:border-texto-resaltado/30 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-neutral-lg overflow-hidden flex flex-col h-full">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-texto-resaltado/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-            <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-contraste flex items-center justify-center mb-5 md:mb-6 group-hover:bg-texto-resaltado/10 transition-colors duration-300">
-              <i
-                class={`${servicio.icono} text-2xl md:text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300`}
-              />
+            <div class="relative z-10 flex-grow">
+              <h3 class="text-xl font-bold text-texto-principal mb-4 tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500">
+                {servicio.titulo}
+              </h3>
+              <p class="text-sm md:text-base text-texto-secundario leading-relaxed">
+                {servicio.descripcion}
+              </p>
             </div>
-
-            <h3 class="text-lg md:text-xl font-bold text-texto-principal mb-3 tracking-wide">
-              {servicio.titulo}
-            </h3>
-            <p class="text-sm md:text-base text-texto-secundario leading-relaxed flex-grow">
-              {servicio.descripcion}
-            </p>
           </article>
         ))
       }
     </div>
   </div>
 </section>
-
-<script>
-  // Lógica reactiva para transicionar entre los servicios de Design y Solutions
-  const gridDesign = document.getElementById("grid-servicios-design");
-  const gridSolutions = document.getElementById("grid-servicios-solutions");
-
-  const observerServicios = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === "data-context") {
-        const contextoActual =
-          document.documentElement.getAttribute("data-context");
-
-        if (contextoActual === "solutions") {
-          // Ocultar Design
-          gridDesign?.classList.remove(
-            "opacity-100",
-            "translate-y-0",
-            "relative",
-            "z-10",
-          );
-          gridDesign?.classList.add(
-            "opacity-0",
-            "-translate-y-8",
-            "absolute",
-            "pointer-events-none",
-          );
-
-          // Mostrar Solutions
-          gridSolutions?.classList.remove(
-            "opacity-0",
-            "translate-y-8",
-            "absolute",
-            "pointer-events-none",
-          );
-          gridSolutions?.classList.add(
-            "opacity-100",
-            "translate-y-0",
-            "relative",
-            "z-10",
-          );
-        } else {
-          // Ocultar Solutions
-          gridSolutions?.classList.remove(
-            "opacity-100",
-            "translate-y-0",
-            "relative",
-            "z-10",
-          );
-          gridSolutions?.classList.add(
-            "opacity-0",
-            "translate-y-8",
-            "absolute",
-            "pointer-events-none",
-          );
-
-          // Mostrar Design
-          gridDesign?.classList.remove(
-            "opacity-0",
-            "-translate-y-8",
-            "absolute",
-            "pointer-events-none",
-          );
-          gridDesign?.classList.add(
-            "opacity-100",
-            "translate-y-0",
-            "relative",
-            "z-10",
-          );
-        }
-      }
-    });
-  });
-
-  // Iniciamos la observación en el HTML raíz
-  observerServicios.observe(document.documentElement, { attributes: true });
-</script>

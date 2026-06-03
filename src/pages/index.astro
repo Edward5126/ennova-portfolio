@@ -4,78 +4,747 @@ import "../styles/global.css";
 import Header from "../components/common/Header.astro";
 import Footer from "../components/common/Footer.astro";
 import Modal from "../components/common/Modal.astro";
-import Hero from "../components/ui/Hero.astro";
-import Portafolio from "../components/ui/Portafolio.astro";
-import Servicios from "../components/ui/Servicios.astro";
-import AcercaDe from "../components/ui/AcercaDe.astro";
-import Testimonios from "../components/ui/Testimonios.astro";
-import FaviconManager from "../components/common/FaviconManager.astro";
 import SEO from "../components/common/SEO.astro";
+import FaviconManager from "../components/common/FaviconManager.astro";
 
-// --- METADATOS SEO ---
-const seoTitle = "E-nnova | Portafolio Profesional de Diseño e Ingeniería";
+const seoTitle = "E-nnova | El núcleo de tus proyectos";
 const seoDescription =
-  "Portafolio de Eduardo Chan. Diseño de identidad visual, desarrollo web, automatización industrial, lógica PLC y soluciones SCADA. Rigor técnico y estético.";
-// Nota: Deberás subir una imagen (1200x630px) llamada "og-portafolio.jpg" a tu carpeta /public/IMG/ para que la previsualización al compartir el link sea perfecta.
-const seoImage = "https://tu-dominio.com/IMG/og-portafolio.jpg";
-const seoUrl = "https://tu-dominio.com/"; // Sustituir por tu dominio real de GitHub Pages o personalizado
+  "El punto de partida para creadores y emprendedores. Soluciones integrales de identidad visual, desarrollo web y automatización de procesos.";
+const seoImage = "/IMG/og-hub.jpg";
+const seoUrl = "https://tu-dominio.com/";
+
+const logosConfianza = [
+  {
+    nombre: "Innova Dental",
+    src: "/IMG/PROJECTS/ICONS/InnovaDentalLogo.svg",
+    h: "h-8 md:h-10",
+  },
+  {
+    nombre: "WitSet",
+    src: "/IMG/PROJECTS/ICONS/WitSetLogo.svg",
+    h: "h-7 md:h-9",
+  },
+  {
+    nombre: "FI UADY",
+    text: "FI UADY",
+    h: "text-lg md:text-xl font-bold tracking-tight",
+  },
+  {
+    nombre: "IEEE RAS",
+    src: "/IMG/PROJECTS/ICONS/RASLogo.svg",
+    h: "h-8 md:h-10",
+  },
+];
 ---
 
-<html lang="es" data-context="design" class="scroll-smooth">
+<html lang="es" data-route="hub" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <FaviconManager />
-    <SEO />
+    <FaviconManager variant="hub" />
+    <SEO
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      url={seoUrl}
+      schemaType="WebSite"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/Edward5126/E-core-icons@main/style.css"
     />
+    <style>
+      body {
+        background-color: #09090b;
+      }
+
+      .hypernova-container {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hypernova-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px solid rgba(250, 250, 250, 0.04);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+        animation: expand-ring 12s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      }
+
+      .ring-1 {
+        width: 450px;
+        height: 450px;
+        animation-delay: 0s;
+      }
+      .ring-2 {
+        width: 750px;
+        height: 750px;
+        animation-delay: 4s;
+      }
+      .ring-3 {
+        width: 1050px;
+        height: 1050px;
+        animation-delay: 8s;
+      }
+
+      @keyframes expand-ring {
+        0% {
+          transform: translate(-50%, -50%) scale(0.4);
+          opacity: 0;
+          border-color: rgba(250, 250, 250, 0.1);
+        }
+        30% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.4);
+          opacity: 0;
+          border-color: rgba(250, 250, 250, 0);
+        }
+      }
+
+      details > summary {
+        list-style: none;
+        outline: none;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
   </head>
 
-  <body
-    class="bg-fondo text-texto-principal font-sans antialiased selection:bg-texto-resaltado/20 selection:text-texto-principal transition-colors duration-500 flex flex-col min-h-screen"
-  >
-    <Header />
+  <body class="text-[#fafafa] font-sans antialiased flex flex-col min-h-screen">
+    <Header activeRoute="hub" />
 
     <main class="flex-grow">
-      <Hero />
+      <section
+        id="Inicio"
+        class="relative min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden border-b border-[#242424]"
+      >
+        <div class="hypernova-container w-full max-w-7xl h-full">
+          <div class="hypernova-ring ring-3"></div>
+          <div class="hypernova-ring ring-2"></div>
+          <div class="hypernova-ring ring-1"></div>
+        </div>
 
-      <div class="reveal-on-scroll"><Portafolio /></div>
-      <div class="reveal-on-scroll"><Servicios /></div>
-      <div class="reveal-on-scroll"><AcercaDe /></div>
-      <div class="reveal-on-scroll"><Testimonios /></div>
+        <div
+          class="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center text-center pt-24 pb-12"
+        >
+          <h1
+            class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-4xl text-[#fafafa] leading-[1.10]"
+          >
+            Todo gran proyecto<br class="hidden sm:block" /> nace de un núcleo.
+          </h1>
+
+          <p
+            class="text-base md:text-lg text-[#898989] leading-relaxed max-w-2xl mb-14"
+          >
+            Como una hipernova que expande su energía, impulsamos proyectos en
+            sus fases iniciales. Selecciona la dimensión en la que deseas
+            materializar tu visión.
+          </p>
+
+          <div
+            class="flex flex-col md:flex-row items-stretch justify-center gap-6 w-full max-w-5xl"
+          >
+            <a
+              href="/design"
+              class="group flex-1 relative p-[1px] rounded-[24px] overflow-hidden bg-gradient-to-b from-[#393939] to-transparent hover:from-[#10b981] transition-colors duration-500 shadow-lg"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-[#10b981]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+              >
+              </div>
+              <div
+                class="h-full w-full bg-[#121212]/80 backdrop-blur-xl rounded-[23px] p-8 md:p-10 flex flex-col justify-between text-left relative z-10"
+              >
+                <div class="flex justify-between items-start mb-12">
+                  <i
+                    class="icon-palette inline-block text-4xl text-transparent bg-clip-text bg-degradado-principal transition-all"
+                  ></i>
+                  <span
+                    class="px-3 py-1 bg-[#242424] border border-[#393939] text-[#898989] text-xs font-mono rounded-full group-hover:text-[#10b981] group-hover:border-[#10b981]/50 transition-colors"
+                    >/design</span
+                  >
+                </div>
+                <div>
+                  <h2
+                    class="text-3xl font-bold text-[#fafafa] mb-3 tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#10b981] group-hover:to-[#34d399] transition-all duration-500"
+                  >
+                    Área Creativa
+                  </h2>
+                  <p class="text-sm text-[#898989] leading-relaxed">
+                    Identidad visual sólida y desarrollo web Front-End. Tu marca
+                    digital de alto rendimiento.
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="/solutions"
+              class="group flex-1 relative p-[1px] rounded-[24px] overflow-hidden bg-gradient-to-b from-[#393939] to-transparent hover:from-[#30d2be] transition-colors duration-500 shadow-lg"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-[#30d2be]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+              >
+              </div>
+              <div
+                class="h-full w-full bg-[#121212]/80 backdrop-blur-xl rounded-[23px] p-8 md:p-10 flex flex-col justify-between text-left relative z-10"
+              >
+                <div class="flex justify-between items-start mb-12">
+                  <i
+                    class="icon-microchip inline-block text-4xl text-transparent bg-clip-text bg-degradado-principal transition-all"
+                  ></i>
+                  <span
+                    class="px-3 py-1 bg-[#242424] border border-[#393939] text-[#898989] text-xs font-mono rounded-full group-hover:text-[#30d2be] group-hover:border-[#30d2be]/50 transition-colors"
+                    >/solutions</span
+                  >
+                </div>
+                <div>
+                  <h2
+                    class="text-3xl font-bold text-[#fafafa] mb-3 tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#30d2be] group-hover:to-[#45a6d3] transition-all duration-500"
+                  >
+                    Área Técnica
+                  </h2>
+                  <p class="text-sm text-[#898989] leading-relaxed">
+                    Ingeniería mecatrónica, control PLC y automatización.
+                    Hardware robusto para procesos físicos.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <a
+            href="#Ecosistema"
+            class="mt-16 flex flex-col items-center opacity-60 hover:opacity-100 transition-opacity cursor-pointer group"
+          >
+            <span class="text-xs text-[#898989] mb-2 font-medium tracking-wide"
+              >O descubre cómo ambas dimensiones pueden colaborar</span
+            >
+            <i
+              class="icon-arrow-down inline-block text-lg text-transparent bg-clip-text bg-degradado-principal group-hover:translate-y-1 transition-transform"
+            ></i>
+          </a>
+        </div>
+      </section>
+
+      <section class="w-full border-b border-[#242424] bg-[#121212]/30 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+          <p class="text-xs font-semibold text-[#4d4d4d] tracking-widest mb-8">
+            Confianza e Instituciones
+          </p>
+          <div
+            class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
+          >
+            {
+              logosConfianza.map((logo) =>
+                logo.src ? (
+                  <img
+                    src={logo.src}
+                    alt={logo.nombre}
+                    class={`${logo.h} w-auto`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <span class={`${logo.h} text-[#fafafa]`}>{logo.text}</span>
+                ),
+              )
+            }
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="Ecosistema"
+        class="w-full max-w-7xl mx-auto px-6 py-24 md:py-32"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min">
+          <!-- Whoami Photo-centric -->
+          <article
+            class="md:col-span-3 bg-[#121212]/60 backdrop-blur-md border border-[#242424] rounded-[24px] overflow-hidden flex flex-col md:flex-row group hover:border-[#393939] transition-colors relative"
+          >
+            <div class="w-full md:w-1/2 h-[300px] md:h-auto relative">
+              <img
+                src="/IMG/IlustrativaContacto.jpg"
+                alt="Eduardo Chan"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#121212]/90 md:from-[#121212]/30 via-[#121212]/40 to-transparent"
+              >
+              </div>
+            </div>
+
+            <div
+              class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-t md:bg-gradient-to-l from-[#121212] via-[#121212] to-transparent relative z-10 -mt-20 md:mt-0"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <i
+                  class="icon-terminal inline-block text-2xl text-transparent bg-clip-text bg-degradado-principal"
+                ></i>
+                <span
+                  class="text-xs font-mono text-[#898989] bg-[#242424] border border-[#393939] px-2 py-1 rounded-md"
+                  >perfil.json</span
+                >
+              </div>
+              <h3 class="text-3xl md:text-5xl font-bold text-[#fafafa] mb-6">
+                El Desarrollador
+              </h3>
+              <p
+                class="text-[#898989] leading-relaxed text-base md:text-lg mb-4"
+              >
+                Soy Eduardo Chan. Mi trayectoria en el desarrollo frontend nació
+                de manera autodidacta gracias a un hobby, lo que me otorgó una
+                visión creativa sin restricciones. Actualmente, soy estudiante
+                de Ingeniería Mecatrónica, disciplina que aportó el rigor
+                analítico y la capacidad de resolver problemas complejos.
+              </p>
+              <p
+                class="text-[#898989] leading-relaxed text-base md:text-lg mb-8"
+              >
+                E-nnova es la síntesis de ambos mundos: la libertad estética del
+                diseño fusionada con la precisión absoluta de la ingeniería.
+              </p>
+
+              <div class="flex justify-start">
+                <a
+                  href="/docs/CV_Eduardo_Chan.pdf"
+                  download
+                  class="flex items-center gap-3 px-8 py-4 bg-[#242424] hover:bg-[#2e2e2e] border border-[#393939] text-[#fafafa] rounded-xl transition-all duration-300 shadow-sm font-semibold tracking-wide"
+                >
+                  <span>Descargar documento vital</span>
+                  <i
+                    class="icon-download inline-block text-lg text-transparent bg-clip-text bg-degradado-principal"
+                  ></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="md:col-span-2 bg-gradient-to-br from-[#121212] to-[#1a1a1a] border border-[#242424] rounded-[24px] p-8 md:p-10 flex flex-col justify-center group hover:border-[#393939] transition-colors"
+          >
+            <span
+              class="text-xs font-semibold text-[#898989] tracking-wide block mb-4"
+              >Sinergia de hardware y software</span
+            >
+            <h3 class="text-2xl md:text-3xl font-bold text-[#fafafa] mb-4">
+              Conectando lo físico y lo digital
+            </h3>
+            <p class="text-[#898989] leading-relaxed text-base max-w-xl">
+              El verdadero potencial se desbloquea cuando una interfaz web
+              intuitiva controla un sistema físico potente. Desarrollamos desde
+              el hardware industrial hasta el panel de control en la nube que lo
+              monitorea. Dos dimensiones, una sola solución fluida.
+            </p>
+          </article>
+
+          <article
+            class="bg-[#121212]/60 backdrop-blur-md border border-[#242424] rounded-[24px] p-8 md:p-10 flex flex-col justify-between group hover:border-[#393939] transition-colors"
+          >
+            <div>
+              <i
+                class="icon-code inline-block text-2xl text-transparent bg-clip-text bg-degradado-principal mb-6"
+              ></i>
+              <h3 class="text-xl font-bold text-[#fafafa] mb-4">
+                Arquitectura limpia
+              </h3>
+              <p class="text-[#898989] leading-relaxed text-sm">
+                La calidad no es un lujo, es la estructura base. Un proyecto con
+                visión de crecimiento requiere código desarrollado a la medida,
+                libre de dependencias innecesarias y preparado estructuralmente
+                para escalar a futuro.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="Capacidades"
+        class="w-full border-t border-[#242424] bg-[#121212]/30 py-24 md:py-32"
+      >
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-[#fafafa] tracking-tight mb-4"
+            >
+              Centro de capacidades
+            </h2>
+            <p class="text-[#898989] text-lg">
+              Tecnologías de alto rendimiento para cada especialidad.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="bg-[#09090b] border border-[#242424] rounded-[16px] overflow-hidden"
+            >
+              <div
+                class="bg-[#242424] px-4 py-2 border-b border-[#393939] flex items-center gap-2"
+              >
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <span class="ml-2 text-xs font-mono text-[#898989]"
+                  >herramientas-design.json</span
+                >
+              </div>
+              <div class="p-6 md:p-8 font-mono text-sm text-[#898989]">
+                <ul class="space-y-4">
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-code inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">Astro Framework</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-file-code inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">Vanilla JavaScript</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-html5 inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">HTML5 & CSS3 Avanzado</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-pen-nib inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">Figma (UI/UX)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="bg-[#09090b] border border-[#242424] rounded-[16px] overflow-hidden"
+            >
+              <div
+                class="bg-[#242424] px-4 py-2 border-b border-[#393939] flex items-center gap-2"
+              >
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#4d4d4d]"></div>
+                <span class="ml-2 text-xs font-mono text-[#898989]"
+                  >herramientas-solutions.json</span
+                >
+              </div>
+              <div class="p-6 md:p-8 font-mono text-sm text-[#898989]">
+                <ul class="space-y-4">
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-laptop-code inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">C++ / C# / Python</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-microchip inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">Siemens TIA Portal (SCL)</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-network-wired inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">Sistemas SCADA & IoT</span>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <i
+                      class="icon-cube inline-block text-transparent bg-clip-text bg-degradado-principal text-lg w-6 text-center"
+                    ></i>
+                    <span class="text-[#fafafa]">SolidWorks (Diseño CAD)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="w-full border-t border-[#242424] py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="mb-12">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-[#fafafa] tracking-tight"
+            >
+              Proyectos fundacionales
+            </h2>
+            <p class="text-[#898989] mt-3 text-lg">
+              Casos de éxito de cada dimensión de servicio.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a
+              href="/design"
+              class="group relative aspect-[4/3] md:aspect-[16/9] rounded-[24px] overflow-hidden border border-[#242424] bg-[#121212] block"
+            >
+              <img
+                src="/IMG/PROJECTS/WitSet.jpg"
+                alt="Proyecto WitSet"
+                class="w-full h-full object-cover opacity-40 group-hover:opacity-80 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/40 to-transparent"
+              >
+              </div>
+              <div
+                class="absolute bottom-0 left-0 w-full p-8 flex flex-col items-start"
+              >
+                <span
+                  class="inline-flex items-center gap-2 px-3 py-1 bg-[#10b981]/20 border border-[#10b981]/50 text-[#10b981] text-xs font-semibold rounded-full mb-4"
+                >
+                  <i class="icon-display"></i> Área Creativa
+                </span>
+                <h3
+                  class="text-2xl font-bold text-[#fafafa] mb-2 group-hover:text-[#10b981] transition-colors"
+                >
+                  WitSet Hub
+                </h3>
+                <p class="text-sm text-[#898989] mb-4">
+                  Ecosistema modular de aplicaciones web progresivas centradas
+                  en la utilidad y educación.
+                </p>
+                <span
+                  class="text-xs font-mono text-[#fafafa] border-b border-transparent group-hover:border-[#10b981] transition-all"
+                  >Explorar el portafolio -></span
+                >
+              </div>
+            </a>
+
+            <a
+              href="/solutions"
+              class="group relative aspect-[4/3] md:aspect-[16/9] rounded-[24px] overflow-hidden border border-[#242424] bg-[#121212] block"
+            >
+              <img
+                src="/IMG/PROJECTS/RAS.jpg"
+                alt="Sistema SCADA"
+                class="w-full h-full object-cover opacity-40 group-hover:opacity-80 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/40 to-transparent"
+              >
+              </div>
+              <div
+                class="absolute bottom-0 left-0 w-full p-8 flex flex-col items-start"
+              >
+                <span
+                  class="inline-flex items-center gap-2 px-3 py-1 bg-[#30d2be]/20 border border-[#30d2be]/50 text-[#30d2be] text-xs font-semibold rounded-full mb-4"
+                >
+                  <i class="icon-robot"></i> Área Técnica
+                </span>
+                <h3
+                  class="text-2xl font-bold text-[#fafafa] mb-2 group-hover:text-[#30d2be] transition-colors"
+                >
+                  Gestión Energética
+                </h3>
+                <p class="text-sm text-[#898989] mb-4">
+                  Sistema domótico industrial autónomo implementado para el
+                  monitoreo de consumo mediante HMI.
+                </p>
+                <span
+                  class="text-xs font-mono text-[#fafafa] border-b border-transparent group-hover:border-[#30d2be] transition-all"
+                  >Explorar los proyectos -></span
+                >
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="FAQ"
+        class="w-full border-t border-[#242424] py-24 md:py-32 bg-[#121212]/30"
+      >
+        <div class="max-w-3xl mx-auto px-6">
+          <div class="flex items-center gap-3 justify-center mb-6">
+            <i
+              class="icon-circle-question inline-block text-2xl text-transparent bg-clip-text bg-degradado-principal"
+            ></i>
+          </div>
+          <h2
+            class="text-3xl font-bold text-[#fafafa] tracking-tight mb-12 text-center"
+          >
+            Preguntas frecuentes
+          </h2>
+
+          <div class="flex flex-col gap-4">
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span
+                  >¿Puedo solicitar servicios de ambas áreas para un mismo
+                  proyecto?</span
+                >
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Absolutamente. Esa es la ventaja principal del ecosistema. Si
+                tienes una idea para un producto de hardware (como una máquina o
+                un sistema inteligente para el hogar), se puede diseñar tanto el
+                funcionamiento electrónico y mecánico, como la interfaz web o el
+                dashboard desde donde tus usuarios lo controlarán.
+              </div>
+            </details>
+
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span>¿En qué etapa debe estar mi proyecto para contactar?</span
+                >
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Puedes acercarte en cualquier etapa de desarrollo. Desde la
+                validación de una idea conceptual que necesita una identidad
+                visual inicial para buscar inversores, hasta proyectos avanzados
+                que requieren resolver un problema técnico de automatización o
+                mejorar su rendimiento web.
+              </div>
+            </details>
+
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span
+                  >¿Por qué no usar constructores de sitios web tradicionales?</span
+                >
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Los constructores visuales suelen generar código pesado que hace
+                lentas las páginas y limita su crecimiento. Aquí se desarrolla a
+                medida mediante programación estructurada, asegurando que tu
+                plataforma sea increíblemente rápida, se posicione bien en
+                Google y te pertenezca al 100%.
+              </div>
+            </details>
+
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span
+                  >¿Me entregan la propiedad intelectual y el código fuente?</span
+                >
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Sí. Al finalizar y liquidar el proyecto, recibes la propiedad
+                intelectual total. Esto incluye los repositorios de código,
+                diseños en Figma, archivos de identidad visual y, en su caso,
+                los modelos CAD y diagramas de control industrial. Eres dueño
+                absoluto de tu producto.
+              </div>
+            </details>
+
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span
+                  >¿Ofrecen soporte y mantenimiento posterior al lanzamiento?</span
+                >
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Sí, todos los desarrollos incluyen un periodo de garantía
+                técnica inicial para asegurar su estabilidad en producción.
+                Posteriormente, puedes solicitar mantenimiento preventivo,
+                actualizaciones de contenido o la integración de nuevas
+                funcionalidades.
+              </div>
+            </details>
+
+            <details
+              class="group bg-[#121212] border border-[#242424] rounded-xl hover:border-[#393939] transition-colors"
+            >
+              <summary
+                class="w-full flex justify-between items-center font-medium text-[#fafafa] text-base md:text-lg p-6 cursor-pointer outline-none block"
+              >
+                <span>¿Cómo funciona el proceso de cotización y pagos?</span>
+                <span
+                  class="transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+                >
+                  <i class="icon-chevron-down inline-block text-[#898989]"></i>
+                </span>
+              </summary>
+              <div
+                class="px-6 pb-6 text-[#898989] leading-relaxed text-sm border-t border-[#242424] pt-4 mt-2"
+              >
+                Todo comienza con una charla gratuita donde evaluamos los
+                requerimientos técnicos y estéticos de tu idea. Posteriormente,
+                se elabora una propuesta formal que detalla el alcance, los
+                tiempos de ejecución y el presupuesto exacto, sin costos
+                ocultos.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <div class="reveal-on-scroll"><Footer /></div>
-
+    <Footer variant="hub" />
     <Modal />
-
-    <script>
-      // Lógica de Scroll Reveal
-      // Este script detecta cuando un elemento entra en el 15% inferior de la pantalla y lo revela
-      const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.15,
-      };
-
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            // Una vez revelado, dejamos de observarlo para que no se anime al subir
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      // Aplicar el observador a todos los elementos con la clase
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-        revealObserver.observe(el);
-      });
-    </script>
   </body>
 </html>

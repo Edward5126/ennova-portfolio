@@ -1,18 +1,57 @@
 ---
 // src/components/common/Footer.astro
 
-// Lógica de enrutamiento para que los anclajes funcionen desde la página 404
+interface Props {
+  variant?: "hub" | "design" | "solutions";
+}
+
+const { variant = "hub" } = Astro.props;
+
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === "/" || currentPath === "/index.html";
 const formatearEnlace = (hash: string) => (isHome ? hash : `/${hash}`);
 
-const enlacesFooter = [
-  { url: "#Inicio", texto: "Inicio" },
-  { url: "#Portafolio", texto: "Portafolio" },
-  { url: "#Servicios", texto: "Servicios" },
-  { url: "#AcercaDe", texto: "Acerca de" },
-  { url: "#Testimonios", texto: "Testimonios" },
-];
+const configuracionFooter = {
+  hub: {
+    marca: "E-nnova",
+    descripcion:
+      "El núcleo creativo y técnico para el desarrollo de proyectos integrales. Expandiendo ideas a través del diseño y la ingeniería.",
+    logo: "/IMG/logos/master/Master%20-%20Logo%20Horizontal.svg",
+    urlLogo: "/",
+  },
+  design: {
+    marca: "E-nnova Design",
+    descripcion:
+      "Soluciones de identidad visual, diseño UI/UX y desarrollo web Front-End. Construyendo marcas digitales de alto rendimiento.",
+    logo: "/IMG/logos/design/Colores%20-%20Logo%20Horizontal.svg",
+    urlLogo: "/design",
+  },
+  solutions: {
+    marca: "E-nnova Solutions",
+    descripcion:
+      "Ingeniería mecatrónica orientada a la automatización de procesos, sistemas SCADA y diseño electromecánico.",
+    logo: "/IMG/logos/solutions/Colores%20-%20Logo%20Horizontal.svg",
+    urlLogo: "/solutions",
+  },
+};
+
+const datosActuales = configuracionFooter[variant];
+
+const enlacesFooter =
+  variant === "hub"
+    ? [
+        { url: "#Inicio", texto: "Inicio" },
+        { url: "#Ecosistema", texto: "Ecosistema" },
+        { url: "#Capacidades", texto: "Capacidades" },
+        { url: "#FAQ", texto: "Preguntas frecuentes" },
+      ]
+    : [
+        { url: "#Inicio", texto: "Inicio" },
+        { url: "#Portafolio", texto: "Portafolio" },
+        { url: "#Servicios", texto: "Servicios" },
+        { url: "#AcercaDe", texto: "Acerca de" },
+        { url: "#Testimonios", texto: "Testimonios" },
+      ];
 
 const redesSociales = [
   {
@@ -24,6 +63,11 @@ const redesSociales = [
     url: "https://www.instagram.com/ennova_design/",
     iconoClase: "icon-instagram",
     ariaLabel: "Instagram",
+  },
+  {
+    url: "https://www.linkedin.com/in/eduardo-chan/",
+    iconoClase: "icon-linkedin",
+    ariaLabel: "LinkedIn",
   },
   {
     url: "https://github.com/Edward5126",
@@ -46,10 +90,12 @@ const redesSociales = [
     ariaLabel: "Buy Me a Coffee",
   },
 ];
+
+const anioActual = new Date().getFullYear();
 ---
 
 <footer
-  class="w-full bg-tarjetas border-t border-contraste/80 pt-16 pb-8 px-6 mt-12"
+  class="w-full bg-tarjetas backdrop-blur-md border-t border-contraste/80 pt-16 pb-8 px-6 mt-12"
 >
   <div
     class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-12 items-center md:items-start text-center md:text-left"
@@ -58,27 +104,35 @@ const redesSociales = [
       class="w-full md:w-1/3 flex flex-col items-center md:items-start gap-6"
     >
       <a
-        href={formatearEnlace("#Inicio")}
+        href={datosActuales.urlLogo}
         class="flex items-center cursor-pointer w-fit"
       >
         <img
-          id="logo-footer"
-          src="/IMG/LogoHorizontalDesign.svg"
-          alt="E-nnova Logo"
-          class="h-7 w-auto drop-shadow-sm hover:scale-105 transition-transform duration-300"
+          src={datosActuales.logo}
+          alt={`${datosActuales.marca} Logo`}
+          class="h-7 w-auto drop-shadow-sm transition-transform duration-300"
         />
       </a>
       <p class="text-texto-secundario text-sm leading-relaxed max-w-sm">
-        Transformando ideas en soluciones digitales y tecnológicas con rigor
-        estético y precisión técnica.
+        {datosActuales.descripcion}
       </p>
+
+      {
+        !isHome && (
+          <a
+            href="/"
+            class="group flex items-center gap-2 text-sm text-texto-secundario hover:text-transparent hover:bg-clip-text hover:bg-degradado-principal transition-all mt-2 font-medium tracking-wide"
+          >
+            <i class="icon-arrow-left" />
+            <span>Volver a la página principal</span>
+          </a>
+        )
+      }
     </div>
 
     <div class="w-full md:w-1/3 flex flex-col items-center">
       <div class="flex flex-col gap-4">
-        <h4
-          class="text-texto-principal font-bold tracking-wide uppercase text-sm mb-2"
-        >
+        <h4 class="text-texto-principal font-bold tracking-wide text-base mb-2">
           Explorar
         </h4>
         <ul class="flex flex-col gap-3">
@@ -87,7 +141,7 @@ const redesSociales = [
               <li>
                 <a
                   href={formatearEnlace(enlace.url)}
-                  class="text-texto-secundario hover:text-texto-resaltado transition-colors text-sm font-medium tracking-wide"
+                  class="text-texto-secundario hover:text-transparent hover:bg-clip-text hover:bg-degradado-principal transition-all text-sm font-medium tracking-wide"
                 >
                   {enlace.texto}
                 </a>
@@ -102,9 +156,7 @@ const redesSociales = [
       <div
         class="flex flex-col items-center md:items-start gap-4 w-full md:w-fit"
       >
-        <h4
-          class="text-texto-principal font-bold tracking-wide uppercase text-sm mb-2"
-        >
+        <h4 class="text-texto-principal font-bold tracking-wide text-base mb-2">
           Conectar
         </h4>
         <div
@@ -120,7 +172,7 @@ const redesSociales = [
                 class="group transition-all duration-300 hover:-translate-y-1"
               >
                 <i
-                  class={`${red.iconoClase} text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all`}
+                  class={`${red.iconoClase} inline-block text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all`}
                 />
               </a>
             ))
@@ -136,50 +188,15 @@ const redesSociales = [
     <span
       class="text-texto-secundario text-[11px] sm:text-xs font-medium tracking-wide"
     >
-      © <span id="year-copy"></span>
-      <span id="marca-copy">E-nnova Design</span>. Todos los derechos
-      reservados.
+      © {anioActual}
+      <span>{datosActuales.marca}</span>. Todos los derechos reservados.
     </span>
     <span
       class="text-texto-secundario text-[11px] sm:text-xs flex items-center justify-center gap-1.5"
     >
-      Desarrollado con <i class="icon-heart text-texto-resaltado text-[10px]"
+      Desarrollado con <i
+        class="icon-heart inline-block text-transparent bg-clip-text bg-degradado-principal text-[10px]"
       ></i> por Eduardo Chan.
     </span>
   </div>
 </footer>
-
-<script>
-  const yearSpan = document.getElementById("year-copy");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear().toString();
-  }
-
-  const marcaCopy = document.getElementById("marca-copy");
-  const logoFooter = document.getElementById("logo-footer") as HTMLImageElement;
-
-  const observerFooter = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === "data-context") {
-        const contextoActual =
-          document.documentElement.getAttribute("data-context");
-
-        if (marcaCopy) {
-          marcaCopy.textContent =
-            contextoActual === "solutions"
-              ? "E-nnova Solutions"
-              : "E-nnova Design";
-        }
-
-        if (logoFooter) {
-          logoFooter.src =
-            contextoActual === "solutions"
-              ? "/IMG/LogoHorizontalSolutions.svg"
-              : "/IMG/LogoHorizontalDesign.svg";
-        }
-      }
-    });
-  });
-
-  observerFooter.observe(document.documentElement, { attributes: true });
-</script>

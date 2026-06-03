@@ -1,77 +1,20 @@
 ---
 // src/components/common/FaviconManager.astro
+interface Props {
+  variant?: "hub" | "design" | "solutions";
+}
+
+const { variant = "hub" } = Astro.props;
+
+const configuracionFavicon = {
+  hub: "/IMG/logos/master/Logo.svg",
+  design: "/IMG/logos/design/Logo.svg",
+  solutions: "/IMG/logos/solutions/Logo.svg",
+};
+
+const faviconActual = configuracionFavicon[variant];
 ---
 
-<link
-  id="dynamic-favicon"
-  rel="icon"
-  type="image/svg+xml"
-  href="/favicon.svg"
-/>
-
-<script>
-  const faviconLink = document.getElementById(
-    "dynamic-favicon",
-  ) as HTMLLinkElement;
-
-  // Hemos separado tu logo en sus dos figuras fundamentales
-  const framePath = `M695.2,296.5L420.13,571.57c-33.07,33.07-87.18,33.07-120.25,0L24.8,296.5c-33.07-33.07-33.07-87.18,0-120.25L201.05,0c21.18,21.39,21.12,55.9-0.2,77.22l-99.03,99.03c-33.07,33.07-33.07,87.18,0,120.25l198.05,198.05c33.07,33.07,87.18,33.07,120.25,0L618.18,296.5c33.07-33.07,33.07-87.18,0-120.25L515.2,73.26c-17.54-21.5-16.28-53.22,3.76-73.26L695.2,176.25C728.27,209.31,728.27,263.43,695.2,296.5z`;
-
-  const rhombusPath = `M334.17,125.45l-85.09,85.09c-14.21,14.21-14.21,37.45,0,51.66l85.09,85.09c14.21,14.21,37.45,14.21,51.66,0l85.09-85.09c14.21-14.21,14.21-37.45,0-51.66l-85.09-85.09C371.62,111.25,348.38,111.25,334.17,125.45z`;
-
-  const actualizarFavicon = () => {
-    if (!faviconLink) return;
-
-    // Detectamos el estado del entorno
-    const isHidden = document.hidden;
-    const isDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    const contextoActual =
-      document.documentElement.getAttribute("data-context") || "design";
-
-    // REGLA MAESTRA: El color sólido depende estrictamente del tema del usuario
-    const solidColor = isDarkMode ? "#FFFFFF" : "#1E1E1E";
-
-    let defs = "";
-    let frameFill = "";
-    // El rombo NUNCA cambia, siempre usa el color sólido
-    let rhombusFill = solidColor;
-
-    if (isHidden) {
-      // Pestaña Inactiva: El marco se apaga y usa el color sólido también
-      frameFill = solidColor;
-    } else {
-      // Pestaña Activa: El marco se enciende con el degradado correspondiente
-      frameFill = "url(#grad)";
-
-      if (contextoActual === "solutions") {
-        defs = `<linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>`;
-      } else {
-        defs = `<linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="27%" stop-color="#DAE15C"/><stop offset="100%" stop-color="#47B449"/></linearGradient>`;
-      }
-    }
-
-    // Ensamblamos el SVG inyectando los colores de forma independiente
-    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 596.37"><defs>${defs}</defs><path d="${framePath}" fill="${frameFill}"/><path d="${rhombusPath}" fill="${rhombusFill}"/></svg>`;
-
-    // Lo codificamos y lo enviamos al navegador
-    faviconLink.href = `data:image/svg+xml,${encodeURIComponent(svgString)}`;
-  };
-
-  // Listeners de Eventos
-  document.addEventListener("visibilitychange", actualizarFavicon);
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", actualizarFavicon);
-
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === "data-context") actualizarFavicon();
-    });
-  });
-  observer.observe(document.documentElement, { attributes: true });
-
-  // Disparo Inicial
-  actualizarFavicon();
-</script>
+<link rel="icon" type="image/svg+xml" href={faviconActual} />
+<link rel="apple-touch-icon" href="/IMG/maskable_icon_x192.png" />
+<meta name="theme-color" content="#09090b" />

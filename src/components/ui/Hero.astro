@@ -1,5 +1,29 @@
 ---
 // src/components/ui/Hero.astro
+interface Props {
+  variant: "design" | "solutions";
+}
+
+const { variant } = Astro.props;
+
+const configuracionHero =
+  variant === "design"
+    ? {
+        imagen: "/IMG/FondoHeroDesign.jpg",
+        alt: "Entorno de diseño creativo",
+        descripcion:
+          "Comienza tu proyecto con una presencia digital valiosa desde su nacimiento y obtén una identidad que realmente destaque.",
+        perfil: "Ingeniería y Automatización",
+        enlacePerfil: "/solutions",
+      }
+    : {
+        imagen: "/IMG/FondoHeroSolutions.jpg",
+        alt: "Entorno de ingeniería y código",
+        descripcion:
+          "Trae a la vida tus proyectos bajo un enfoque ingenieril o agiliza tus procesos mediante la automatización.",
+        perfil: "Diseño y Desarrollo Web",
+        enlacePerfil: "/design",
+      };
 ---
 
 <section
@@ -8,20 +32,11 @@
 >
   <div class="absolute inset-0 z-0 bg-fondo">
     <img
-      id="hero-img-design"
-      src="/IMG/FondoHeroDesign.jpg"
-      alt="Entorno de diseño creativo"
+      src={configuracionHero.imagen}
+      alt={configuracionHero.alt}
       class="w-full h-full object-cover opacity-30 transition-opacity duration-700"
       loading="eager"
     />
-    <img
-      id="hero-img-solutions"
-      src="/IMG/FondoHeroSolutions.jpg"
-      alt="Entorno de ingeniería y código"
-      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700"
-      loading="lazy"
-    />
-
     <div
       class="absolute inset-0 bg-gradient-to-r from-fondo via-fondo/90 to-transparent"
     >
@@ -30,9 +45,8 @@
       class="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-fondo to-transparent"
     >
     </div>
-
     <div
-      class="absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-a rounded-full opacity-5 blur-[80px] md:blur-[120px] mix-blend-screen transition-colors duration-700 pointer-events-none"
+      class="absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-a rounded-full opacity-5 blur-[80px] md:blur-[120px] mix-blend-screen pointer-events-none"
     >
     </div>
   </div>
@@ -43,26 +57,16 @@
         class="text-4xl sm:text-5xl md:text-7xl font-bold text-texto-principal tracking-tight mb-6 md:mb-8 leading-tight"
       >
         Inicia con <span
-          id="hero-title-accent"
-          class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+          class="text-transparent bg-clip-text bg-degradado-principal"
           >calidad</span
         >
       </h1>
 
       <div class="relative min-h-[120px] sm:min-h-[100px] mb-8 md:mb-12">
         <p
-          id="hero-desc-design"
-          class="text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl transition-opacity duration-500"
+          class="text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl"
         >
-          Comienza tu proyecto con una presencia digital valiosa desde su
-          nacimiento y obtén una identidad que realmente destaque.
-        </p>
-        <p
-          id="hero-desc-solutions"
-          class="absolute top-0 left-0 text-base sm:text-lg md:text-xl text-texto-secundario leading-relaxed max-w-xl opacity-0 pointer-events-none transition-opacity duration-500"
-        >
-          Trae a la vida tus proyectos bajo un enfoque ingenieril o agiliza tus
-          procesos mediante la automatización.
+          {configuracionHero.descripcion}
         </p>
       </div>
 
@@ -70,9 +74,9 @@
         class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
       >
         <button
-          class="flex items-center justify-center gap-3 px-8 py-4 bg-degradado-principal text-fondo font-bold rounded-xl shadow-neutral-md hover:shadow-neutral-lg transition-all duration-300 cursor-pointer btn-interactivo btn-hero w-full sm:w-auto"
+          class="flex items-center justify-center gap-3 px-8 py-4 bg-degradado-principal text-fondo font-bold rounded-xl shadow-neutral-md hover:shadow-neutral-lg transition-all duration-300 cursor-pointer btn-interactivo w-full sm:w-auto"
         >
-          <span id="hero-cta-text">Me interesa</span>
+          <span>Cotizar proyecto</span>
           <i class="icon-paper-plane text-lg"></i>
         </button>
 
@@ -92,69 +96,20 @@
   <div
     class="mt-12 md:mt-0 md:absolute md:inset-0 z-20 pointer-events-none flex items-end justify-center md:justify-end max-w-7xl mx-auto px-6 w-full md:pb-12"
   >
-    <div
-      class="group pointer-events-auto relative flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-tarjetas/60 border border-contraste/50 hover:border-texto-resaltado/40 shadow-neutral-md hover:shadow-neutral-lg backdrop-blur-md w-full md:max-w-[380px] transition-all duration-500 overflow-hidden cursor-default"
+    <a
+      href={configuracionHero.enlacePerfil}
+      class="group pointer-events-auto relative flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-tarjetas/60 border border-contraste/50 hover:border-texto-resaltado/40 shadow-neutral-md hover:shadow-neutral-lg backdrop-blur-md w-full md:max-w-[380px] transition-all duration-500 overflow-hidden cursor-pointer"
     >
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-transparent via-texto-resaltado/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-in-out pointer-events-none"
-      >
-      </div>
-
       <div class="mt-0.5 relative z-10 flex-shrink-0">
         <i
           class="icon-shuffle text-xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500"
         ></i>
       </div>
-
       <p class="text-sm text-texto-secundario leading-relaxed relative z-10">
-        ¿Buscas soluciones de <strong
-          id="hero-hint-perfil"
-          class="text-texto-principal tracking-wide transition-colors duration-500"
-          >Ingeniería y Automatización</strong
-        >? Explora más con el botón de la barra superior.
+        ¿Buscas soluciones de <strong class="text-texto-principal tracking-wide"
+          >{configuracionHero.perfil}</strong
+        >? Explora la otra dimensión del estudio.
       </p>
-    </div>
+    </a>
   </div>
 </section>
-
-<script>
-  const titleAccent = document.getElementById("hero-title-accent");
-  const descDesign = document.getElementById("hero-desc-design");
-  const descSolutions = document.getElementById("hero-desc-solutions");
-  const ctaText = document.getElementById("hero-cta-text");
-  const imgDesign = document.getElementById("hero-img-design");
-  const imgSolutions = document.getElementById("hero-img-solutions");
-  const hintPerfil = document.getElementById("hero-hint-perfil");
-
-  const observerHero = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === "data-context") {
-        const ctx = document.documentElement.getAttribute("data-context");
-
-        if (ctx === "solutions") {
-          if (titleAccent) titleAccent.textContent = "calidad";
-          if (ctaText) ctaText.textContent = "Cotizar proyecto";
-          if (hintPerfil) hintPerfil.textContent = "Diseño y Desarrollo Web";
-
-          descDesign?.classList.add("opacity-0", "pointer-events-none");
-          descSolutions?.classList.remove("opacity-0", "pointer-events-none");
-
-          imgDesign?.classList.replace("opacity-30", "opacity-0");
-          imgSolutions?.classList.replace("opacity-0", "opacity-30");
-        } else {
-          if (titleAccent) titleAccent.textContent = "calidad";
-          if (ctaText) ctaText.textContent = "Cotizar proyecto";
-          if (hintPerfil)
-            hintPerfil.textContent = "Ingeniería y Automatización";
-          descSolutions?.classList.add("opacity-0", "pointer-events-none");
-          descDesign?.classList.remove("opacity-0", "pointer-events-none");
-
-          imgSolutions?.classList.replace("opacity-30", "opacity-0");
-          imgDesign?.classList.replace("opacity-0", "opacity-30");
-        }
-      }
-    });
-  });
-
-  observerHero.observe(document.documentElement, { attributes: true });
-</script>

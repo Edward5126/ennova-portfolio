@@ -1,0 +1,182 @@
+---
+// src/components/ui/StackTecnologico.astro
+const stackDesign = [
+  {
+    nombre: "Astro",
+    descripcion: "Framework para rendimiento extremo",
+    icono: "icon-rocket",
+  },
+  {
+    nombre: "Tailwind CSS",
+    descripcion: "Diseño moderno y escalable",
+    icono: "icon-palette",
+  },
+  {
+    nombre: "TypeScript",
+    descripcion: "Código robusto y tipado",
+    icono: "icon-code",
+  },
+  {
+    nombre: "Figma",
+    descripcion: "Prototipado de alta fidelidad",
+    icono: "icon-layout",
+  },
+  {
+    nombre: "Adobe Illustrator",
+    descripcion: "Vectores e identidad de marca",
+    icono: "icon-pen-tool",
+  },
+  {
+    nombre: "Adobe Photoshop",
+    descripcion: "Edición y retoque profesional",
+    icono: "icon-image",
+  },
+];
+
+const stackSolutions = [
+  {
+    nombre: "TIA Portal",
+    descripcion: "Lógica SCL y Ladder avanzada",
+    icono: "icon-microchip",
+  },
+  {
+    nombre: "C# .NET",
+    descripcion: "Sistemas SCADA y control de datos",
+    icono: "icon-monitor",
+  },
+  {
+    nombre: "Fusion 360",
+    descripcion: "Diseño CAD y análisis FEA",
+    icono: "icon-box",
+  },
+  {
+    nombre: "ESP32 & MQTT",
+    descripcion: "IoT y protocolos industriales",
+    icono: "icon-wifi",
+  },
+  {
+    nombre: "PLC Siemens",
+    descripcion: "Automatización de procesos",
+    icono: "icon-cpu",
+  },
+  {
+    nombre: "Modbus TCP",
+    descripcion: "Comunicación industrial MDK32",
+    icono: "icon-network",
+  },
+];
+---
+
+<section id="Stack" class="w-full max-w-7xl mx-auto px-6 py-24 md:py-32">
+  <div class="text-center mb-16 md:mb-20">
+    <h2
+      class="text-3xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
+    >
+      Tecnologías de <span
+        class="text-transparent bg-clip-text bg-degradado-principal"
+        >Vanguardia</span
+      >
+    </h2>
+    <p class="text-texto-secundario max-w-xl mx-auto text-sm md:text-base">
+      Herramientas seleccionadas para garantizar soluciones de alto impacto
+      técnico y visual.
+    </p>
+  </div>
+
+  <div
+    id="stack-design-container"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500"
+  >
+    {
+      stackDesign.map((item) => (
+        <div class="group relative p-8 bg-tarjetas border border-contraste rounded-3xl hover:border-texto-resaltado/30 transition-all duration-500 overflow-hidden cursor-default shadow-neutral-sm hover:shadow-neutral-lg">
+          <div class="absolute inset-0 bg-gradient-to-br from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          <div class="relative z-10">
+            <div class="w-14 h-14 flex items-center justify-center bg-fondo border border-contraste rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
+              <i
+                class={`${item.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+              />
+            </div>
+            <h3 class="text-lg font-bold text-texto-principal mb-2 group-hover:text-texto-resaltado transition-colors duration-500">
+              {item.nombre}
+            </h3>
+            <p class="text-sm text-texto-secundario leading-relaxed">
+              {item.descripcion}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    id="stack-solutions-container"
+    class="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 opacity-0 translate-y-4"
+  >
+    {
+      stackSolutions.map((item) => (
+        <div class="group relative p-8 bg-tarjetas border border-contraste rounded-3xl hover:border-texto-resaltado/30 transition-all duration-500 overflow-hidden cursor-default shadow-neutral-sm hover:shadow-neutral-lg">
+          <div class="absolute inset-0 bg-gradient-to-br from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          <div class="relative z-10">
+            <div class="w-14 h-14 flex items-center justify-center bg-fondo border border-contraste rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
+              <i
+                class={`${item.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+              />
+            </div>
+            <h3 class="text-lg font-bold text-texto-principal mb-2 group-hover:text-texto-resaltado transition-colors duration-500">
+              {item.nombre}
+            </h3>
+            <p class="text-sm text-texto-secundario leading-relaxed">
+              {item.descripcion}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const designStack = document.getElementById("stack-design-container");
+  const solutionsStack = document.getElementById("stack-solutions-container");
+
+  const updateStackContext = () => {
+    const context = document.documentElement.getAttribute("data-context");
+
+    if (context === "solutions") {
+      // Ocultar Diseño
+      designStack?.classList.add("hidden", "opacity-0", "translate-y-4");
+      // Mostrar Ingeniería
+      solutionsStack?.classList.remove("hidden");
+      setTimeout(() => {
+        solutionsStack?.classList.add("grid");
+        solutionsStack?.classList.remove("opacity-0", "translate-y-4");
+      }, 50);
+    } else {
+      // Ocultar Ingeniería
+      solutionsStack?.classList.add("hidden", "opacity-0", "translate-y-4");
+      // Mostrar Diseño
+      designStack?.classList.remove("hidden");
+      setTimeout(() => {
+        designStack?.classList.add("grid");
+        designStack?.classList.remove("opacity-0", "translate-y-4");
+      }, 50);
+    }
+  };
+
+  // Escuchar cambios de contexto
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-context") {
+        updateStackContext();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+
+  // Inicialización
+  updateStackContext();
+</script>

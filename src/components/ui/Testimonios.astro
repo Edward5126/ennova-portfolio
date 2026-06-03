@@ -1,7 +1,12 @@
 ---
 // src/components/ui/Testimonios.astro
+interface Props {
+  variant: "design" | "solutions";
+}
 
-const testimonios = [
+const { variant } = Astro.props;
+
+const testimoniosDesign = [
   {
     cita: "Logró una identidad visual sólida, moderna y bien alineada con la esencia del equipo.",
     autor: "Joksan Chavez",
@@ -14,128 +19,105 @@ const testimonios = [
   },
 ];
 
-const logosMarcas = [
+const logosDesign = [
   { src: "/IMG/PROJECTS/ICONS/AtlantisLogo.svg", alt: "Atlantis Force" },
   { src: "/IMG/PROJECTS/ICONS/WitSetLogo.svg", alt: "Wit Set" },
   { src: "/IMG/PROJECTS/ICONS/FIPocketLogo.svg", alt: "FI Pocket" },
-  { src: "/IMG/PROJECTS/ICONS/CarimLogo.svg", alt: "Panadería Carim" },
   { src: "/IMG/PROJECTS/ICONS/CAFILogo.svg", alt: "CAFI" },
   { src: "/IMG/PROJECTS/ICONS/STMFIUADYLogo.svg", alt: "STM FIUADY" },
   { src: "/IMG/PROJECTS/ICONS/CastoresFIUADYLogo.svg", alt: "Castores FIUADY" },
   { src: "/IMG/PROJECTS/ICONS/InnovaDentalLogo.svg", alt: "Innova Dental" },
-  { src: "/IMG/PROJECTS/ICONS/RASLogo.svg", alt: "IEEE RAS UADY" },
 ];
 
-const carruselInfinito = [...logosMarcas, ...logosMarcas];
+const testimoniosSolutions: Array<{cita: string, autor: string, rol: string}> = []; // Vacío por ahora, como indicaste
+const logosSolutions = [
+  { src: "/IMG/PROJECTS/ICONS/RASLogo.svg", alt: "IEEE RAS UADY" },
+  { src: "/IMG/PROJECTS/ICONS/CarimLogo.svg", alt: "Panadería Carim" },
+];
+
+const testimoniosActivos = variant === "design" ? testimoniosDesign : testimoniosSolutions;
+const logosActivos = variant === "design" ? logosDesign : logosSolutions;
+const carruselInfinito = [...logosActivos, ...logosActivos];
+
+const mostrarSeccion = testimoniosActivos.length > 0 || logosActivos.length > 0;
 ---
 
-<section
-  id="Testimonios"
-  class="w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-contraste/50 overflow-hidden"
->
-  <div class="text-center mb-16 md:mb-24">
-    <h2
-      class="text-3xl sm:text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
-    >
-      Mis <span
-        class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
-        >Testimonios</span
-      >
-    </h2>
-    <p
-      class="text-sm sm:text-base text-texto-secundario max-w-2xl mx-auto leading-relaxed"
-    >
-      La satisfacción de quienes han confiado en mi trabajo para dar vida y
-      estructura a sus proyectos.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10">
-    {
-      testimonios.map((testimonio) => (
-        <article class="group relative bg-tarjetas/40 border border-contraste/50 hover:border-texto-resaltado/40 rounded-3xl p-6 sm:p-8 md:p-10 transition-all duration-500 shadow-neutral-sm hover:shadow-neutral-md backdrop-blur-sm overflow-hidden flex flex-col justify-between cursor-default">
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-texto-resaltado/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-in-out pointer-events-none z-0" />
-
-          <div class="flex flex-col items-start relative z-10">
-            <i class="icon-comments text-2xl md:text-3xl text-contraste group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500 mb-5 md:mb-6" />
-            <p class="text-base sm:text-lg md:text-xl text-texto-principal italic leading-relaxed">
-              "{testimonio.cita}"
-            </p>
-          </div>
-
-          <div class="mt-6 md:mt-8 pt-5 md:pt-6 border-t border-contraste/50 relative z-10">
-            <span class="block font-bold text-texto-principal text-sm sm:text-base tracking-wide">
-              {testimonio.autor}
-            </span>
-            <span class="block text-xs sm:text-sm text-texto-secundario mt-1 tracking-wide">
-              {testimonio.rol}
-            </span>
-          </div>
-        </article>
-      ))
-    }
-  </div>
-
-  <div
-    class="mt-20 md:mt-24 pt-12 border-t border-contraste/30 relative flex flex-col items-center"
-  >
-    <span
-      class="text-[10px] sm:text-xs font-semibold text-texto-secundario tracking-widest uppercase mb-8 text-center px-4"
-    >
-      Proyectos que respaldan mi experiencia
-    </span>
-
-    <div class="w-full overflow-hidden mascara-carrusel py-4 md:py-8">
-      <div
-        class="flex items-center gap-12 sm:gap-16 md:gap-24 w-max animate-scroll hover:pause-animation"
-      >
-        {
-          carruselInfinito.map((logo) => (
-            <div class="w-20 sm:w-24 md:w-32 flex justify-center items-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-300">
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                class="max-w-full h-8 sm:h-12 md:h-16 object-contain"
-                loading="lazy"
-                onerror="this.style.display='none';"
-              />
-            </div>
-          ))
-        }
+{mostrarSeccion && (
+  <section id="Testimonios" class="w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-contraste/50 overflow-hidden">
+    
+    {testimoniosActivos.length > 0 && (
+      <div class="text-center mb-16 md:mb-24">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight">
+          Mis <span class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500">Testimonios</span>
+        </h2>
+        <p class="text-sm sm:text-base text-texto-secundario max-w-2xl mx-auto leading-relaxed">
+          La satisfacción de quienes han confiado en mi trabajo para dar vida y estructura a sus proyectos.
+        </p>
       </div>
-    </div>
-  </div>
-</section>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10">
+        {testimoniosActivos.map((testimonio) => (
+          <article class="group relative bg-tarjetas backdrop-blur-md border border-contraste hover:border-texto-resaltado/40 rounded-[24px] p-6 sm:p-8 md:p-10 transition-all duration-500 shadow-neutral-sm hover:shadow-neutral-md overflow-hidden flex flex-col justify-between cursor-default">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-texto-resaltado/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-in-out pointer-events-none z-0" />
+
+            <div class="flex flex-col items-start relative z-10">
+              <i class="icon-comments inline-block text-2xl md:text-3xl text-contraste group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500 mb-5 md:mb-6" />
+              <p class="text-base sm:text-lg md:text-xl text-texto-principal italic leading-relaxed">
+                "{testimonio.cita}"
+              </p>
+            </div>
+
+            <div class="mt-6 md:mt-8 pt-5 md:pt-6 border-t border-contraste/50 relative z-10">
+              <span class="block font-bold text-texto-principal text-sm sm:text-base tracking-wide">
+                {testimonio.autor}
+              </span>
+              <span class="block text-xs sm:text-sm text-texto-secundario mt-1 tracking-wide">
+                {testimonio.rol}
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+
+    {logosActivos.length > 0 && (
+      <div class={`mt-20 md:mt-24 pt-12 ${testimoniosActivos.length > 0 ? 'border-t border-contraste/30' : ''} relative flex flex-col items-center`}>
+        <span class="text-[10px] sm:text-xs font-semibold text-texto-secundario tracking-widest mb-8 text-center px-4">
+          Proyectos que respaldan mi experiencia
+        </span>
+
+        <div class="w-full overflow-hidden mascara-carrusel py-4 md:py-8">
+          <div class="flex items-center justify-center gap-12 sm:gap-16 md:gap-24 w-max animate-scroll hover:pause-animation">
+            {carruselInfinito.map((logo) => (
+              <div class="w-20 sm:w-24 md:w-32 flex justify-center items-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  class="max-w-full h-8 sm:h-12 md:h-16 object-contain"
+                  loading="lazy"
+                  onerror="this.style.display='none';"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+  </section>
+)}
 
 <style>
   .mascara-carrusel {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 15%,
-      black 85%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 15%,
-      black 85%,
-      transparent
-    );
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   }
 
   @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .animate-scroll {
-    /* Un poco más rápido en general para compensar el ancho del móvil */
     animation: scroll 25s linear infinite;
   }
 

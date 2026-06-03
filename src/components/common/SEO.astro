@@ -2,59 +2,51 @@
 // src/components/common/SEO.astro
 
 interface Props {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   image?: string;
   url?: string;
+  schemaType?: "Person" | "WebSite" | "Organization";
 }
 
 const {
-  title = "Eduardo Chan | Diseño Web e Ingeniería Mecatrónica",
-  description = "Portafolio dual de Eduardo Chan. Transformando ideas en soluciones efectivas: desde identidad de marca y desarrollo Front-End, hasta automatización industrial, lógica PLC y sistemas SCADA.",
-  image = "/IMG/IlustrativaContacto.jpg", // Asegúrate de tener una imagen de previsualización general aquí
-  url = "https://tudominio.com", // Reemplaza con tu dominio final
+  title,
+  description,
+  image = "/IMG/IlustrativaContacto.jpg",
+  url = Astro.url.href,
+  schemaType = "WebSite",
 } = Astro.props;
 
-// Construcción del Schema.org (JSON-LD) para definir tu dualidad profesional
-const schemaPerson = {
+// Se define la estructura base del Schema
+let schemaData: any = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Eduardo Chan",
-  image: new URL(image, Astro.url).toString(),
-  jobTitle: [
-    "Desarrollador Web Front-End",
-    "Diseñador de Identidad de Marca",
-    "Estudiante de Ingeniería Mecatrónica",
-    "Desarrollador de Sistemas de Automatización",
-  ],
-  description: description,
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Universidad Autónoma de Yucatán",
-    acronym: "UADY",
-  },
-  homeLocation: {
-    "@type": "Place",
-    name: "Mérida, Yucatán, México",
-  },
-  knowsAbout: [
-    "Diseño Web",
-    "UI/UX",
-    "Astro",
-    "Tailwind CSS",
-    "Vanilla JavaScript",
-    "Automatización Industrial",
-    "Lógica SCL",
-    "Controladores Lógicos Programables (PLC)",
-    "Sistemas SCADA",
-    "HMI",
-  ],
+  "@type": schemaType,
   url: url,
-  sameAs: [
-    "https://github.com/Edward5126",
-    "https://www.instagram.com/ennova_design/",
-  ],
+  name: "E-nnova",
+  description: description,
+  image: new URL(image, Astro.url).toString(),
 };
+
+// Se enriquece el Schema si la ruta pertenece a un perfil profesional específico
+if (schemaType === "Person") {
+  schemaData = {
+    ...schemaData,
+    name: "Eduardo Chan",
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Universidad Autónoma de Yucatán",
+      acronym: "UADY",
+    },
+    homeLocation: {
+      "@type": "Place",
+      name: "Mérida, Yucatán, México",
+    },
+    sameAs: [
+      "https://github.com/Edward5126",
+      "https://www.instagram.com/ennova_design/",
+    ],
+  };
+}
 ---
 
 <title>{title}</title>
@@ -73,4 +65,4 @@ const schemaPerson = {
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.url)} />
 
-<script type="application/ld+json" set:html={JSON.stringify(schemaPerson)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
