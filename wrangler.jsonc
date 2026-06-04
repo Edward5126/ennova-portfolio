@@ -3,6 +3,12 @@
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "ennova-portfolio",
 	"main": "@astrojs/cloudflare/entrypoints/server",
+	"kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "a6a21e786d004258a554bdbdd21da1d7" 
+    }
+  ],
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
