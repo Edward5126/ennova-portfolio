@@ -6,20 +6,32 @@ interface Props {
 
 const { activeRoute } = Astro.props;
 const esHub = activeRoute === "hub";
+const currentPath = Astro.url.pathname;
+
+// Identificamos páginas donde los anclajes (#) no existen localmente
+const isStandalone =
+  currentPath.includes("/terminos") ||
+  currentPath.includes("/links");
+
+// Función de enrutamiento inteligente
+const formatearEnlace = (link: string) => {
+  if (link.startsWith("/")) return link; // Respeta rutas absolutas
+  return isStandalone ? `/${link}` : link; // Envía a la raíz si no hay anclajes locales
+};
 
 const enlacesNavegacion = esHub
   ? [
-      { url: "#Inicio", texto: "Inicio" },
-      { url: "#Ecosistema", texto: "Ecosistema" },
-      { url: "#Capacidades", texto: "Capacidades" },
-      { url: "#FAQ", texto: "Preguntas frecuentes" },
+      { url: formatearEnlace("#Inicio"), texto: "Inicio" },
+      { url: formatearEnlace("#Ecosistema"), texto: "Ecosistema" },
+      { url: formatearEnlace("#Capacidades"), texto: "Capacidades" },
+      { url: formatearEnlace("#FAQ"), texto: "Preguntas frecuentes" },
     ]
   : [
-      { url: "#Inicio", texto: "Inicio" },
-      { url: "#Portafolio", texto: "Portafolio" },
-      { url: "#Servicios", texto: "Servicios" },
-      { url: "#AcercaDe", texto: "Acerca de" },
-      { url: "#Testimonios", texto: "Testimonios" },
+      { url: formatearEnlace("#Inicio"), texto: "Inicio" },
+      { url: formatearEnlace("#Portafolio"), texto: "Portafolio" },
+      { url: formatearEnlace("#Servicios"), texto: "Servicios" },
+      { url: formatearEnlace("#AcercaDe"), texto: "Acerca de" },
+      { url: formatearEnlace("#Testimonios"), texto: "Testimonios" },
     ];
 
 const enlacesSociales = [
@@ -38,7 +50,7 @@ const enlacesSociales = [
 const configuracionHeader =
   activeRoute === "design"
     ? {
-        urlLogo: "#Inicio",
+        urlLogo: formatearEnlace("#Inicio"),
         urlCruzado: "/solutions",
         textoCruzado: "Ver Solutions",
         iconoCruzado: "icon-microchip",
@@ -47,7 +59,7 @@ const configuracionHeader =
       }
     : activeRoute === "solutions"
       ? {
-          urlLogo: "#Inicio",
+          urlLogo: formatearEnlace("#Inicio"),
           urlCruzado: "/design",
           textoCruzado: "Ver Design",
           iconoCruzado: "icon-palette",
@@ -55,8 +67,8 @@ const configuracionHeader =
           mostrarCruzado: true,
         }
       : {
-          urlLogo: "#Inicio",
-          urlCruzado: "#Inicio",
+          urlLogo: formatearEnlace("#Inicio"),
+          urlCruzado: formatearEnlace("#Inicio"),
           textoCruzado: "Explorar",
           iconoCruzado: "icon-compass",
           logo: "/IMG/logos/master/Master%20-%20Logo%20Horizontal.svg",
@@ -64,6 +76,67 @@ const configuracionHeader =
         };
 ---
 
+<!-- Overlay del Menú Móvil -->
+<div
+  id="menu-movil-overlay"
+  class="fixed inset-0 z-40 bg-fondo/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col items-center justify-center pt-20 pb-10 px-6"
+  style="display: none;"
+>
+  <nav class="flex flex-col items-center gap-8 w-full max-w-sm">
+    {
+      enlacesNavegacion.map((enlace) => (
+        <a
+          href={enlace.url}
+          class="link-movil text-2xl font-semibold text-texto-principal active:scale-95 transition-transform"
+        >
+          {enlace.texto}
+        </a>
+      ))
+    }
+
+    {
+      configuracionHeader.mostrarCruzado && (
+        <div class="w-full h-px bg-contraste/50 my-2" />
+        <a
+          href={configuracionHeader.urlCruzado}
+          class="link-movil flex items-center justify-center gap-3 px-6 py-3 w-full bg-tarjetas border border-contraste rounded-xl active:scale-95 transition-transform"
+        >
+          <i class={`${configuracionHeader.iconoCruzado} text-xl text-texto-principal`} />
+          <span class="text-sm font-semibold text-texto-principal tracking-wide">
+            {configuracionHeader.textoCruzado}
+          </span>
+        </a>
+      )
+    }
+
+    <div class="w-full h-px bg-contraste/50 my-2" />
+
+    <div class="flex items-center gap-8">
+      {
+        enlacesSociales.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transform active:scale-90 transition-transform"
+            aria-label={social.texto}
+          >
+            <i class={`${social.iconoClase} text-2xl text-texto-principal`} />
+          </a>
+        ))
+      }
+    </div>
+
+    <button
+      class="btn-interactivo link-movil w-full mt-4 flex items-center justify-center gap-2 px-6 py-3 bg-tarjetas border border-contraste rounded-xl active:scale-95 transition-transform font-semibold text-sm tracking-wide text-texto-principal"
+    >
+      <i class="icon-paper-plane inline-block text-texto-principal" />
+      <span>Contacto Directo</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Header Principal -->
 <div
   class="fixed top-0 left-0 w-full z-50 px-4 md:px-6 pt-4 md:pt-6 pointer-events-none flex justify-center"
 >
@@ -118,7 +191,7 @@ const configuracionHeader =
           )
         }
 
-        <div class="w-px h-6 bg-contraste/50"></div>
+        <div class="w-px h-6 bg-contraste/50" />
 
         <div class="flex items-center gap-4">
           {
@@ -143,31 +216,30 @@ const configuracionHeader =
         >
           <i
             class="icon-paper-plane inline-block text-texto-principal fluido-base group-hover-fluido"
-          ></i>
-          <span class="text-texto-principal fluido-base group-hover-fluido"
-            >Contacto</span
-          >
+          />
+          <span class="text-texto-principal fluido-base group-hover-fluido">Contacto</span>
         </button>
       </div>
 
       <button
         id="btn-menu-movil"
-        class="md:hidden group p-2 cursor-pointer"
+        class="md:hidden group p-2 cursor-pointer relative z-50"
         aria-label="Alternar menú"
       >
         <i
           id="icono-menu"
-          class="icon-bars inline-block text-2xl text-texto-principal fluido-base group-hover-fluido"
-        ></i>
+          class="icon-bars inline-block text-2xl text-texto-principal transition-transform duration-300"
+        />
       </button>
     </div>
   </header>
 </div>
 
 <script>
+  // Lógica de Modales de Contacto
   const botonesInteractivos = document.querySelectorAll(".btn-interactivo");
   botonesInteractivos.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", function (e: Event) {
       const target = e.currentTarget as HTMLButtonElement;
       if (target.hasAttribute("disabled")) {
         e.preventDefault();
@@ -175,14 +247,65 @@ const configuracionHeader =
       }
       target.setAttribute("disabled", "true");
       target.classList.add("cursor-wait", "opacity-70");
+      
       const win = window as any;
       if (typeof win.abrirModalContacto === "function") {
         win.abrirModalContacto();
       }
+      
       setTimeout(() => {
         target.removeAttribute("disabled");
         target.classList.remove("cursor-wait", "opacity-70");
       }, 1000);
+    });
+  });
+
+  // Lógica del Menú Móvil
+  const btnMenu = document.getElementById("btn-menu-movil") as HTMLButtonElement | null;
+  const iconoMenu = document.getElementById("icono-menu") as HTMLElement | null;
+  const menuMovil = document.getElementById("menu-movil-overlay") as HTMLElement | null;
+  const linksMovil = document.querySelectorAll(".link-movil");
+
+  let menuAbierto = false;
+
+  function toggleMenu() {
+    if (!menuMovil || !iconoMenu) return;
+
+    menuAbierto = !menuAbierto;
+
+    if (menuAbierto) {
+      menuMovil.style.display = "flex";
+      requestAnimationFrame(() => {
+        menuMovil.classList.remove("opacity-0", "pointer-events-none");
+        menuMovil.classList.add("opacity-100", "pointer-events-auto");
+      });
+      
+      iconoMenu.classList.remove("icon-bars");
+      iconoMenu.classList.add("icon-xmark");
+      iconoMenu.style.transform = "rotate(90deg)";
+
+      document.body.style.overflow = "hidden";
+    } else {
+      menuMovil.classList.remove("opacity-100", "pointer-events-auto");
+      menuMovil.classList.add("opacity-0", "pointer-events-none");
+      
+      iconoMenu.classList.remove("icon-xmark");
+      iconoMenu.classList.add("icon-bars");
+      iconoMenu.style.transform = "rotate(0deg)";
+
+      document.body.style.overflow = "";
+
+      setTimeout(() => {
+        if (!menuAbierto) menuMovil.style.display = "none";
+      }, 500);
+    }
+  }
+
+  btnMenu?.addEventListener("click", toggleMenu);
+
+  linksMovil.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (menuAbierto) toggleMenu();
     });
   });
 </script>

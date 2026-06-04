@@ -1,0 +1,654 @@
+---
+// src/pages/terminos.astro
+import Layout from "../layouts/Layout.astro";
+
+const seoTitle = "Términos y condiciones | E-nnova";
+const seoDescription =
+  "Metodología de trabajo, políticas de pago, garantías técnicas y cesión de propiedad intelectual para los servicios de E-nnova Design y E-nnova Solutions.";
+const seoImage = "/IMG/og-master.jpg";
+const seoUrl = Astro.url.href;
+
+const secciones = [
+  {
+    id: "metodologia",
+    titulo: "Metodología de trabajo",
+    icono: "icon-compass",
+  },
+  {
+    id: "pagos",
+    titulo: "Políticas de pago",
+    icono: "icon-file",
+  },
+  {
+    id: "especificaciones-design",
+    titulo: "E-nnova Design",
+    icono: "icon-palette",
+  },
+  {
+    id: "especificaciones-solutions",
+    titulo: "E-nnova Solutions",
+    icono: "icon-microchip",
+  },
+  {
+    id: "propiedad-intelectual",
+    titulo: "Propiedad intelectual",
+    icono: "icon-github",
+  },
+  {
+    id: "garantia",
+    titulo: "Garantía técnica",
+    icono: "icon-heart",
+  },
+];
+---
+
+<Layout
+  variant="hub"
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+  seoImage={seoImage}
+  seoUrl={seoUrl}
+  schemaType="WebSite"
+>
+  <div
+    class="fixed inset-0 z-0 pointer-events-none overflow-hidden flex items-start justify-center pt-[15vh]"
+  >
+    <div
+      class="w-[800px] h-[500px] bg-texto-resaltado/5 rounded-[100%] blur-[120px] mix-blend-screen opacity-50"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-16 items-start"
+  >
+    <aside class="hidden lg:block w-64 shrink-0 sticky top-32 h-fit">
+      <div class="flex flex-col gap-2 border-l border-contraste/50 pl-5 py-2">
+        <span
+          class="text-[11px] font-semibold text-texto-secundario tracking-widest mb-4 uppercase"
+        >
+          Índice del documento
+        </span>
+        {
+          secciones.map((seccion) => (
+            <a
+              href={`#${seccion.id}`}
+              class="group flex items-center gap-4 py-2.5 text-sm text-texto-secundario hover:text-texto-principal transition-colors duration-300"
+            >
+              <i
+                class={`${seccion.icono} text-sm opacity-50 group-hover:opacity-100 transition-opacity`}
+              />
+              <span class="tracking-wide font-medium">{seccion.titulo}</span>
+            </a>
+          ))
+        }
+      </div>
+    </aside>
+
+    <main class="w-full flex-1 flex flex-col gap-8 md:gap-12">
+      <header class="mb-4 md:mb-8 flex flex-col items-center text-center">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-texto-principal tracking-tight mb-6 leading-tight"
+        >
+          Términos y condiciones <br class="hidden sm:block" /><span
+            class="texto-degradado">de servicio</span
+          >
+        </h1>
+        <p
+          class="text-texto-secundario leading-relaxed max-w-3xl text-base md:text-lg mx-auto"
+        >
+          El presente documento establece el marco regulatorio, las metodologías
+          de trabajo y las responsabilidades mutuas aplicables a los proyectos
+          desarrollados por Eduardo Chan bajo el ecosistema de E-nnova. Al
+          aprobar una cotización o realizar un anticipo, el cliente acepta
+          íntegramente las siguientes cláusulas.
+        </p>
+        <div
+          class="mt-8 inline-flex items-center gap-3 px-4 py-2 bg-fondo border border-contraste rounded-lg shadow-neutral-sm"
+        >
+          <div class="w-2 h-2 rounded-full bg-texto-resaltado animate-pulse">
+          </div>
+          <span class="text-xs text-texto-secundario font-mono"
+            >Última actualización: Junio 2026</span
+          >
+        </div>
+      </header>
+
+      <div class="flex flex-col gap-8">
+        <section
+          id="metodologia"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-texto-secundario to-texto-resaltado rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-compass text-4xl md:text-5xl text-texto-secundario fluido-base group-hover-fluido mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal fluido-base group-hover-fluido leading-tight"
+                >
+                  1. Metodología de trabajo
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  Todo proyecto operado bajo E-nnova se rige por un esquema de
+                  fases estructuradas para garantizar el rigor técnico y la
+                  satisfacción del cliente.
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Fase de descubrimiento</strong
+                      > Definición estricta de alcances, requerimientos técnicos y
+                      arquitectura. Finaliza con la entrega de una cotización formal
+                      y un cronograma estimado.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Fase de desarrollo iterativo</strong
+                      > Ejecución del código o ensamblaje de hardware. Se programarán
+                      puntos de control predefinidos para la retroalimentación del
+                      cliente.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Casos límite (Retrasos)</strong
+                      > Si el cliente demora más de 15 días hábiles en proveer información,
+                      credenciales o retroalimentación requerida, el proyecto será
+                      catalogado como "En pausa". La reactivación estará sujeta a
+                      la disponibilidad de agenda de E-nnova.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="pagos"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-texto-secundario to-texto-resaltado rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-file text-4xl md:text-5xl text-texto-secundario fluido-base group-hover-fluido mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal fluido-base group-hover-fluido leading-tight"
+                >
+                  2. Políticas de pago y liquidación
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  Para garantizar la viabilidad y el compromiso mutuo, se
+                  establece la siguiente estructura financiera aplicable a
+                  servicios de desarrollo web y automatización:
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Esquema estándar (50% / 50%)</strong
+                      > Se requiere un anticipo del 50% del valor total de la mano
+                      de obra para reservar el espacio en agenda e iniciar operaciones.
+                      El 50% restante deberá liquidarse previo a la migración final
+                      a producción, entrega de código fuente o despliegue de hardware.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Costos de Hardware y Terceros</strong
+                      > Cualquier componente físico (sensores, PLCs, microcontroladores)
+                      o licencias de terceros (hosting, dominios, APIs) deberán ser
+                      cubiertos al 100% por el cliente antes de su adquisición, o
+                      bien, ser adquiridos directamente por el cliente bajo asesoría
+                      de E-nnova.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Cancelación y reembolsos</strong
+                      > El anticipo no es reembolsable. Compensa la reserva de tiempo,
+                      la ingeniería de diseño inicial y los costos de oportunidad.
+                      Si el cliente cancela el proyecto en una etapa avanzada, se
+                      entregará el progreso correspondiente al valor abonado.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="especificaciones-design"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#047857] to-[#34d399] rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#10b981]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-palette text-4xl md:text-5xl text-texto-secundario texto-instancia-design revelar-degradado mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal texto-instancia-design revelar-degradado leading-tight"
+                >
+                  3. Condiciones: E-nnova Design
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  Aplicable a plataformas web, interfaces de usuario,
+                  Progressive Web Apps (PWAs) e identidad visual.
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-[#10b981]/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Límites de revisión</strong
+                      > Todo proyecto incluye hasta tres (3) rondas de modificaciones
+                      mayores durante la fase de diseño UI/UX. Cambios estructurales
+                      solicitados una vez aprobado el diseño y transferido a código
+                      requerirán una recotización.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-[#10b981]/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Responsabilidad de infraestructura</strong
+                      > E-nnova configura y despliega la plataforma inicial, pero
+                      los costos recurrentes de servidores, bases de datos o nombres
+                      de dominio son responsabilidad exclusiva del cliente.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="especificaciones-solutions"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#3584a7] to-[#4be2d0] rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#45a6d3]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-microchip text-4xl md:text-5xl text-texto-secundario texto-instancia-solutions revelar-degradado mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal texto-instancia-solutions revelar-degradado leading-tight"
+                >
+                  4. Condiciones: E-nnova Solutions
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  Aplicable a sistemas SCADA, programación de PLCs, telemetría,
+                  domótica industrial e integraciones IoT.
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-[#45a6d3]/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Entornos de prueba</strong
+                      > E-nnova realizará pruebas en entornos simulados o prototipos
+                      locales. Las pruebas en la planta del cliente (On-site testing)
+                      están sujetas a la disponibilidad de la maquinaria y las condiciones
+                      de seguridad industrial proveídas por el cliente.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-[#45a6d3]/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Responsabilidad de hardware existente</strong
+                      > E-nnova no se responsabiliza por fallas mecánicas, eléctricas
+                      o de desgaste en actuadores, motores o infraestructuras preexistentes
+                      del cliente conectadas a los nuevos sistemas de control.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="propiedad-intelectual"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-texto-secundario to-texto-resaltado rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-github text-4xl md:text-5xl text-texto-secundario fluido-base group-hover-fluido mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal fluido-base group-hover-fluido leading-tight"
+                >
+                  5. Propiedad intelectual y código fuente
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  La transparencia en la propiedad técnica es fundamental en el
+                  ecosistema E-nnova.
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Transferencia absoluta</strong
+                      > Una vez liquidado el 100% del pago acordado, el cliente adquiere
+                      la propiedad total del código fuente personalizado (Astro, JavaScript,
+                      Python, lógica ladder de PLC, etc.) y los recursos gráficos
+                      originales. El código se entrega limpio, documentado y listo
+                      para ser modificado ("Plug and Play").
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Atribución y portafolio</strong
+                      > E-nnova conserva el derecho irrevocable de documentar y publicar
+                      el proyecto en su portafolio como demostración de capacidades,
+                      a menos que se haya firmado un Acuerdo de Confidencialidad (NDA)
+                      previo al inicio.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Bibliotecas base</strong
+                      > La cesión no incluye derechos exclusivos sobre utilidades
+                      Open Source, bibliotecas de la comunidad o arquitecturas de
+                      núcleo creadas previamente por E-nnova y reutilizadas en el
+                      proyecto.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="garantia"
+          class="scroll-mt-32 group relative p-[1px] rounded-[24px] shadow-neutral-sm hover:shadow-neutral-md transition-shadow duration-500 block"
+        >
+          <div
+            class="absolute inset-0 bg-contraste/80 rounded-[24px] opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+          >
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-texto-secundario to-texto-resaltado rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+          </div>
+
+          <div
+            class="relative h-full w-full bg-fondo rounded-[23px] overflow-hidden z-10"
+          >
+            <div class="absolute inset-0 bg-tarjetas"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-texto-resaltado/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            >
+            </div>
+
+            <div
+              class="relative z-20 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12"
+            >
+              <div class="md:w-1/3 shrink-0">
+                <i
+                  class="icon-heart text-4xl md:text-5xl text-texto-secundario fluido-base group-hover-fluido mb-6 inline-block transition-transform duration-500 group-hover:-translate-y-1"
+                ></i>
+                <h2
+                  class="text-2xl font-bold text-texto-principal fluido-base group-hover-fluido leading-tight"
+                >
+                  6. Garantía técnica y soporte
+                </h2>
+              </div>
+
+              <div
+                class="md:w-2/3 space-y-4 text-sm md:text-base text-texto-secundario leading-relaxed"
+              >
+                <p>
+                  El despliegue de software y hardware de grado industrial
+                  requiere monitoreo post-entrega para asegurar su estabilidad.
+                </p>
+                <ul class="space-y-4 mt-6">
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Cobertura de software (30 días)</strong
+                      > Se ofrece una garantía de corrección de errores (Bugs) y vicios
+                      ocultos de programación durante 30 días naturales posteriores
+                      a la entrega. No incluye el desarrollo de nuevas características
+                      ni alteraciones posteriores.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Anulación por intervención</strong
+                      > La garantía técnica se anulará inmediatamente si el código
+                      fuente, la configuración del servidor, o las conexiones físicas
+                      del hardware son alteradas por el cliente o terceros no autorizados.
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <i
+                      class="icon-arrow-right mt-1.5 text-texto-resaltado/70 text-xs shrink-0"
+                    ></i>
+                    <div>
+                      <strong
+                        class="text-texto-principal font-medium block mb-1"
+                        >Garantía de hardware</strong
+                      > Los componentes físicos adquiridos se rigen estrictamente
+                      por la garantía estipulada por el fabricante original. E-nnova
+                      facilitará la documentación, pero no absorberá costos de reemplazo
+                      por daños de fábrica o mala operación.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-contraste">
+        <p
+          class="text-xs text-texto-secundario text-center max-w-2xl mx-auto leading-relaxed"
+        >
+          Al iniciar cualquier relación comercial, se asume la lectura y
+          aceptación de estos términos. Para consultas legales o ajustes
+          contractuales a medida, por favor utilice el portal de contacto
+          directo.
+        </p>
+      </div>
+    </main>
+  </div>
+</Layout>

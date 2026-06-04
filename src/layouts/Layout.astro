@@ -37,7 +37,6 @@ const { variant, seoTitle, seoDescription, seoImage, seoUrl, schemaType } =
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/Edward5126/E-core-icons@main/style.css"
     />
-    <!-- Ranura para inyectar estilos específicos de la página desde el origen -->
     <slot name="head" />
   </head>
 
@@ -57,7 +56,6 @@ const { variant, seoTitle, seoDescription, seoImage, seoUrl, schemaType } =
     <Modal />
     <ProjectModal />
 
-    <!-- Lógica centralizada para la revelación en el desplazamiento -->
     <script>
       const observerOptions = {
         root: null,
@@ -76,6 +74,88 @@ const { variant, seoTitle, seoDescription, seoImage, seoUrl, schemaType } =
 
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
         revealObserver.observe(el);
+      });
+
+      // Lógica global para animar suavemente todos los componentes <details>
+      class InterfazAcordeon {
+        el: HTMLDetailsElement;
+        summary: HTMLElement;
+        content: HTMLElement;
+        animation: Animation | null;
+        isClosing: boolean;
+        isExpanding: boolean;
+
+        constructor(el: HTMLDetailsElement) {
+          this.el = el;
+          this.summary = el.querySelector("summary") as HTMLElement;
+          this.content = el.querySelector("summary ~ *") as HTMLElement;
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
+          this.summary.addEventListener("click", (e: MouseEvent) =>
+            this.onClick(e),
+          );
+        }
+
+        onClick(e: MouseEvent) {
+          e.preventDefault();
+          this.el.style.overflow = "hidden";
+          if (this.isClosing || !this.el.open) {
+            this.open();
+          } else if (this.isExpanding || this.el.open) {
+            this.shrink();
+          }
+        }
+
+        shrink() {
+          this.isClosing = true;
+          const startHeight = `${this.el.offsetHeight}px`;
+          const endHeight = `${this.summary.offsetHeight}px`;
+
+          if (this.animation) this.animation.cancel();
+
+          this.animation = this.el.animate(
+            { height: [startHeight, endHeight] },
+            { duration: 400, easing: "cubic-bezier(0.165, 0.84, 0.44, 1)" },
+          );
+
+          this.animation.onfinish = () => this.onAnimationFinish(false);
+          this.animation.oncancel = () => (this.isClosing = false);
+        }
+
+        open() {
+          this.el.style.height = `${this.el.offsetHeight}px`;
+          this.el.open = true;
+
+          window.requestAnimationFrame(() => {
+            this.isExpanding = true;
+            const startHeight = `${this.el.offsetHeight}px`;
+            const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+
+            if (this.animation) this.animation.cancel();
+
+            this.animation = this.el.animate(
+              { height: [startHeight, endHeight] },
+              { duration: 400, easing: "cubic-bezier(0.165, 0.84, 0.44, 1)" },
+            );
+
+            this.animation.onfinish = () => this.onAnimationFinish(true);
+            this.animation.oncancel = () => (this.isExpanding = false);
+          });
+        }
+
+        onAnimationFinish(open: boolean) {
+          this.el.open = open;
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
+          this.el.style.height = "";
+          this.el.style.overflow = "";
+        }
+      }
+
+      document.querySelectorAll("details").forEach((el) => {
+        new InterfazAcordeon(el as HTMLDetailsElement);
       });
     </script>
   </body>

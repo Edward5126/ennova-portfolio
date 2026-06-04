@@ -89,6 +89,26 @@
     background-clip: text;
     color: transparent !important;
   }
+
+  /* Solución Anti-Flicker para instancias (Dirección estrictamente vertical) */
+  .texto-instancia-design {
+    background-image: linear-gradient(to top, #047857, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: color 0.4s ease;
+  }
+
+  .texto-instancia-solutions {
+    background-image: linear-gradient(to top, #3584a7, #4be2d0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: color 0.4s ease;
+  }
+
+  .group:hover .revelar-degradado,
+  .group\/item:hover .revelar-degradado-item {
+    color: transparent !important;
+  }
 }
 
 /* Clases de utilidad para scroll reveal */

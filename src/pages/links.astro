@@ -1,0 +1,549 @@
+---
+// src/pages/links.astro
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+
+const seoTitle = "Conecta con E-nnova | Links Oficiales";
+const seoDescription =
+  "Explora el portafolio creativo, soluciones de ingeniería mecatrónica y canales de contacto directo del ecosistema E-nnova.";
+const seoImage = "/IMG/og-hub.jpg";
+const seoUrl = Astro.url.href;
+
+const cvLinks = [
+  {
+    titulo: "Perfil General",
+    url: "/docs/CV_Eduardo_Chan_General.pdf",
+    icono: "icon-compass",
+    hoverClase: "fluido-base",
+    revelarClase: "group-hover-fluido",
+  },
+  {
+    titulo: "Área Creativa",
+    url: "/docs/CV_Eduardo_Chan_Design.pdf",
+    icono: "icon-palette",
+    hoverClase: "texto-instancia-design",
+    revelarClase: "revelar-degradado-item",
+  },
+  {
+    titulo: "Área Técnica",
+    url: "/docs/CV_Eduardo_Chan_Solutions.pdf",
+    icono: "icon-microchip",
+    hoverClase: "texto-instancia-solutions",
+    revelarClase: "revelar-degradado-item",
+  },
+];
+
+const enlacesSecundarios = [
+  {
+    titulo: "Enviar un correo",
+    url: "mailto:eduardochan_cach@hotmail.com",
+    icono: "icon-envelope",
+    target: "_blank",
+  },
+  {
+    titulo: "Formulario de proyecto",
+    url: "https://forms.gle/A5B7pvSFWFqWSEgV9",
+    icono: "icon-file",
+    target: "_blank",
+  },
+  {
+    titulo: "Términos y condiciones",
+    url: "/terminos",
+    icono: "icon-file-pdf",
+    target: "_self",
+  },
+];
+
+const redesSociales = [
+  {
+    url: "https://wa.me/529994247747",
+    icono: "icon-whatsapp-brands-solid-full",
+    aria: "WhatsApp",
+  },
+  {
+    url: "https://www.instagram.com/ennova_design/",
+    icono: "icon-instagram",
+    aria: "Instagram",
+  },
+  {
+    url: "https://www.linkedin.com/in/eduardo-chan/",
+    icono: "icon-linkedin",
+    aria: "LinkedIn",
+  },
+  {
+    url: "https://github.com/Edward5126",
+    icono: "icon-github",
+    aria: "GitHub",
+  },
+];
+---
+
+<Layout
+  variant="hub"
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+  seoImage={seoImage}
+  seoUrl={seoUrl}
+  schemaType="Person"
+>
+  <style is:global slot="head">
+    header,
+    footer,
+    .reveal-on-scroll:has(footer),
+    body > div.fixed.z-50 {
+      display: none !important;
+    }
+
+    details > summary {
+      list-style: none;
+      outline: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Definición de la animación arquitectónica del núcleo estelar fluido */
+    .stellar-core-container {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      perspective: 1000px;
+    }
+
+    .stellar-core-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: clamp(300px, 40vw, 800px);
+      height: clamp(300px, 40vw, 800px);
+      background: radial-gradient(
+        circle at center,
+        rgba(244, 244, 245, 0.12) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: core-breathe 6s ease-in-out infinite alternate;
+    }
+
+    .stellar-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid rgba(244, 244, 245, 0.05);
+      border-radius: 50%;
+      transform-style: preserve-3d;
+    }
+
+    .orbit-1 {
+      width: clamp(450px, 60vw, 1200px);
+      height: clamp(450px, 60vw, 1200px);
+      animation: orbit-spin-1 25s linear infinite;
+    }
+
+    .orbit-2 {
+      width: clamp(650px, 85vw, 1700px);
+      height: clamp(650px, 85vw, 1700px);
+      animation: orbit-spin-2 35s linear infinite;
+    }
+
+    .orbit-1::after,
+    .orbit-2::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(244, 244, 245, 0.8);
+      box-shadow: 0 0 10px rgba(244, 244, 245, 0.4);
+    }
+
+    .orbit-1::after {
+      top: -2px;
+      left: 50%;
+      width: 3px;
+      height: 3px;
+    }
+
+    .orbit-2::after {
+      bottom: 15%;
+      right: -1px;
+      width: 2px;
+      height: 2px;
+    }
+
+    @keyframes core-breathe {
+      0% {
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0.4;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+      }
+    }
+
+    @keyframes orbit-spin-1 {
+      0% {
+        transform: translate(-50%, -50%) rotateX(70deg) rotateY(-10deg)
+          rotateZ(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotateX(70deg) rotateY(-10deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes orbit-spin-2 {
+      0% {
+        transform: translate(-50%, -50%) rotateX(65deg) rotateY(15deg)
+          rotateZ(360deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotateX(65deg) rotateY(15deg)
+          rotateZ(0deg);
+      }
+    }
+  </style>
+
+  <!-- Atmósfera inmersiva y animada -->
+  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-fondo">
+    <div class="stellar-core-container w-full h-full">
+      <div class="stellar-core-glow"></div>
+      <div class="stellar-orbit orbit-2"></div>
+      <div class="stellar-orbit orbit-1"></div>
+    </div>
+  </div>
+
+  <section
+    class="relative z-10 w-full min-h-[100dvh] flex flex-col items-center py-12 md:py-20 px-6 max-w-xl mx-auto"
+  >
+    <!-- Encabezado de perfil -->
+    <div class="flex flex-col items-center text-center mb-10 w-full">
+      <div class="relative mb-5 group">
+        <div
+          class="absolute inset-0 bg-texto-resaltado/10 rounded-full blur-xl group-hover:bg-texto-resaltado/20 transition-colors duration-500"
+        >
+        </div>
+        <div
+          class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-contraste shadow-neutral-md relative z-10 bg-fondo"
+        >
+          <Image
+            src="/IMG/IlustrativaContacto.jpg"
+            alt="Eduardo Chan"
+            width={200}
+            height={200}
+            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            loading="eager"
+            decoding="async"
+          />
+          <div
+            class="absolute inset-0 bg-fondo/20 group-hover:bg-transparent transition-colors duration-500 pointer-events-none"
+          >
+          </div>
+        </div>
+      </div>
+
+      <h1
+        class="text-3xl sm:text-4xl font-bold text-texto-principal tracking-tight mb-2"
+      >
+        Conecta con E-nnova
+      </h1>
+      <p class="text-sm text-texto-secundario tracking-wide">
+        Por <span class="font-semibold text-texto-principal">Eduardo Chan</span>
+      </p>
+    </div>
+
+    <!-- Enlaces de Ecosistema -->
+    <div class="w-full flex flex-col gap-4 mb-10">
+      <!-- Área Creativa -->
+      <a
+        href="/design"
+        aria-label="Explorar Área Creativa"
+        class="group relative p-[1px] rounded-2xl overflow-hidden shadow-neutral-sm hover:shadow-neutral-md block transition-transform duration-300 active:scale-[0.98]"
+      >
+        <div
+          class="absolute inset-0 bg-contraste/80 opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+        >
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#047857] to-[#34d399] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        >
+        </div>
+
+        <div
+          class="h-full w-full bg-fondo rounded-[15px] p-5 flex items-center justify-between relative z-10"
+        >
+          <div class="absolute inset-0 bg-tarjetas rounded-[15px]"></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#10b981]/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[15px]"
+          >
+          </div>
+
+          <div class="flex items-center gap-4 relative z-20">
+            <div
+              class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-fondo border border-contraste group-hover:border-[#10b981]/40 rounded-xl transition-colors duration-400"
+            >
+              <i
+                class="icon-palette text-2xl text-texto-secundario texto-instancia-design revelar-degradado"
+              ></i>
+            </div>
+            <div>
+              <h2
+                class="text-base font-bold text-texto-principal texto-instancia-design revelar-degradado leading-tight"
+              >
+                Área Creativa
+              </h2>
+              <p class="text-xs text-texto-secundario">
+                Identidad visual y Front-End
+              </p>
+            </div>
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario texto-instancia-design revelar-degradado opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-400 relative z-20"
+          ></i>
+        </div>
+      </a>
+
+      <!-- Área Técnica -->
+      <a
+        href="/solutions"
+        aria-label="Explorar Área Técnica"
+        class="group relative p-[1px] rounded-2xl overflow-hidden shadow-neutral-sm hover:shadow-neutral-md block transition-transform duration-300 active:scale-[0.98]"
+      >
+        <div
+          class="absolute inset-0 bg-contraste/80 opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+        >
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#3584a7] to-[#4be2d0] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        >
+        </div>
+
+        <div
+          class="h-full w-full bg-fondo rounded-[15px] p-5 flex items-center justify-between relative z-10"
+        >
+          <div class="absolute inset-0 bg-tarjetas rounded-[15px]"></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#45a6d3]/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[15px]"
+          >
+          </div>
+
+          <div class="flex items-center gap-4 relative z-20">
+            <div
+              class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-fondo border border-contraste group-hover:border-[#45a6d3]/40 rounded-xl transition-colors duration-400"
+            >
+              <i
+                class="icon-microchip text-2xl text-texto-secundario texto-instancia-solutions revelar-degradado"
+              ></i>
+            </div>
+            <div>
+              <h2
+                class="text-base font-bold text-texto-principal texto-instancia-solutions revelar-degradado leading-tight"
+              >
+                Área Técnica
+              </h2>
+              <p class="text-xs text-texto-secundario">
+                Ingeniería y automatización
+              </p>
+            </div>
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario texto-instancia-solutions revelar-degradado opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-400 relative z-20"
+          ></i>
+        </div>
+      </a>
+
+      <!-- Página Principal -->
+      <a
+        href="/"
+        aria-label="Ir a la Página Principal"
+        class="group relative p-[1px] rounded-2xl overflow-hidden shadow-neutral-sm hover:shadow-neutral-md block transition-transform duration-300 active:scale-[0.98]"
+      >
+        <div
+          class="absolute inset-0 bg-contraste/80 opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+        >
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-texto-secundario to-texto-resaltado opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        >
+        </div>
+
+        <div
+          class="h-full w-full bg-fondo rounded-[15px] p-5 flex items-center justify-between relative z-10"
+        >
+          <div class="absolute inset-0 bg-tarjetas rounded-[15px]"></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-texto-resaltado/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[15px]"
+          >
+          </div>
+
+          <div class="flex items-center gap-4 relative z-20">
+            <div
+              class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-fondo border border-contraste group-hover:border-texto-resaltado/40 rounded-xl transition-colors duration-400"
+            >
+              <i
+                class="icon-compass text-2xl text-texto-secundario fluido-base group-hover-fluido"
+              ></i>
+            </div>
+            <div>
+              <h2
+                class="text-base font-bold text-texto-principal fluido-base group-hover-fluido leading-tight"
+              >
+                Página Principal
+              </h2>
+              <p class="text-xs text-texto-secundario">
+                El núcleo del ecosistema
+              </p>
+            </div>
+          </div>
+          <i
+            class="icon-arrow-right text-texto-secundario fluido-base group-hover-fluido opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-400 relative z-20"
+          ></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Contacto y Documentos -->
+    <div class="w-full flex flex-col gap-3">
+      <span
+        class="text-[11px] font-semibold text-texto-secundario tracking-widest mb-1 ml-2"
+      >
+        Contacto y recursos
+      </span>
+
+      <!-- Acordeón de Currículums -->
+      <details
+        class="group/accordion bg-fondo backdrop-blur-md border border-contraste rounded-2xl shadow-neutral-sm transition-colors hover:border-texto-resaltado/30 overflow-hidden"
+      >
+        <summary
+          class="flex items-center justify-between p-4 cursor-pointer outline-none select-none relative z-20 bg-tarjetas"
+          aria-label="Desplegar opciones de Currículum"
+        >
+          <div class="flex items-center gap-4">
+            <i
+              class="icon-file-pdf text-xl text-texto-secundario fluido-base group-hover/accordion:group-hover-fluido transition-colors"
+            ></i>
+            <span
+              class="font-medium text-sm text-texto-principal fluido-base group-hover/accordion:group-hover-fluido transition-colors"
+            >
+              Descargar Currículum (PDF)
+            </span>
+          </div>
+          <i
+            class="icon-chevron-down text-texto-secundario transition-transform duration-300 group-open/accordion:rotate-180"
+          ></i>
+        </summary>
+
+        <div
+          class="flex flex-col border-t border-contraste bg-fondo/50 p-2 gap-1 relative z-10"
+        >
+          {
+            cvLinks.map((cv) => (
+              <a
+                href={cv.url}
+                download
+                aria-label={`Descargar ${cv.titulo}`}
+                class="group/item flex items-center justify-between p-3 hover:bg-tarjetas rounded-xl transition-colors duration-300 border border-transparent hover:border-contraste"
+              >
+                <div class="flex items-center gap-4">
+                  <i
+                    class={`${cv.icono} text-lg text-texto-secundario ${cv.hoverClase} ${cv.revelarClase}`}
+                  />
+                  <span class="text-sm font-medium text-texto-secundario group-hover/item:text-texto-principal transition-colors duration-300">
+                    {cv.titulo}
+                  </span>
+                </div>
+                <i class="icon-download text-texto-secundario opacity-0 group-hover/item:opacity-100 group-hover/item:-translate-y-0.5 transition-all duration-300" />
+              </a>
+            ))
+          }
+        </div>
+      </details>
+
+      {
+        enlacesSecundarios.map((enlace) => (
+          <a
+            href={enlace.url}
+            target={enlace.target}
+            rel="noopener noreferrer"
+            aria-label={enlace.titulo}
+            class="group flex items-center justify-between p-4 bg-tarjetas backdrop-blur-md border border-contraste hover:border-texto-resaltado/30 rounded-2xl transition-all duration-300 shadow-neutral-sm active:scale-[0.98]"
+          >
+            <div class="flex items-center gap-4">
+              <i
+                class={`${enlace.icono} text-xl text-texto-secundario fluido-base group-hover-fluido`}
+              />
+              <span class="font-medium text-sm text-texto-principal fluido-base group-hover-fluido">
+                {enlace.titulo}
+              </span>
+            </div>
+            <i class="icon-arrow-right text-texto-secundario opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Redes Sociales -->
+    <div
+      class="flex items-center justify-center gap-6 sm:gap-8 mt-10 relative z-20"
+    >
+      {
+        redesSociales.map((red) => (
+          <a
+            href={red.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group transform hover:-translate-y-1 active:scale-90 transition-all duration-300"
+            aria-label={red.aria}
+          >
+            <i
+              class={`${red.icono} text-2xl text-texto-secundario fluido-base group-hover-fluido`}
+            />
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Firma Institucional (Ecosistema de Marca) -->
+    <div
+      class="w-full flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mt-14 mb-2 relative z-20 opacity-100 grayscale-0 md:opacity-30 md:grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+    >
+      <Image
+        src="/IMG/logos/design/Colores%20-%20Logo%20Horizontal.svg"
+        alt="E-nnova Design"
+        width={160}
+        height={24}
+        class="h-5 md:h-6 w-auto"
+      />
+      <div class="hidden md:block w-1 h-1 rounded-full bg-texto-secundario/50">
+      </div>
+      <Image
+        src="/IMG/logos/master/Master%20-%20Logo%20Horizontal.svg"
+        alt="E-nnova Master"
+        width={160}
+        height={24}
+        class="h-5 md:h-6 w-auto"
+      />
+      <div class="hidden md:block w-1 h-1 rounded-full bg-texto-secundario/50">
+      </div>
+      <Image
+        src="/IMG/logos/solutions/Colores%20-%20Logo%20Horizontal.svg"
+        alt="E-nnova Solutions"
+        width={160}
+        height={24}
+        class="h-5 md:h-6 w-auto"
+      />
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-4 text-center relative z-20">
+      <p class="text-[11px] text-texto-secundario font-medium tracking-wide">
+        © 2026 E-nnova.<br />Desarrollado con <i
+          class="icon-heart inline-block text-[10px] texto-degradado"></i> por Eduardo
+        Chan.
+      </p>
+    </div>
+  </section>
+</Layout>
