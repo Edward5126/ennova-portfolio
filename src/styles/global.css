@@ -22,12 +22,11 @@
 @layer base {
   /* Configuración Universal */
   :root {
-    --theme-fondo: #09090b; /* Nuevo fondo oscuro universal */
+    --theme-fondo: #09090b;
     --theme-texto-principal: #f4f4f5;
-    --theme-texto-secundario: rgba(244, 244, 245, 0.6);
+    --theme-texto-secundario: #a1a1aa;
   }
 
-  /* Tema Hub / Landing Page (Neutral y Elegante) */
   html[data-route="hub"] {
     --theme-texto-resaltado: #ffffff;
     --theme-tarjetas: rgba(255, 255, 255, 0.03);
@@ -36,7 +35,6 @@
     --theme-degradado-hover: linear-gradient(to top, #a1a1aa, #ffffff);
   }
 
-  /* Tema Design (Esmeralda) */
   html[data-route="design"] {
     --theme-texto-resaltado: #10b981;
     --theme-tarjetas: rgba(16, 185, 129, 0.03);
@@ -45,9 +43,8 @@
     --theme-degradado-hover: linear-gradient(to top, #059669, #34d399);
   }
 
-  /* Tema Solutions (Azul 3-puntos) */
   html[data-route="solutions"] {
-    --theme-texto-resaltado: #30d2be;
+    --theme-texto-resaltado: #3584a7;
     --theme-tarjetas: rgba(53, 132, 167, 0.04);
     --theme-contraste: rgba(53, 132, 167, 0.15);
     --theme-degradado-principal: linear-gradient(
@@ -70,7 +67,31 @@
   }
 }
 
-/* Clases de utilidad para Scroll Reveal (Mantenidas y optimizadas) */
+@layer components {
+  .fluido-base {
+    background-image: var(--background-image-degradado-hover);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: color 0.3s ease;
+  }
+
+  .hover-fluido:hover {
+    color: transparent !important;
+  }
+
+  .group:hover .group-hover-fluido {
+    color: transparent !important;
+  }
+
+  .texto-degradado {
+    background-image: var(--background-image-degradado-principal);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+  }
+}
+
+/* Clases de utilidad para scroll reveal */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(40px);

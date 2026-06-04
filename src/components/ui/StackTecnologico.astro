@@ -72,10 +72,7 @@ const stackSolutions = [
     <h2
       class="text-3xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
     >
-      Tecnologías de <span
-        class="text-transparent bg-clip-text bg-degradado-principal"
-        >Vanguardia</span
-      >
+      Tecnologías de <span class="texto-degradado">Vanguardia</span>
     </h2>
     <p class="text-texto-secundario max-w-xl mx-auto text-sm md:text-base">
       Herramientas seleccionadas para garantizar soluciones de alto impacto
@@ -95,7 +92,7 @@ const stackSolutions = [
           <div class="relative z-10">
             <div class="w-14 h-14 flex items-center justify-center bg-fondo border border-contraste rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
               <i
-                class={`${item.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                class={`${item.icono} text-3xl text-texto-secundario fluido-base group-hover-fluido duration-500`}
               />
             </div>
             <h3 class="text-lg font-bold text-texto-principal mb-2 group-hover:text-texto-resaltado transition-colors duration-500">
@@ -122,7 +119,7 @@ const stackSolutions = [
           <div class="relative z-10">
             <div class="w-14 h-14 flex items-center justify-center bg-fondo border border-contraste rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
               <i
-                class={`${item.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                class={`${item.icono} text-3xl text-texto-secundario fluido-base group-hover-fluido duration-500`}
               />
             </div>
             <h3 class="text-lg font-bold text-texto-principal mb-2 group-hover:text-texto-resaltado transition-colors duration-500">
@@ -144,20 +141,15 @@ const stackSolutions = [
 
   const updateStackContext = () => {
     const context = document.documentElement.getAttribute("data-context");
-
     if (context === "solutions") {
-      // Ocultar Diseño
       designStack?.classList.add("hidden", "opacity-0", "translate-y-4");
-      // Mostrar Ingeniería
       solutionsStack?.classList.remove("hidden");
       setTimeout(() => {
         solutionsStack?.classList.add("grid");
         solutionsStack?.classList.remove("opacity-0", "translate-y-4");
       }, 50);
     } else {
-      // Ocultar Ingeniería
       solutionsStack?.classList.add("hidden", "opacity-0", "translate-y-4");
-      // Mostrar Diseño
       designStack?.classList.remove("hidden");
       setTimeout(() => {
         designStack?.classList.add("grid");
@@ -166,7 +158,6 @@ const stackSolutions = [
     }
   };
 
-  // Escuchar cambios de contexto
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === "data-context") {
@@ -176,7 +167,5 @@ const stackSolutions = [
   });
 
   observer.observe(document.documentElement, { attributes: true });
-
-  // Inicialización
   updateStackContext();
 </script>

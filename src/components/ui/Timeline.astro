@@ -58,10 +58,7 @@ const trayectoriaSolutions = [
     <h2
       class="text-3xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
     >
-      Línea de <span
-        class="text-transparent bg-clip-text bg-degradado-principal"
-        >Evolución</span
-      >
+      Línea de <span class="texto-degradado">Evolución</span>
     </h2>
     <p class="text-texto-secundario max-w-xl mx-auto text-sm md:text-base">
       Cronología de hitos académicos y profesionales que definen mi trayectoria
@@ -96,7 +93,7 @@ const trayectoriaSolutions = [
                     class={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}
                   >
                     <i
-                      class={`${hito.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                      class={`${hito.icono} text-3xl text-texto-secundario fluido-base group-hover-fluido duration-500`}
                     />
                     <span class="text-3xl font-black text-texto-resaltado/20 group-hover:text-texto-resaltado/40 transition-colors duration-500 tracking-tighter">
                       {hito.año}
@@ -137,7 +134,7 @@ const trayectoriaSolutions = [
                     class={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}
                   >
                     <i
-                      class={`${hito.icono} text-3xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                      class={`${hito.icono} text-3xl text-texto-secundario fluido-base group-hover-fluido duration-500`}
                     />
                     <span class="text-3xl font-black text-texto-resaltado/20 group-hover:text-texto-resaltado/40 transition-colors duration-500 tracking-tighter">
                       {hito.año}
@@ -167,7 +164,6 @@ const trayectoriaSolutions = [
 
   const updateTimelineContext = () => {
     const context = document.documentElement.getAttribute("data-context");
-
     if (context === "solutions") {
       designTimeline?.classList.add(
         "opacity-0",
@@ -230,6 +226,5 @@ const trayectoriaSolutions = [
   });
 
   observerTimeline.observe(document.documentElement, { attributes: true });
-
   updateTimelineContext();
 </script>

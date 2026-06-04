@@ -5,7 +5,6 @@ interface Props {
 }
 
 const { activeRoute } = Astro.props;
-
 const esHub = activeRoute === "hub";
 
 const enlacesNavegacion = esHub
@@ -16,7 +15,6 @@ const enlacesNavegacion = esHub
       { url: "#FAQ", texto: "Preguntas frecuentes" },
     ]
   : [
-      { url: "/", texto: "Volver al núcleo" },
       { url: "#Inicio", texto: "Inicio" },
       { url: "#Portafolio", texto: "Portafolio" },
       { url: "#Servicios", texto: "Servicios" },
@@ -88,13 +86,11 @@ const configuracionHeader =
         <nav class="hidden lg:flex items-center gap-6">
           <ul class="flex items-center gap-6">
             {
-              enlacesNavegacion.map((enlace, index) => (
+              enlacesNavegacion.map((enlace) => (
                 <li>
                   <a
                     href={enlace.url}
-                    class={`transition-colors duration-300 text-sm cursor-pointer tracking-wide font-medium bg-degradado-principal bg-clip-text hover:text-transparent
-                    ${index === 0 && !esHub ? "text-texto-principal font-semibold border-b border-texto-resaltado/30 pb-0.5 hover:border-texto-resaltado" : "text-texto-secundario"}
-                  `}
+                    class="text-sm cursor-pointer tracking-wide font-medium text-texto-principal fluido-base hover-fluido"
                   >
                     {enlace.texto}
                   </a>
@@ -113,9 +109,9 @@ const configuracionHeader =
               class="group flex items-center justify-center gap-2 px-4 py-1.5 w-[145px] bg-tarjetas border border-contraste hover:border-texto-resaltado/50 rounded-lg cursor-pointer transition-all duration-300"
             >
               <i
-                class={`${configuracionHeader.iconoCruzado} text-sm text-texto-secundario bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300`}
+                class={`${configuracionHeader.iconoCruzado} text-sm text-texto-principal fluido-base group-hover-fluido`}
               />
-              <span class="text-xs font-semibold text-texto-secundario bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300 tracking-wide w-[96px] text-center inline-block">
+              <span class="text-xs font-semibold text-texto-principal fluido-base group-hover-fluido tracking-wide w-[96px] text-center inline-block">
                 {configuracionHeader.textoCruzado}
               </span>
             </a>
@@ -135,7 +131,7 @@ const configuracionHeader =
                 aria-label={social.texto}
               >
                 <i
-                  class={`${social.iconoClase} inline-block text-lg text-texto-secundario bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300`}
+                  class={`${social.iconoClase} inline-block text-lg text-texto-principal fluido-base group-hover-fluido`}
                 />
               </a>
             ))
@@ -146,10 +142,9 @@ const configuracionHeader =
           class="btn-interactivo group flex items-center gap-2 px-5 py-2 bg-tarjetas hover:bg-tarjetas/80 border border-contraste hover:border-texto-resaltado/50 transition-all duration-300 rounded-lg cursor-pointer font-semibold text-sm tracking-wide text-texto-principal"
         >
           <i
-            class="icon-paper-plane inline-block text-texto-secundario bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300"
+            class="icon-paper-plane inline-block text-texto-principal fluido-base group-hover-fluido"
           ></i>
-          <span
-            class="bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300"
+          <span class="text-texto-principal fluido-base group-hover-fluido"
             >Contacto</span
           >
         </button>
@@ -162,7 +157,7 @@ const configuracionHeader =
       >
         <i
           id="icono-menu"
-          class="icon-bars inline-block text-2xl text-texto-secundario bg-degradado-principal bg-clip-text group-hover:text-transparent transition-colors duration-300"
+          class="icon-bars inline-block text-2xl text-texto-principal fluido-base group-hover-fluido"
         ></i>
       </button>
     </div>

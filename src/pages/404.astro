@@ -1,86 +1,70 @@
 ---
 // src/pages/404.astro
-import "../styles/global.css";
-import Header from "../components/common/Header.astro";
-import Footer from "../components/common/Footer.astro";
-import Modal from "../components/common/Modal.astro";
-import FaviconManager from "../components/common/FaviconManager.astro";
-import SEO from "../components/common/SEO.astro";
+import Layout from "../layouts/Layout.astro";
+
+const seoTitle = "Coordenada no encontrada | E-nnova";
+const seoDescription =
+  "La ruta solicitada no existe en el ecosistema. Vuelve al núcleo para explorar nuestras soluciones.";
+const seoImage = "/IMG/og-hub.jpg";
+const seoUrl = Astro.url.href;
 ---
 
-<html lang="es" data-context="design" class="scroll-smooth">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <FaviconManager />
-    <SEO />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/Edward5126/E-core-icons@main/style.css"
-    />
-  </head>
-
-  <body
-    class="bg-fondo text-texto-principal font-sans antialiased selection:bg-texto-resaltado/20 selection:text-texto-principal transition-colors duration-500 flex flex-col min-h-[100dvh]"
+<Layout
+  variant="hub"
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+  seoImage={seoImage}
+  seoUrl={seoUrl}
+  schemaType="WebSite"
+>
+  <section
+    class="relative w-full min-h-[85dvh] flex flex-col items-center justify-center px-6 overflow-hidden"
   >
-    <Header />
-
-    <main
-      class="flex-grow flex items-center justify-center relative overflow-hidden h-[100dvh] pt-20"
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[450px] md:h-[450px] bg-texto-resaltado/5 rounded-full blur-[100px] mix-blend-screen pointer-events-none"
     >
-      <div
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-texto-resaltado opacity-5 blur-[120px] rounded-full pointer-events-none transition-colors duration-700"
-      >
-      </div>
+    </div>
 
-      <div
-        class="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl"
-      >
-        <div class="relative mb-10 group cursor-default">
-          <div
-            class="absolute inset-0 bg-texto-resaltado/20 blur-3xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-          >
-          </div>
+    <div
+      class="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto"
+    >
+      <div class="relative flex justify-center items-center mb-6 w-full">
+        <span
+          class="text-[9rem] sm:text-[13rem] md:text-[15rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-texto-principal/10 to-transparent select-none leading-none tracking-tighter"
+        >
+          404
+        </span>
+        <div
+          class="absolute inset-0 flex items-center justify-center flex-col transform md:-translate-y-4"
+        >
           <i
-            class="icon-bug text-[120px] md:text-[160px] text-transparent bg-clip-text bg-degradado-principal transition-all duration-700 drop-shadow-2xl relative z-10"
+            class="icon-compass text-6xl md:text-8xl texto-degradado animate-pulse"
           ></i>
         </div>
-
-        <div class="flex flex-col items-center">
-          <h1
-            class="text-4xl md:text-5xl font-bold text-texto-principal mb-6 tracking-tight"
-          >
-            Parece que algo <span
-              class="text-transparent bg-clip-text bg-degradado-principal"
-              >falló</span
-            >
-          </h1>
-
-          <p
-            class="text-texto-secundario text-base md:text-lg leading-relaxed mb-10 max-w-md"
-          >
-            La dirección que ingresaste no está disponible o ha cambiado de
-            ruta. Te invito a regresar al inicio para seguir explorando mi
-            portafolio y servicios.
-          </p>
-
-          <div class="flex flex-wrap justify-center gap-4">
-            <a
-              href="/"
-              class="group flex items-center gap-3 px-8 py-4 bg-transparent border border-texto-resaltado text-texto-resaltado hover:bg-texto-resaltado/10 transition-all duration-300 rounded-xl cursor-pointer shadow-neutral-sm font-semibold tracking-wide"
-            >
-              <i
-                class="icon-arrow-left text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
-              ></i>
-              <span>Volver al Inicio</span>
-            </a>
-          </div>
-        </div>
       </div>
-    </main>
 
-    <Footer />
-    <Modal />
-  </body>
-</html>
+      <h1
+        class="text-3xl md:text-4xl font-bold text-texto-principal mb-4 tracking-tight"
+      >
+        Página no encontrada
+      </h1>
+
+      <p
+        class="text-base md:text-lg text-texto-secundario leading-relaxed mb-10 max-w-lg mx-auto"
+      >
+        La página a la que intentas acceder no está disponible. Es posible que
+        el enlace sea incorrecto o que el contenido haya sido reubicado.
+      </p>
+
+      <a
+        href="/"
+        class="group flex items-center justify-center gap-3 px-8 py-4 bg-tarjetas backdrop-blur-md border border-contraste hover:border-texto-resaltado/40 text-texto-principal rounded-xl transition-all duration-300 shadow-neutral-sm active:scale-95 cursor-pointer"
+      >
+        <i
+          class="icon-arrow-left text-lg text-texto-secundario fluido-base group-hover-fluido transition-transform group-hover:-translate-x-1"
+        ></i>
+        <span class="font-medium tracking-wide">Volver al inicio</span>
+      </a>
+    </div>
+  </section>
+</Layout>

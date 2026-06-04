@@ -1,7 +1,6 @@
 ---
 // src/components/ui/Portafolio.astro
 import ProjectCard from "./ProjectCard.astro";
-import ProjectModal from "./ProjectModal.astro";
 import type { Proyecto } from "../../types";
 import proyectosData from "../../data/proyectos.json";
 
@@ -13,7 +12,6 @@ const { variant } = Astro.props;
 const proyectosTodas: Proyecto[] = proyectosData as Proyecto[];
 
 const proyectosFiltrados = proyectosTodas.filter((p) => p.contexto === variant);
-
 const filtrosDisponibles =
   variant === "design"
     ? [
@@ -41,8 +39,7 @@ const filtrosDisponibles =
     <h2
       class="text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
     >
-      Mi <span
-        class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+      Mi <span class="texto-degradado transition-all duration-500"
         >Portafolio</span
       >
     </h2>
@@ -64,13 +61,14 @@ const filtrosDisponibles =
       >
         <div class="flex items-center gap-3">
           <i
-            class="icon-filter text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+            class="icon-filter text-lg text-texto-secundario fluido-base group-hover-fluido"
           ></i>
           <span
             id="texto-filtro-actual"
             class="font-semibold text-texto-principal tracking-wide text-sm"
-            >Categoría: Todo</span
           >
+            Categoría: Todo
+          </span>
         </div>
         <i
           id="icono-flecha-dropdown"
@@ -137,13 +135,11 @@ const filtrosDisponibles =
     >
       <span>Ver más proyectos</span>
       <i
-        class="icon-arrow-trend-down inline-block text-lg text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all"
+        class="icon-arrow-trend-down inline-block text-lg text-texto-secundario fluido-base group-hover-fluido"
       ></i>
     </button>
   </div>
 </section>
-
-<ProjectModal />
 
 <script>
   const btnDropdown = document.getElementById("btn-dropdown-filtro");

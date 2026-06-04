@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { variant = "hub" } = Astro.props;
-
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === "/" || currentPath === "/index.html";
 const formatearEnlace = (hash: string) => (isHome ? hash : `/${hash}`);
@@ -79,16 +78,6 @@ const redesSociales = [
     iconoClase: "icon-envelope",
     ariaLabel: "Correo Electrónico",
   },
-  {
-    url: "https://forms.gle/A5B7pvSFWFqWSEgV9",
-    iconoClase: "icon-file",
-    ariaLabel: "Formulario",
-  },
-  {
-    url: "https://buymeacoffee.com/ennovadesign",
-    iconoClase: "icon-paypal",
-    ariaLabel: "Buy Me a Coffee",
-  },
 ];
 
 const anioActual = new Date().getFullYear();
@@ -111,6 +100,8 @@ const anioActual = new Date().getFullYear();
           src={datosActuales.logo}
           alt={`${datosActuales.marca} Logo`}
           class="h-7 w-auto drop-shadow-sm transition-transform duration-300"
+          loading="lazy"
+          decoding="async"
         />
       </a>
       <p class="text-texto-secundario text-sm leading-relaxed max-w-sm">
@@ -121,10 +112,10 @@ const anioActual = new Date().getFullYear();
         !isHome && (
           <a
             href="/"
-            class="group flex items-center gap-2 text-sm text-texto-secundario hover:text-transparent hover:bg-clip-text hover:bg-degradado-principal transition-all mt-2 font-medium tracking-wide"
+            class="group flex items-center gap-2 text-sm text-texto-principal fluido-base hover-fluido mt-2 font-medium tracking-wide"
           >
             <i class="icon-arrow-left" />
-            <span>Volver a la página principal</span>
+            <span>Volver al núcleo</span>
           </a>
         )
       }
@@ -141,7 +132,7 @@ const anioActual = new Date().getFullYear();
               <li>
                 <a
                   href={formatearEnlace(enlace.url)}
-                  class="text-texto-secundario hover:text-transparent hover:bg-clip-text hover:bg-degradado-principal transition-all text-sm font-medium tracking-wide"
+                  class="text-texto-principal fluido-base hover-fluido text-sm font-medium tracking-wide"
                 >
                   {enlace.texto}
                 </a>
@@ -172,7 +163,7 @@ const anioActual = new Date().getFullYear();
                 class="group transition-all duration-300 hover:-translate-y-1"
               >
                 <i
-                  class={`${red.iconoClase} inline-block text-2xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all`}
+                  class={`${red.iconoClase} inline-block text-2xl text-texto-principal fluido-base group-hover-fluido`}
                 />
               </a>
             ))
@@ -195,8 +186,8 @@ const anioActual = new Date().getFullYear();
       class="text-texto-secundario text-[11px] sm:text-xs flex items-center justify-center gap-1.5"
     >
       Desarrollado con <i
-        class="icon-heart inline-block text-transparent bg-clip-text bg-degradado-principal text-[10px]"
-      ></i> por Eduardo Chan.
+        class="icon-heart inline-block texto-degradado text-[10px]"></i> por Eduardo
+      Chan.
     </span>
   </div>
 </footer>

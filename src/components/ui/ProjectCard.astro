@@ -7,11 +7,17 @@ interface Props {
 }
 
 const { proyecto } = Astro.props;
-
 const categoriasTexto = proyecto.categorias.join(", ");
 const categoriasData = proyecto.categorias.join("|");
 
 const proyectoCodificado = btoa(encodeURIComponent(JSON.stringify(proyecto)));
+
+const iconoFallback =
+  proyecto.contexto === "design"
+    ? "icon-palette"
+    : proyecto.contexto === "solutions"
+      ? "icon-microchip"
+      : "icon-compass";
 ---
 
 <article
@@ -22,24 +28,43 @@ const proyectoCodificado = btoa(encodeURIComponent(JSON.stringify(proyecto)));
   aria-label={`Ver detalles de ${proyecto.nombre}`}
 >
   <div
-    class="relative w-full aspect-video rounded-3xl overflow-hidden bg-contraste shadow-neutral-sm group-hover:shadow-neutral-lg transition-all duration-500"
+    class="relative w-full aspect-video rounded-3xl overflow-hidden bg-fondo shadow-neutral-sm group-hover:shadow-neutral-lg transition-all duration-500 border border-contraste/50"
   >
+    <div
+      class="absolute inset-0 flex items-center justify-center overflow-hidden bg-fondo z-0"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-texto-resaltado/5 via-transparent to-transparent"
+      >
+      </div>
+      <div
+        class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:24px_24px]"
+      >
+      </div>
+
+      <i class={`${iconoFallback} text-3xl text-texto-resaltado opacity-20`}
+      ></i>
+      <i
+        class={`${iconoFallback} absolute -bottom-8 -right-8 text-[8rem] text-texto-resaltado opacity-[0.03] transform -rotate-12`}
+      ></i>
+    </div>
+
     <img
       src={proyecto.imagenUrl}
       alt={proyecto.nombre}
-      class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+      class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105 z-10"
       loading="lazy"
-      onerror={`this.onerror=null; this.src='${proyecto.imagenFallbackUrl}'; this.classList.add('opacity-50');`}
+      onerror="this.style.display='none';"
     />
     <div
-      class="absolute inset-0 bg-fondo/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none"
+      class="absolute inset-0 bg-fondo/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none z-20"
     >
     </div>
   </div>
 
   <div class="flex flex-col px-2">
     <h3
-      class="text-xl font-bold text-texto-principal mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-300 w-fit"
+      class="text-xl font-bold text-texto-principal mb-1 fluido-base group-hover-fluido duration-300 w-fit"
     >
       {proyecto.nombre}
     </h3>

@@ -29,7 +29,7 @@ const logosDesign = [
   { src: "/IMG/PROJECTS/ICONS/InnovaDentalLogo.svg", alt: "Innova Dental" },
 ];
 
-const testimoniosSolutions: Array<{cita: string, autor: string, rol: string}> = []; // Vacío por ahora, como indicaste
+const testimoniosSolutions: Array<{cita: string, autor: string, rol: string}> = [];
 const logosSolutions = [
   { src: "/IMG/PROJECTS/ICONS/RASLogo.svg", alt: "IEEE RAS UADY" },
   { src: "/IMG/PROJECTS/ICONS/CarimLogo.svg", alt: "Panadería Carim" },
@@ -37,6 +37,7 @@ const logosSolutions = [
 
 const testimoniosActivos = variant === "design" ? testimoniosDesign : testimoniosSolutions;
 const logosActivos = variant === "design" ? logosDesign : logosSolutions;
+
 const carruselInfinito = [...logosActivos, ...logosActivos];
 
 const mostrarSeccion = testimoniosActivos.length > 0 || logosActivos.length > 0;
@@ -48,7 +49,7 @@ const mostrarSeccion = testimoniosActivos.length > 0 || logosActivos.length > 0;
     {testimoniosActivos.length > 0 && (
       <div class="text-center mb-16 md:mb-24">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight">
-          Mis <span class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500">Testimonios</span>
+          Mis <span class="texto-degradado transition-all duration-500">Testimonios</span>
         </h2>
         <p class="text-sm sm:text-base text-texto-secundario max-w-2xl mx-auto leading-relaxed">
           La satisfacción de quienes han confiado en mi trabajo para dar vida y estructura a sus proyectos.
@@ -61,7 +62,7 @@ const mostrarSeccion = testimoniosActivos.length > 0 || logosActivos.length > 0;
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-texto-resaltado/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-in-out pointer-events-none z-0" />
 
             <div class="flex flex-col items-start relative z-10">
-              <i class="icon-comments inline-block text-2xl md:text-3xl text-contraste group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500 mb-5 md:mb-6" />
+              <i class="icon-comments inline-block text-2xl md:text-3xl text-contraste fluido-base group-hover-fluido duration-500 mb-5 md:mb-6" />
               <p class="text-base sm:text-lg md:text-xl text-texto-principal italic leading-relaxed">
                 "{testimonio.cita}"
               </p>

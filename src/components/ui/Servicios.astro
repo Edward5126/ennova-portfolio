@@ -85,8 +85,7 @@ const serviciosActivos =
     <h2
       class="text-4xl md:text-5xl font-bold text-texto-principal mb-4 tracking-tight"
     >
-      Mis <span
-        class="text-transparent bg-clip-text bg-degradado-principal transition-all duration-500"
+      Mis <span class="texto-degradado transition-all duration-500"
         >Servicios</span
       >
     </h2>
@@ -107,12 +106,12 @@ const serviciosActivos =
 
             <div class="mb-8 relative z-10">
               <i
-                class={`${servicio.icono} inline-block text-4xl text-texto-secundario group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500`}
+                class={`${servicio.icono} inline-block text-4xl text-texto-secundario fluido-base group-hover-fluido duration-500`}
               />
             </div>
 
             <div class="relative z-10 flex-grow">
-              <h3 class="text-xl font-bold text-texto-principal mb-4 tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-degradado-principal transition-all duration-500">
+              <h3 class="text-xl font-bold text-texto-principal mb-4 tracking-wide fluido-base group-hover-fluido duration-500">
                 {servicio.titulo}
               </h3>
               <p class="text-sm md:text-base text-texto-secundario leading-relaxed">
